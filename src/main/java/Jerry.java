@@ -9,7 +9,7 @@ public class Jerry {
     public static final String MARK_TASK = "mark";
     public static final String UNMARK_TASK = "unmark";
 
-    private final ArrayList<String> taskList;
+    private final ArrayList<Task> taskList;
 
     public Jerry() {
         this.taskList = new ArrayList<>();
@@ -22,7 +22,15 @@ public class Jerry {
         }
         System.out.println();
     }
-    
+
+    public void addTask(String userInput) {
+        Task task = new Task(userInput);
+        this.taskList.add(task);
+        System.out.println(CHATBOT_NAME +
+                ": I have added " +
+                userInput +
+                " to your list");
+    }
 
     public void readUserInput() {
         Scanner scan = new Scanner(System.in);
@@ -52,8 +60,7 @@ public class Jerry {
                     break;
 
                 default:
-
-
+                    addTask(userInput);
             }
         }
     }
