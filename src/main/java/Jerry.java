@@ -32,6 +32,29 @@ public class Jerry {
                 " to your list");
     }
 
+    public Task getTask(String taskNumber) {
+        int index = Integer.parseInt(taskNumber);
+        return this.taskList.get(index);
+    }
+
+    public void markTask(Task targetTask) {
+        if (targetTask.isDone)
+        {
+            System.out.println("This task is already Marked and Done");
+        } else {
+            targetTask.toggleIsDone();
+        }
+    }
+
+    public void unmarkTask(Task targetTask) {
+        if (!targetTask.isDone)
+        {
+            System.out.println("This task is already Unmarked");
+        } else {
+            targetTask.toggleIsDone();
+        }
+    }
+
     public void readUserInput() {
         Scanner scan = new Scanner(System.in);
         String userInput;
@@ -53,10 +76,10 @@ public class Jerry {
                     }
                     break;
                 case MARK_TASK:
-
+                    markTask(getTask(userInputByWord[1]));
                     break;
                 case UNMARK_TASK:
-
+                    unmarkTask(getTask(userInputByWord[1]));
                     break;
 
                 default:
