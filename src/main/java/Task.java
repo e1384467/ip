@@ -15,7 +15,8 @@ public class Task {
         this.isDone = !this.isDone;
     }
 
-    public String printTask() {
+    @Override
+    public String toString() {
         return "[" +
                 this.getStatusIcon() +
                 "] " +

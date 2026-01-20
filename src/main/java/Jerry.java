@@ -19,7 +19,7 @@ public class Jerry {
         System.out.println("Your list:");
         for (int index = 0; index < this.taskList.size(); index += 1) {
             System.out.println(index + 1 + "." +
-                    this.taskList.get(index).printTask());
+                    this.taskList.get(index));
         }
         System.out.println();
     }
@@ -41,24 +41,24 @@ public class Jerry {
     public void markTask(Task targetTask) {
         if (targetTask.isDone)
         {
-            System.out.println("This task is already Marked and Done");
+            System.out.println("This task is already Marked and Done\n");
         } else {
             targetTask.toggleIsDone();
             System.out.println(CHATBOT_NAME +
-                    "Nice I've marked this task as done -> " +
-                    targetTask.printTask());
+                    ": Nice! I've marked this task as done -> " +
+                    targetTask + "\n");
         }
     }
 
     public void unmarkTask(Task targetTask) {
         if (!targetTask.isDone)
         {
-            System.out.println("This task is already Unmarked");
+            System.out.println("This task is already Unmarked\n");
         } else {
             targetTask.toggleIsDone();
             System.out.println(CHATBOT_NAME +
-                    "Okiee I've marked this task as not done yet -> " +
-                    targetTask.printTask());
+                    ": Okiee! I've marked this task as not done yet -> " +
+                    targetTask + "\n");
         }
     }
 
