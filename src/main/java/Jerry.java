@@ -8,6 +8,7 @@ public class Jerry {
     public static final String SHOW_LIST = "list";
     public static final String MARK_TASK = "mark";
     public static final String UNMARK_TASK = "unmark";
+    public static final String TODO_TASK = "todo";
 
     private final ArrayList<Task> taskList;
 
@@ -24,13 +25,14 @@ public class Jerry {
         System.out.println();
     }
 
-    public void addTask(String userInput) {
-        Task task = new Task(userInput);
-        this.taskList.add(task);
+    public void addTaskPrint(Task task) {
         System.out.println(CHATBOT_NAME +
                 ": I have added '" +
                 task +
-                "' to your list!\n");
+                "' to your list!");
+        System.out.println("Now you have " +
+                taskList.size() +
+                " tasks in the list!\n");
     }
 
     public Task getTask(String taskNumber) {
@@ -62,6 +64,13 @@ public class Jerry {
         }
     }
 
+    public void addToDoTask(String userInput) {
+        String task_description = userInput.substring(TODO_TASK.length()).trim();
+        Task task = new ToDo(task_description);
+        taskList.add(task);
+        addTaskPrint(task);
+    }
+
     public void readUserInput() {
         Scanner scan = new Scanner(System.in);
         String userInput;
@@ -74,6 +83,7 @@ public class Jerry {
             switch (userCommand) {
                 case EXIT:
                     return;
+
                 case SHOW_LIST:
                     if (this.taskList.isEmpty()) {
                         System.out.println(CHATBOT_NAME +
@@ -82,6 +92,7 @@ public class Jerry {
                         printList();
                     }
                     break;
+
                 case MARK_TASK:
                     markTask(getTask(userInputByWord[1]));
                     break;
@@ -89,8 +100,12 @@ public class Jerry {
                     unmarkTask(getTask(userInputByWord[1]));
                     break;
 
+                case TODO_TASK:
+                    addToDoTask(userInput);
+                    break;
                 default:
-                    addTask(userInput);
+                    System.out.println("Invalid Command");
+
             }
         }
     }
