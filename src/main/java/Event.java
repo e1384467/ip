@@ -1,9 +1,9 @@
-public class Events extends Task {
+public class Event extends Task {
 
     protected String from;
     protected String to;
 
-    public Events(String descriptor, String from, String to) {
+    public Event(String descriptor, String from, String to) {
         super(descriptor);
         this.from = from;
         this.to = to;
