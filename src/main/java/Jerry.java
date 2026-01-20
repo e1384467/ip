@@ -10,7 +10,7 @@ public class Jerry {
     public static final String UNMARK_TASK = "unmark";
     public static final String TODO_TASK = "todo";
     public static final String DEADLINE_TASK = "deadline";
-
+    public static final String EVENT_TASK= "event";
 
     private final ArrayList<Task> taskList;
 
@@ -67,18 +67,29 @@ public class Jerry {
         }
     }
 
-    public void ToDoTask(String userInput) {
+    public void toDoTask(String userInput) {
         String taskDescription = userInput.substring(TODO_TASK.length()).trim();
         Task task = new ToDo(taskDescription);
         addTaskPrint(task);
     }
 
-    public void DeadlineTask(String userInput){
+    public void deadlineTask(String userInput){
         String information = userInput.substring(DEADLINE_TASK.length()).trim();
-        String[] informationSeparate =  information.split("\\s*/by\\s*");
+        String[] informationSeparate =  information.split("\\s*/by\\s*",2);
         String taskDescription = informationSeparate[0];
         String deadline = informationSeparate[1];
         Task task = new Deadline(taskDescription, deadline);
+        addTaskPrint(task);
+    }
+
+    public void eventTask(String userInput) {
+        String information = userInput.substring(EVENT_TASK.length()).trim();
+        String[] informationSeparate = information.split("\\s*/from\\s*",2);
+        String taskDescription = informationSeparate[0];
+        String[] furtherSplit = informationSeparate[1].split("\\s*/to\\s*",2);
+        String from = furtherSplit[0];
+        String to = furtherSplit[1];
+        Task task = new Event(taskDescription, from, to);
         addTaskPrint(task);
     }
 
@@ -112,11 +123,15 @@ public class Jerry {
                     break;
 
                 case TODO_TASK:
-                    ToDoTask(userInput);
+                    toDoTask(userInput);
                     break;
 
                 case DEADLINE_TASK:
-                    DeadlineTask(userInput);
+                    deadlineTask(userInput);
+                    break;
+
+                case EVENT_TASK:
+                    eventTask(userInput);
                     break;
 
                 default:
