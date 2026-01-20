@@ -9,6 +9,8 @@ public class Jerry {
     public static final String MARK_TASK = "mark";
     public static final String UNMARK_TASK = "unmark";
     public static final String TODO_TASK = "todo";
+    public static final String DEADLINE_TASK = "deadline";
+
 
     private final ArrayList<Task> taskList;
 
@@ -65,8 +67,18 @@ public class Jerry {
     }
 
     public void addToDoTask(String userInput) {
-        String task_description = userInput.substring(TODO_TASK.length()).trim();
-        Task task = new ToDo(task_description);
+        String taskDescription = userInput.substring(TODO_TASK.length()).trim();
+        Task task = new ToDo(taskDescription);
+        taskList.add(task);
+        addTaskPrint(task);
+    }
+
+    public void addDeadlineTask(String userInput){
+        String information = userInput.substring(DEADLINE_TASK.length()).trim();
+        String[] informationSeparate =  information.split("\\s*/by\\s*");
+        String taskDescription = informationSeparate[0];
+        String deadline = informationSeparate[1];
+        Task task = new Deadline(taskDescription, deadline);
         taskList.add(task);
         addTaskPrint(task);
     }
@@ -103,6 +115,11 @@ public class Jerry {
                 case TODO_TASK:
                     addToDoTask(userInput);
                     break;
+
+                case DEADLINE_TASK:
+                    addDeadlineTask(userInput);
+                    break;
+
                 default:
                     System.out.println("Invalid Command");
 
