@@ -28,6 +28,7 @@ public class Jerry {
     }
 
     public void addTaskPrint(Task task) {
+        taskList.add(task);
         System.out.println(CHATBOT_NAME +
                 ": I have added '" +
                 task +
@@ -66,20 +67,18 @@ public class Jerry {
         }
     }
 
-    public void addToDoTask(String userInput) {
+    public void ToDoTask(String userInput) {
         String taskDescription = userInput.substring(TODO_TASK.length()).trim();
         Task task = new ToDo(taskDescription);
-        taskList.add(task);
         addTaskPrint(task);
     }
 
-    public void addDeadlineTask(String userInput){
+    public void DeadlineTask(String userInput){
         String information = userInput.substring(DEADLINE_TASK.length()).trim();
         String[] informationSeparate =  information.split("\\s*/by\\s*");
         String taskDescription = informationSeparate[0];
         String deadline = informationSeparate[1];
         Task task = new Deadline(taskDescription, deadline);
-        taskList.add(task);
         addTaskPrint(task);
     }
 
@@ -113,11 +112,11 @@ public class Jerry {
                     break;
 
                 case TODO_TASK:
-                    addToDoTask(userInput);
+                    ToDoTask(userInput);
                     break;
 
                 case DEADLINE_TASK:
-                    addDeadlineTask(userInput);
+                    DeadlineTask(userInput);
                     break;
 
                 default:
