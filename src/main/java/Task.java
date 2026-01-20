@@ -14,4 +14,11 @@ public class Task {
     public void toggleIsDone() {
         this.isDone = !this.isDone;
     }
+
+    public String printTask() {
+        return "[" +
+                this.getStatusIcon() +
+                "] " +
+                this.description;
+    }
 }

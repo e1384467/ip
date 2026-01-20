@@ -18,7 +18,8 @@ public class Jerry {
     public void printList() {
         System.out.println("Your list:");
         for (int index = 0; index < this.taskList.size(); index += 1) {
-            System.out.println(index + 1 + ". " + this.taskList.get(index));
+            System.out.println(index + 1 + "." +
+                    this.taskList.get(index).printTask());
         }
         System.out.println();
     }
@@ -29,11 +30,11 @@ public class Jerry {
         System.out.println(CHATBOT_NAME +
                 ": I have added " +
                 userInput +
-                " to your list");
+                " to your list!\n");
     }
 
     public Task getTask(String taskNumber) {
-        int index = Integer.parseInt(taskNumber);
+        int index = Integer.parseInt(taskNumber) - 1;
         return this.taskList.get(index);
     }
 
@@ -43,6 +44,9 @@ public class Jerry {
             System.out.println("This task is already Marked and Done");
         } else {
             targetTask.toggleIsDone();
+            System.out.println(CHATBOT_NAME +
+                    "Nice I've marked this task as done -> " +
+                    targetTask.printTask());
         }
     }
 
@@ -52,6 +56,9 @@ public class Jerry {
             System.out.println("This task is already Unmarked");
         } else {
             targetTask.toggleIsDone();
+            System.out.println(CHATBOT_NAME +
+                    "Okiee I've marked this task as not done yet -> " +
+                    targetTask.printTask());
         }
     }
 
