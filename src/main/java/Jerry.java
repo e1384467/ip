@@ -28,9 +28,9 @@ public class Jerry {
         Task task = new Task(userInput);
         this.taskList.add(task);
         System.out.println(CHATBOT_NAME +
-                ": I have added " +
-                userInput +
-                " to your list!\n");
+                ": I have added '" +
+                task +
+                "' to your list!\n");
     }
 
     public Task getTask(String taskNumber) {
