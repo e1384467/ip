@@ -1,0 +1,13 @@
+notACommand
+tod todo spelling mistake
+dedline deadline spelling mistake
+evnt event spelling mistake
+todo eat
+deadline eat /by 1pm
+event meeting /from monday 2pm /to monday 4 pm
+mar 1
+unmrk 3
+mark 1
+unmark 3
+by
+bye

@@ -1,0 +1,24 @@
+Hello! I'm Jerry
+What can I do for you?
+
+User input: Invalid Command
+User input: Invalid Command
+User input: Invalid Command
+User input: Invalid Command
+User input: Jerry: I have added '[T][ ] eat' to your list!
+Now you have 1 tasks in the list!
+
+User input: Jerry: I have added '[D][ ] eat (by: 1pm)' to your list!
+Now you have 2 tasks in the list!
+
+User input: Jerry: I have added '[E][ ] meeting (from: monday 2pm to: monday 4 pm)' to your list!
+Now you have 3 tasks in the list!
+
+User input: Invalid Command
+User input: Invalid Command
+User input: Jerry: Nice! I've marked this task as done -> [T][X] eat
+
+User input: This task is already Unmarked
+
+User input: Invalid Command
+User input: Bye. Hope to see you again soon!
