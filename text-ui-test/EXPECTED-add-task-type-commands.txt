@@ -11,22 +11,22 @@ User input: Jerry: I have added '[T][ ] eat' to your list!
 Now you have 1 tasks in the list!
 
 User input: Missing Argument >:( !!!! Please try:
-deadline <your task goes here>
+deadline <your task goes here> /by <add your date/time here>
 
 User input: Missing Argument >:( !!!! Please try:
-deadline <your task goes here> /by <add your date/time here
+deadline <your task goes here> /by <add your date/time here>
 
 User input: Missing Argument >:( !!!! Please try:
-deadline <your task goes here> /by <add your date/time here
+deadline <your task goes here> /by <add your date/time here>
 
 User input: Missing Argument >:( !!!! Please try:
-deadline <your task goes here> /by <add your date/time here
+deadline <your task goes here> /by <add your date/time here>
 
 User input: Missing Argument >:( !!!! Please try:
-deadline <your task goes here> /by <add your date/time here
+deadline <your task goes here> /by <add your date/time here>
 
 User input: Missing Argument >:( !!!! Please try:
-deadline <your task goes here> /by <add your date/time here
+deadline <your task goes here> /by <add your date/time here>
 
 User input: Jerry: I have added '[D][ ] eat (by: 1 pm)' to your list!
 Now you have 2 tasks in the list!
@@ -42,5 +42,41 @@ Now you have 5 tasks in the list!
 
 User input: Jerry: I have added '[D][ ] eat (by: /by /by)' to your list!
 Now you have 6 tasks in the list!
+
+User input: Missing Argument >:( !!!! Please try:
+deadline <your task goes here> /by <add your date/time here>
+
+User input: Missing Argument >:( !!!! Please try:
+Event <your task goes here> /from <add your start date/time here> /to <add your end date/time here>
+
+User input: Missing Argument >:( !!!! Please try:
+Event <your task goes here> /from <add your start date/time here> /to <add your end date/time here>
+
+User input: Missing Argument >:( !!!! Please try:
+Event <your task goes here> /from <add your start date/time here> /to <add your end date/time here>
+
+User input: Missing Argument >:( !!!! Please try:
+Event <your task goes here> /from <add your start date/time here> /to <add your end date/time here>
+
+User input: Missing Argument >:( !!!! Please try:
+Event <your task goes here> /from <add your start date/time here> /to <add your end date/time here>
+
+User input: Missing Argument >:( !!!! Please try:
+Event <your task goes here> /from <add your start date/time here> /to <add your end date/time here>
+
+User input: Jerry: I have added '[E][ ] eat (from: 1pm to: 2pm)' to your list!
+Now you have 7 tasks in the list!
+
+User input: Jerry: I have added '[E][ ] eat (from: /from to: /to)' to your list!
+Now you have 8 tasks in the list!
+
+User input: Missing Argument >:( !!!! Please try:
+Event <your task goes here> /from <add your start date/time here> /to <add your end date/time here>
+
+User input: Missing Argument >:( !!!! Please try:
+Event <your task goes here> /from <add your start date/time here> /to <add your end date/time here>
+
+User input: Missing Argument >:( !!!! Please try:
+Event <your task goes here> /from <add your start date/time here> /to <add your end date/time here>
 
 User input: Bye. Hope to see you again soon!
