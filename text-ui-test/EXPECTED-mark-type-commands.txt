@@ -1,0 +1,51 @@
+Hello! I'm Jerry
+What can I do for you?
+
+User input: Missing Argument >:( !!!! Please try:
+Mark <your task index from list>
+or
+Unmark <your task index from list>
+
+User input: Wrong Argument >:( !!!! Your task list is empty currently
+Use Command: list. To check your task list first :)
+
+User input: Wrong Argument >:( !!!! Your task list is empty currently
+Use Command: list. To check your task list first :)
+
+User input: Wrong Argument >:( !!!! Your task list is empty currently
+Use Command: list. To check your task list first :)
+
+User input: Missing Argument >:( !!!! Please try:
+Mark <your task index from list>
+or
+Unmark <your task index from list>
+
+User input: Wrong Argument >:( !!!! Your task list is empty currently
+Use Command: list. To check your task list first :)
+
+User input: Wrong Argument >:( !!!! Your task list is empty currently
+Use Command: list. To check your task list first :)
+
+User input: Wrong Argument >:( !!!! Your task list is empty currently
+Use Command: list. To check your task list first :)
+
+User input: Jerry: I have added '[T][ ] Read book' to your list!
+Now you have 1 tasks in the list!
+
+User input: Jerry: Nice! I've marked this task as done -> [T][X] Read book
+
+User input: Jerry: Okiee! I've marked this task as not done yet -> [T][ ] Read book
+
+User input: Wrong Argument >:( !!!! Please enter a number in the range of 1 to 1
+Use Command: list. To check your task list first :)
+
+User input: Wrong Argument >:( !!!! Please enter a number in the range of 1 to 1
+Use Command: list. To check your task list first :)
+
+User input: Wrong Argument >:( !!!! Please enter a number in the range of 1 to 1
+Use Command: list. To check your task list first :)
+
+User input: Wrong Argument >:( !!!! Please enter a number in the range of 1 to 1
+Use Command: list. To check your task list first :)
+
+User input: Bye. Hope to see you again soon!

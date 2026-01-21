@@ -1,0 +1,16 @@
+mark
+mark 0
+mark -1
+mark 1
+unmark
+unmark 0
+unmark -1
+unmark 1
+todo Read book
+mark 1
+unmark 1
+mark 2
+unmark 2
+mark 0
+unmark 0
+bye
