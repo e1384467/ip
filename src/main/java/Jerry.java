@@ -69,7 +69,7 @@ public class Jerry {
                 targetTask +
                 ". You now have " +
                 taskList.size() +
-                " left\n");
+                " task/s left\n");
     }
 
     public void markTask(Task targetTask) throws RepeatedActionsException  {

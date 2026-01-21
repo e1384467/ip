@@ -1,0 +1,8 @@
+delete
+delete 0
+event eat /from monday 1pm /to monday 2pm
+delete 0
+delete 2
+delete 1
+delete 1
+bye

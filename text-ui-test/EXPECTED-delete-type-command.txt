@@ -1,0 +1,32 @@
+Hello! I'm Jerry
+What can I do for you?
+
+User input: Missing Argument >:( !!!! Please try:
+Mark <your task index from list>
+or
+Unmark <your task index from list>
+or
+Delete <your task index from list>
+
+User input: Wrong Argument >:( !!!!
+Your task list is empty currently
+Use Command: list. To check your task list first :)
+
+User input: Jerry: I have added '[E][ ] eat (from: monday 1pm to: monday 2pm)' to your list!
+Now you have 1 tasks in the list!
+
+User input: Wrong Argument >:( !!!!
+Please enter a number in the range of 1 to 1
+Use Command: list. To check your task list first :)
+
+User input: Wrong Argument >:( !!!!
+Please enter a number in the range of 1 to 1
+Use Command: list. To check your task list first :)
+
+User input: JerryGot it! I've removed [E][ ] eat (from: monday 1pm to: monday 2pm). You now have 0 task/s left
+
+User input: Wrong Argument >:( !!!!
+Your task list is empty currently
+Use Command: list. To check your task list first :)
+
+User input: Bye. Hope to see you again soon!

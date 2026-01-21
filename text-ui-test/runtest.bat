@@ -31,3 +31,6 @@ if exist ACTUAL.TXT del ACTUAL.TXT
 java -classpath ..\bin Jerry < input-add-task-type-commands.txt > ACTUAL.TXT
 FC ACTUAL.TXT EXPECTED-add-task-type-commands.TXT
 if exist ACTUAL.TXT del ACTUAL.TXT
+
+java -classpath ..\bin Jerry < input-delete-type-command.txt > ACTUAL.TXT
+FC ACTUAL.TXT EXPECTED-delete-type-command.TXT
