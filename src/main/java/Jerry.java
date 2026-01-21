@@ -97,11 +97,15 @@ public class Jerry {
         Scanner scan = new Scanner(System.in);
         String userInput;
         while (true) {
-            System.out.print("User input: ");
-            userInput = scan.nextLine();
-            String[] userInputByWord = userInput.split("\\s+");
-            String userCommand = userInputByWord[0].toLowerCase();
             try {
+                System.out.print("User input: ");
+                userInput = scan.nextLine().trim();
+                if (userInput.isEmpty()) {
+                    throw new EmptyInputException();
+                }
+                String[] userInputByWord = userInput.split("\\s+");
+                String userCommand = userInputByWord[0].toLowerCase();
+
                 switch (userCommand) {
                     case EXIT:
                         return;
