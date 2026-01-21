@@ -49,11 +49,13 @@ public class Jerry {
         return this.taskList.get(index);
     }
 
-    public void markTask(Task targetTask)  {
+    public void markTask(Task targetTask) throws RepeatedActionsException  {
         if (targetTask.isDone)
         {
-            System.out.println(CHATBOT_NAME +
-                    ": This task is already Marked and Done\n");
+            throw new RepeatedActionsException("Repeated Action >:( !!!!\n" +
+                    "You've made a mistake, " +
+                    targetTask +
+                    " is already marked as done\n");
         } else {
             targetTask.toggleIsDone();
             System.out.println(CHATBOT_NAME +
@@ -62,11 +64,13 @@ public class Jerry {
         }
     }
 
-    public void unmarkTask(Task targetTask) {
+    public void unmarkTask(Task targetTask) throws RepeatedActionsException{
         if (!targetTask.isDone)
         {
-            System.out.println(CHATBOT_NAME +
-                    "This task is already Unmarked\n");
+            throw new RepeatedActionsException("Repeated Action >:( !!!!\n" +
+                    "You've made a mistake, " +
+                    targetTask +
+                    " is already unmarked as not done yet\n");
         } else {
             targetTask.toggleIsDone();
             System.out.println(CHATBOT_NAME +
