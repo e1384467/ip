@@ -1,0 +1,22 @@
+todo buy books
+todo read notes
+Deadline return book /by Tuesday
+Event project meeting /from monday 2pm /to tuesday 1 am
+list
+mark 1
+list
+mark 2
+list
+mark 3
+list
+mark 4
+list
+unmark 1
+list
+unmark 2
+list
+unmark 3
+list
+unmark 4
+list
+bye

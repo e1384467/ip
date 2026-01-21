@@ -1,7 +1,86 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hello! I'm Jerry
+What can I do for you?
 
+User input: Jerry: I have added '[T][ ] buy books' to your list!
+Now you have 1 tasks in the list!
+
+User input: Jerry: I have added '[T][ ] read notes' to your list!
+Now you have 2 tasks in the list!
+
+User input: Jerry: I have added '[D][ ] return book (by: Tuesday)' to your list!
+Now you have 3 tasks in the list!
+
+User input: Jerry: I have added '[E][ ] project meeting (from: monday 2pm to: tuesday 1 am)' to your list!
+Now you have 4 tasks in the list!
+
+User input: Your list:
+1.[T][ ] buy books
+2.[T][ ] read notes
+3.[D][ ] return book (by: Tuesday)
+4.[E][ ] project meeting (from: monday 2pm to: tuesday 1 am)
+
+User input: Jerry: Nice! I've marked this task as done -> [T][X] buy books
+
+User input: Your list:
+1.[T][X] buy books
+2.[T][ ] read notes
+3.[D][ ] return book (by: Tuesday)
+4.[E][ ] project meeting (from: monday 2pm to: tuesday 1 am)
+
+User input: Jerry: Nice! I've marked this task as done -> [T][X] read notes
+
+User input: Your list:
+1.[T][X] buy books
+2.[T][X] read notes
+3.[D][ ] return book (by: Tuesday)
+4.[E][ ] project meeting (from: monday 2pm to: tuesday 1 am)
+
+User input: Jerry: Nice! I've marked this task as done -> [D][X] return book (by: Tuesday)
+
+User input: Your list:
+1.[T][X] buy books
+2.[T][X] read notes
+3.[D][X] return book (by: Tuesday)
+4.[E][ ] project meeting (from: monday 2pm to: tuesday 1 am)
+
+User input: Jerry: Nice! I've marked this task as done -> [E][X] project meeting (from: monday 2pm to: tuesday 1 am)
+
+User input: Your list:
+1.[T][X] buy books
+2.[T][X] read notes
+3.[D][X] return book (by: Tuesday)
+4.[E][X] project meeting (from: monday 2pm to: tuesday 1 am)
+
+User input: Jerry: Okiee! I've marked this task as not done yet -> [T][ ] buy books
+
+User input: Your list:
+1.[T][ ] buy books
+2.[T][X] read notes
+3.[D][X] return book (by: Tuesday)
+4.[E][X] project meeting (from: monday 2pm to: tuesday 1 am)
+
+User input: Jerry: Okiee! I've marked this task as not done yet -> [T][ ] read notes
+
+User input: Your list:
+1.[T][ ] buy books
+2.[T][ ] read notes
+3.[D][X] return book (by: Tuesday)
+4.[E][X] project meeting (from: monday 2pm to: tuesday 1 am)
+
+User input: Jerry: Okiee! I've marked this task as not done yet -> [D][ ] return book (by: Tuesday)
+
+User input: Your list:
+1.[T][ ] buy books
+2.[T][ ] read notes
+3.[D][ ] return book (by: Tuesday)
+4.[E][X] project meeting (from: monday 2pm to: tuesday 1 am)
+
+User input: Jerry: Okiee! I've marked this task as not done yet -> [E][ ] project meeting (from: monday 2pm to: tuesday 1 am)
+
+User input: Your list:
+1.[T][ ] buy books
+2.[T][ ] read notes
+3.[D][ ] return book (by: Tuesday)
+4.[E][ ] project meeting (from: monday 2pm to: tuesday 1 am)
+
+User input: Bye. Hope to see you again soon!
