@@ -12,4 +12,15 @@ deadline eat /By 2 pm
 deadline eat /bY 3 pm
 deadline eat /BY 4 pm
 deadline eat /by /by /by
-bye
+deadline /by 1pm
+event
+event       /from      /to
+event /from /to
+event eat /from /to
+event eat /from 1pm /to
+event eat /from /to 1pm
+event eat /from 1pm /to 2pm
+event eat /from /from /to /to
+event /from 1pm /to
+event /from /to 1pm
+event /from 1pm /to 1pm
