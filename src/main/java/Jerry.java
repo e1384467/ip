@@ -4,15 +4,6 @@ import java.util.ArrayList;
 public class Jerry {
 
     public static final String CHATBOT_NAME = "Jerry";
-    public static final String EXIT = "bye";
-    public static final String SHOW_LIST = "list";
-    public static final String MARK_TASK = "mark";
-    public static final String UNMARK_TASK = "unmark";
-    public static final String TODO_TASK = "todo";
-    public static final String DEADLINE_TASK = "deadline";
-    public static final String EVENT_TASK = "event";
-    public static final String DELETE_TASK = "delete";
-
     private final ArrayList<Task> taskList;
 
     public Jerry() {
@@ -99,7 +90,7 @@ public class Jerry {
     }
 
     public void toDoTask(String userInput) throws MissingArgumentException {
-        String taskDescription = userInput.substring(TODO_TASK.length()).trim();
+        String taskDescription = userInput.substring(Commands.TODO.toString().length()).trim();
         if (taskDescription.isEmpty()) {
             throw new MissingArgumentException("Todo <your task goes here>\n");
         }
@@ -109,7 +100,7 @@ public class Jerry {
 
     public void deadlineTask(String userInput) throws MissingArgumentException, WrongArgumentException{
         try {
-            String information = userInput.substring(DEADLINE_TASK.length()).trim();
+            String information = userInput.substring(Commands.DEADLINE.toString().length()).trim();
             String[] informationSeparate = information.split("(?i)\\s*/by\\s*", 2);
             String taskDescription = informationSeparate[0];
             String deadline = informationSeparate[1];
@@ -125,7 +116,7 @@ public class Jerry {
 
     public void eventTask(String userInput) throws MissingArgumentException {
         try {
-            String information = userInput.substring(EVENT_TASK.length()).trim();
+            String information = userInput.substring(Commands.EVENT.toString().length()).trim();
             String[] informationSeparate = information.split("\\s*/from\\s*", 2);
             String taskDescription = informationSeparate[0];
             String[] furtherSplit = informationSeparate[1].split("\\s*/to\\s*", 2);
@@ -152,13 +143,13 @@ public class Jerry {
                     throw new EmptyInputException();
                 }
                 String[] userInputByWord = userInput.split("\\s+");
-                String userCommand = userInputByWord[0].toLowerCase();
+                Commands userCommand = Commands.getCommand(userInputByWord[0]);
 
                 switch (userCommand) {
-                    case EXIT:
+                    case BYE:
                         return;
 
-                    case SHOW_LIST:
+                    case LIST:
                         if (this.taskList.isEmpty()) {
                             System.out.println(CHATBOT_NAME +
                                     ": your list is currently empty. Type to add more!\n");
@@ -167,30 +158,28 @@ public class Jerry {
                         }
                         break;
 
-                    case MARK_TASK:
+                    case MARK:
                         markTask(getTask(userInputByWord));
                         break;
-                    case UNMARK_TASK:
+                    case UNMARK:
                         unmarkTask(getTask(userInputByWord));
                         break;
 
-                    case TODO_TASK:
+                    case TODO:
                         toDoTask(userInput);
                         break;
 
-                    case DEADLINE_TASK:
+                    case DEADLINE:
                         deadlineTask(userInput);
                         break;
 
-                    case EVENT_TASK:
+                    case EVENT:
                         eventTask(userInput);
                         break;
 
-                    case DELETE_TASK:
+                    case DELETE:
                         deleteTask(getTask(userInputByWord));
                         break;
-                    default:
-                        throw new InvalidCommandException();
                 }
             } catch (JerryException e) {
                 System.out.println(e.getMessage());
