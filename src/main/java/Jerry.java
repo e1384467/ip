@@ -89,8 +89,12 @@ public class Jerry {
 
     }
 
-    public void toDoTask(String userInput) {
+    public void toDoTask(String userInput) throws MissingArgumentException {
         String taskDescription = userInput.substring(TODO_TASK.length()).trim();
+        if (taskDescription.isEmpty()) {
+            throw new MissingArgumentException("Missing Argument >:( !!!! Please try:\n" +
+                    "Todo <your task goes here>\n");
+        }
         Task task = new ToDo(taskDescription);
         addTaskPrint(task);
     }
