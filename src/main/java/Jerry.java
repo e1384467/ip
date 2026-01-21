@@ -177,7 +177,7 @@ public class Jerry {
                     default:
                         throw new InvalidCommandException();
                 }
-            } catch (DukeException e) {
+            } catch (JerryException e) {
                 System.out.println(e.getMessage());
             }
         }

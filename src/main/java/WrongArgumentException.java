@@ -1,4 +1,4 @@
-public class WrongArgumentException extends DukeException {
+public class WrongArgumentException extends JerryException {
     WrongArgumentException(String outputMessage) {
         super("Wrong Argument >:( !!!!\n" + outputMessage);
     }

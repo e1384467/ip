@@ -1,4 +1,4 @@
-public class InvalidCommandException extends DukeException {
+public class InvalidCommandException extends JerryException {
 
     private static final String COMMAND_LIST =
             "Command: list (to view your tasks in a list)\n" +
