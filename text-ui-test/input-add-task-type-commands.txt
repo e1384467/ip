@@ -1,0 +1,9 @@
+todo
+todo
+todo eat
+deadline
+deadline      /by
+deadline /by
+deadline eat /by
+deadline eat /by
+deadline eat/by

@@ -26,3 +26,6 @@ if exist ACTUAL.TXT del ACTUAL.TXT
 java -classpath ..\bin Jerry < input-mark-type-commands.txt > ACTUAL.TXT
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED-mark-type-commands.TXT
+
+java -classpath ..\bin Jerry < input-add-task-type-commands.txt > ACTUAL.TXT
+
