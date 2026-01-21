@@ -129,7 +129,7 @@ e.g. bye
 
 User input: Jerry: Nice! I've marked this task as done -> [T][X] eat
 
-User input: Jerry: Okiee! I've marked this task as not done yet -> [T][ ] eat
+User input: Jerry: Okiee! I've unmarked this task as not done yet -> [T][ ] eat
 
 User input: Please enter something :b
 Command: list (to view your tasks in a list)

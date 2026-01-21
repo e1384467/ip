@@ -81,7 +81,7 @@ public class Jerry {
         }
         targetTask.toggleIsDone();
         System.out.println(CHATBOT_NAME +
-                ": Okiee! I've marked this task as not done yet -> " +
+                ": Okiee! I've unmarked this task as not done yet -> " +
                 targetTask + "\n");
 
     }

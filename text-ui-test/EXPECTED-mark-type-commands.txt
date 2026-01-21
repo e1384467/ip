@@ -40,7 +40,7 @@ Now you have 1 tasks in the list!
 
 User input: Jerry: Nice! I've marked this task as done -> [T][X] Read book
 
-User input: Jerry: Okiee! I've marked this task as not done yet -> [T][ ] Read book
+User input: Jerry: Okiee! I've unmarked this task as not done yet -> [T][ ] Read book
 
 User input: Wrong Argument >:( !!!!
 Please enter a number in the range of 1 to 1
