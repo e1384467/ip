@@ -5,10 +5,12 @@ evnt event spelling mistake
 todo eat
 deadline eat /by 1pm
 event meeting /from monday 2pm /to monday 4 pm
+lst
+list
 mar 1
-unmrk 3
+unmrk 1
 mark 1
-unmark 3
+unmark 1
 
 by
 bye

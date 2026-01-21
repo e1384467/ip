@@ -43,7 +43,7 @@ public class Jerry {
             int index = Integer.parseInt(userInputByWord[1]);
             return this.taskList.get(index - 1);
         } catch (NumberFormatException e) {
-            throw new WrongArgumentException("Wrong Argument >:( !!!! THIS IS NOT A NUMBER");
+            throw new WrongArgumentException("Wrong Argument >:( !!!! THIS IS NOT A NUMBER\n");
         } catch (IndexOutOfBoundsException e) {
             if (userInputByWord.length < 2) {
                 throw new MissingArgumentException("Missing Argument >:( !!!! Please try:\n" +
@@ -51,7 +51,6 @@ public class Jerry {
                         "or\n" +
                         "Unmark <your task index from list>\n");
             }
-
             throw new WrongArgumentException((taskList.isEmpty() ?
                     ("Wrong Argument >:( !!!! Your task list is empty currently") :
                     ("Wrong Argument >:( !!!! Please enter a number in the range of 1 to " +
