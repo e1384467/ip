@@ -38,15 +38,22 @@ public class Jerry {
                 " tasks in the list!\n");
     }
 
-    public Task getTask(String taskNumber) {
-        int index = Integer.parseInt(taskNumber) - 1;
+    public Task getTask(String[] userInputByWord) throws MissingArgumentException {
+        if (userInputByWord.length < 2) {
+            throw new MissingArgumentException("Missing Argument >:( !!!! Please try:\n" +
+                    "Mark <your task index from list>\n" +
+                    "or\n" +
+                    "Unmark <your task index from list>\n");
+        }
+        int index = Integer.parseInt(userInputByWord[1]) - 1;
         return this.taskList.get(index);
     }
 
-    public void markTask(Task targetTask) {
+    public void markTask(Task targetTask)  {
         if (targetTask.isDone)
         {
-            System.out.println("This task is already Marked and Done\n");
+            System.out.println(CHATBOT_NAME +
+                    ": This task is already Marked and Done\n");
         } else {
             targetTask.toggleIsDone();
             System.out.println(CHATBOT_NAME +
@@ -58,7 +65,8 @@ public class Jerry {
     public void unmarkTask(Task targetTask) {
         if (!targetTask.isDone)
         {
-            System.out.println("This task is already Unmarked\n");
+            System.out.println(CHATBOT_NAME +
+                    "This task is already Unmarked\n");
         } else {
             targetTask.toggleIsDone();
             System.out.println(CHATBOT_NAME +
@@ -120,10 +128,10 @@ public class Jerry {
                         break;
 
                     case MARK_TASK:
-                        markTask(getTask(userInputByWord[1]));
+                        markTask(getTask(userInputByWord));
                         break;
                     case UNMARK_TASK:
-                        unmarkTask(getTask(userInputByWord[1]));
+                        unmarkTask(getTask(userInputByWord));
                         break;
 
                     case TODO_TASK:
