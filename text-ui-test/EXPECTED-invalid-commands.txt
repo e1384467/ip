@@ -1,10 +1,70 @@
 Hello! I'm Jerry
 What can I do for you?
 
-User input: Invalid Command
-User input: Invalid Command
-User input: Invalid Command
-User input: Invalid Command
+User input: Invalid Command >:c
+Command: list (to view your tasks in a list)
+e.g. list
+Command: Todo <add your task here>
+e.g. todo clean house
+Command: Deadline <add your task here> /by <add your date/time here>
+e.g. deadline submit report /by Monday 11/10/2019 5 pm
+Command: Event <add your task here> /from <add your start date/time here> /to <add your end date/time here>
+e.g. event project meeting /from Tuesday 12/10/2019 1pm /to Tuesday 12/10/2019 2pm
+Command: Mark <your task index from list>
+e.g. mark 1
+Command: Unmark <your task index from list>
+e.g. unmark 2
+Command: Bye
+e.g. bye
+
+User input: Invalid Command >:c
+Command: list (to view your tasks in a list)
+e.g. list
+Command: Todo <add your task here>
+e.g. todo clean house
+Command: Deadline <add your task here> /by <add your date/time here>
+e.g. deadline submit report /by Monday 11/10/2019 5 pm
+Command: Event <add your task here> /from <add your start date/time here> /to <add your end date/time here>
+e.g. event project meeting /from Tuesday 12/10/2019 1pm /to Tuesday 12/10/2019 2pm
+Command: Mark <your task index from list>
+e.g. mark 1
+Command: Unmark <your task index from list>
+e.g. unmark 2
+Command: Bye
+e.g. bye
+
+User input: Invalid Command >:c
+Command: list (to view your tasks in a list)
+e.g. list
+Command: Todo <add your task here>
+e.g. todo clean house
+Command: Deadline <add your task here> /by <add your date/time here>
+e.g. deadline submit report /by Monday 11/10/2019 5 pm
+Command: Event <add your task here> /from <add your start date/time here> /to <add your end date/time here>
+e.g. event project meeting /from Tuesday 12/10/2019 1pm /to Tuesday 12/10/2019 2pm
+Command: Mark <your task index from list>
+e.g. mark 1
+Command: Unmark <your task index from list>
+e.g. unmark 2
+Command: Bye
+e.g. bye
+
+User input: Invalid Command >:c
+Command: list (to view your tasks in a list)
+e.g. list
+Command: Todo <add your task here>
+e.g. todo clean house
+Command: Deadline <add your task here> /by <add your date/time here>
+e.g. deadline submit report /by Monday 11/10/2019 5 pm
+Command: Event <add your task here> /from <add your start date/time here> /to <add your end date/time here>
+e.g. event project meeting /from Tuesday 12/10/2019 1pm /to Tuesday 12/10/2019 2pm
+Command: Mark <your task index from list>
+e.g. mark 1
+Command: Unmark <your task index from list>
+e.g. unmark 2
+Command: Bye
+e.g. bye
+
 User input: Jerry: I have added '[T][ ] eat' to your list!
 Now you have 1 tasks in the list!
 
@@ -14,11 +74,56 @@ Now you have 2 tasks in the list!
 User input: Jerry: I have added '[E][ ] meeting (from: monday 2pm to: monday 4 pm)' to your list!
 Now you have 3 tasks in the list!
 
-User input: Invalid Command
-User input: Invalid Command
+User input: Invalid Command >:c
+Command: list (to view your tasks in a list)
+e.g. list
+Command: Todo <add your task here>
+e.g. todo clean house
+Command: Deadline <add your task here> /by <add your date/time here>
+e.g. deadline submit report /by Monday 11/10/2019 5 pm
+Command: Event <add your task here> /from <add your start date/time here> /to <add your end date/time here>
+e.g. event project meeting /from Tuesday 12/10/2019 1pm /to Tuesday 12/10/2019 2pm
+Command: Mark <your task index from list>
+e.g. mark 1
+Command: Unmark <your task index from list>
+e.g. unmark 2
+Command: Bye
+e.g. bye
+
+User input: Invalid Command >:c
+Command: list (to view your tasks in a list)
+e.g. list
+Command: Todo <add your task here>
+e.g. todo clean house
+Command: Deadline <add your task here> /by <add your date/time here>
+e.g. deadline submit report /by Monday 11/10/2019 5 pm
+Command: Event <add your task here> /from <add your start date/time here> /to <add your end date/time here>
+e.g. event project meeting /from Tuesday 12/10/2019 1pm /to Tuesday 12/10/2019 2pm
+Command: Mark <your task index from list>
+e.g. mark 1
+Command: Unmark <your task index from list>
+e.g. unmark 2
+Command: Bye
+e.g. bye
+
 User input: Jerry: Nice! I've marked this task as done -> [T][X] eat
 
 User input: This task is already Unmarked
 
-User input: Invalid Command
+User input: Invalid Command >:c
+Command: list (to view your tasks in a list)
+e.g. list
+Command: Todo <add your task here>
+e.g. todo clean house
+Command: Deadline <add your task here> /by <add your date/time here>
+e.g. deadline submit report /by Monday 11/10/2019 5 pm
+Command: Event <add your task here> /from <add your start date/time here> /to <add your end date/time here>
+e.g. event project meeting /from Tuesday 12/10/2019 1pm /to Tuesday 12/10/2019 2pm
+Command: Mark <your task index from list>
+e.g. mark 1
+Command: Unmark <your task index from list>
+e.g. unmark 2
+Command: Bye
+e.g. bye
+
 User input: Bye. Hope to see you again soon!
