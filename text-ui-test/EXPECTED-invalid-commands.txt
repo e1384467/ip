@@ -14,6 +14,8 @@ Command: Mark <your task index from list>
 e.g. mark 1
 Command: Unmark <your task index from list>
 e.g. unmark 2
+Command: Delete <your task index from list>
+e.g. delete 3
 Command: Bye
 e.g. bye
 
@@ -30,6 +32,8 @@ Command: Mark <your task index from list>
 e.g. mark 1
 Command: Unmark <your task index from list>
 e.g. unmark 2
+Command: Delete <your task index from list>
+e.g. delete 3
 Command: Bye
 e.g. bye
 
@@ -46,6 +50,8 @@ Command: Mark <your task index from list>
 e.g. mark 1
 Command: Unmark <your task index from list>
 e.g. unmark 2
+Command: Delete <your task index from list>
+e.g. delete 3
 Command: Bye
 e.g. bye
 
@@ -62,6 +68,8 @@ Command: Mark <your task index from list>
 e.g. mark 1
 Command: Unmark <your task index from list>
 e.g. unmark 2
+Command: Delete <your task index from list>
+e.g. delete 3
 Command: Bye
 e.g. bye
 
@@ -87,6 +95,8 @@ Command: Mark <your task index from list>
 e.g. mark 1
 Command: Unmark <your task index from list>
 e.g. unmark 2
+Command: Delete <your task index from list>
+e.g. delete 3
 Command: Bye
 e.g. bye
 
@@ -108,6 +118,8 @@ Command: Mark <your task index from list>
 e.g. mark 1
 Command: Unmark <your task index from list>
 e.g. unmark 2
+Command: Delete <your task index from list>
+e.g. delete 3
 Command: Bye
 e.g. bye
 
@@ -124,6 +136,8 @@ Command: Mark <your task index from list>
 e.g. mark 1
 Command: Unmark <your task index from list>
 e.g. unmark 2
+Command: Delete <your task index from list>
+e.g. delete 3
 Command: Bye
 e.g. bye
 
@@ -144,6 +158,8 @@ Command: Mark <your task index from list>
 e.g. mark 1
 Command: Unmark <your task index from list>
 e.g. unmark 2
+Command: Delete <your task index from list>
+e.g. delete 3
 Command: Bye
 e.g. bye
 
@@ -160,6 +176,8 @@ Command: Mark <your task index from list>
 e.g. mark 1
 Command: Unmark <your task index from list>
 e.g. unmark 2
+Command: Delete <your task index from list>
+e.g. delete 3
 Command: Bye
 e.g. bye
 

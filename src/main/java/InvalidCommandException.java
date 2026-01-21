@@ -13,6 +13,8 @@ public class InvalidCommandException extends JerryException {
             "e.g. mark 1\n" +
             "Command: Unmark <your task index from list>\n" +
             "e.g. unmark 2\n" +
+            "Command: Delete <your task index from list>\n" +
+            "e.g. delete 3\n" +
             "Command: Bye\n" +
             "e.g. bye\n" ;
 
