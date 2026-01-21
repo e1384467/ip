@@ -11,7 +11,7 @@ public class InvalidCommandException extends DukeException {
             "e.g. event project meeting /from Tuesday 12/10/2019 1pm /to Tuesday 12/10/2019 2pm\n" +
             "Command: Mark <your task index from list>\n" +
             "e.g. mark 1\n" +
-            "Command: Unmark <your task index from list> \n" +
+            "Command: Unmark <your task index from list>\n" +
             "e.g. unmark 2\n" +
             "Command: Bye\n" +
             "e.g. bye\n" ;
