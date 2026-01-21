@@ -99,13 +99,22 @@ public class Jerry {
         addTaskPrint(task);
     }
 
-    public void deadlineTask(String userInput){
-        String information = userInput.substring(DEADLINE_TASK.length()).trim();
-        String[] informationSeparate =  information.split("\\s*/by\\s*",2);
-        String taskDescription = informationSeparate[0];
-        String deadline = informationSeparate[1];
-        Task task = new Deadline(taskDescription, deadline);
-        addTaskPrint(task);
+    public void deadlineTask(String userInput) throws MissingArgumentException, WrongArgumentException{
+        try {
+            String information = userInput.substring(DEADLINE_TASK.length()).trim();
+            String[] informationSeparate = information.split("(?i)\\s*/by\\s*", 2);
+            String taskDescription = informationSeparate[0];
+            String deadline = informationSeparate[1];
+            if (taskDescription.isEmpty()|| deadline.isEmpty()) {
+                throw new MissingArgumentException("Missing Argument >:( !!!! Please try:\n" +
+                        "deadline <your task goes here> /by <add your date/time here\n");
+            }
+            Task task = new Deadline(taskDescription, deadline);
+            addTaskPrint(task);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new MissingArgumentException("Missing Argument >:( !!!! Please try:\n" +
+                    "deadline <your task goes here>\n");
+        }
     }
 
     public void eventTask(String userInput) {

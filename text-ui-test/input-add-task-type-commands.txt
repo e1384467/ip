@@ -7,3 +7,9 @@ deadline /by
 deadline eat /by
 deadline eat /by
 deadline eat/by
+deadline eat /by 1 pm
+deadline eat /By 2 pm
+deadline eat /bY 3 pm
+deadline eat /BY 4 pm
+deadline eat /by /by /by
+bye

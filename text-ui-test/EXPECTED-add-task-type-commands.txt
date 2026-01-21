@@ -1,0 +1,46 @@
+Hello! I'm Jerry
+What can I do for you?
+
+User input: Missing Argument >:( !!!! Please try:
+Todo <your task goes here>
+
+User input: Missing Argument >:( !!!! Please try:
+Todo <your task goes here>
+
+User input: Jerry: I have added '[T][ ] eat' to your list!
+Now you have 1 tasks in the list!
+
+User input: Missing Argument >:( !!!! Please try:
+deadline <your task goes here>
+
+User input: Missing Argument >:( !!!! Please try:
+deadline <your task goes here> /by <add your date/time here
+
+User input: Missing Argument >:( !!!! Please try:
+deadline <your task goes here> /by <add your date/time here
+
+User input: Missing Argument >:( !!!! Please try:
+deadline <your task goes here> /by <add your date/time here
+
+User input: Missing Argument >:( !!!! Please try:
+deadline <your task goes here> /by <add your date/time here
+
+User input: Missing Argument >:( !!!! Please try:
+deadline <your task goes here> /by <add your date/time here
+
+User input: Jerry: I have added '[D][ ] eat (by: 1 pm)' to your list!
+Now you have 2 tasks in the list!
+
+User input: Jerry: I have added '[D][ ] eat (by: 2 pm)' to your list!
+Now you have 3 tasks in the list!
+
+User input: Jerry: I have added '[D][ ] eat (by: 3 pm)' to your list!
+Now you have 4 tasks in the list!
+
+User input: Jerry: I have added '[D][ ] eat (by: 4 pm)' to your list!
+Now you have 5 tasks in the list!
+
+User input: Jerry: I have added '[D][ ] eat (by: /by /by)' to your list!
+Now you have 6 tasks in the list!
+
+User input: Bye. Hope to see you again soon!

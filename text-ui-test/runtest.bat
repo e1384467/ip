@@ -16,6 +16,7 @@ REM no error here, errorlevel == 0
 
 REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
 java -classpath ..\bin Jerry < input.txt > ACTUAL.TXT
+REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT
 if exist ACTUAL.TXT del ACTUAL.TXT
 
@@ -24,8 +25,9 @@ FC ACTUAL.TXT EXPECTED-invalid-commands.TXT
 if exist ACTUAL.TXT del ACTUAL.TXT
 
 java -classpath ..\bin Jerry < input-mark-type-commands.txt > ACTUAL.TXT
-REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED-mark-type-commands.TXT
+if exist ACTUAL.TXT del ACTUAL.TXT
 
 java -classpath ..\bin Jerry < input-add-task-type-commands.txt > ACTUAL.TXT
-
+FC ACTUAL.TXT EXPECTED-add-task-type-commands.TXT
+if exist ACTUAL.TXT del ACTUAL.T
