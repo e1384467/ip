@@ -38,45 +38,56 @@ public class Jerry {
                 " tasks in the list!\n");
     }
 
-    public Task getTask(String[] userInputByWord) throws MissingArgumentException {
-        if (userInputByWord.length < 2) {
-            throw new MissingArgumentException("Missing Argument >:( !!!! Please try:\n" +
-                    "Mark <your task index from list>\n" +
-                    "or\n" +
-                    "Unmark <your task index from list>\n");
+    public Task getTask(String[] userInputByWord) throws MissingArgumentException, WrongArgumentException {
+        try {
+            int index = Integer.parseInt(userInputByWord[1]);
+            return this.taskList.get(index - 1);
+        } catch (NumberFormatException e) {
+            throw new WrongArgumentException("Wrong Argument >:( !!!! THIS IS NOT A NUMBER");
+        } catch (IndexOutOfBoundsException e) {
+            if (userInputByWord.length < 2) {
+                throw new MissingArgumentException("Missing Argument >:( !!!! Please try:\n" +
+                        "Mark <your task index from list>\n" +
+                        "or\n" +
+                        "Unmark <your task index from list>\n");
+            }
+
+            throw new WrongArgumentException((taskList.isEmpty() ?
+                    ("Wrong Argument >:( !!!! Your task list is empty currently") :
+                    ("Wrong Argument >:( !!!! Please enter a number in the range of 1 to " +
+                            taskList.size())) +
+                    "\nUse Command: list. To check your task list first :)\n");
         }
-        int index = Integer.parseInt(userInputByWord[1]) - 1;
-        return this.taskList.get(index);
+
+
     }
 
     public void markTask(Task targetTask) throws RepeatedActionsException  {
-        if (targetTask.isDone)
-        {
+        if (targetTask.isDone) {
             throw new RepeatedActionsException("Repeated Action >:( !!!!\n" +
                     "You've made a mistake, " +
                     targetTask +
                     " is already marked as done\n");
-        } else {
-            targetTask.toggleIsDone();
-            System.out.println(CHATBOT_NAME +
-                    ": Nice! I've marked this task as done -> " +
-                    targetTask + "\n");
         }
+        targetTask.toggleIsDone();
+        System.out.println(CHATBOT_NAME +
+                ": Nice! I've marked this task as done -> " +
+                targetTask + "\n");
+
     }
 
     public void unmarkTask(Task targetTask) throws RepeatedActionsException{
-        if (!targetTask.isDone)
-        {
+        if (!targetTask.isDone) {
             throw new RepeatedActionsException("Repeated Action >:( !!!!\n" +
                     "You've made a mistake, " +
                     targetTask +
                     " is already unmarked as not done yet\n");
-        } else {
-            targetTask.toggleIsDone();
-            System.out.println(CHATBOT_NAME +
-                    ": Okiee! I've marked this task as not done yet -> " +
-                    targetTask + "\n");
         }
+        targetTask.toggleIsDone();
+        System.out.println(CHATBOT_NAME +
+                ": Okiee! I've marked this task as not done yet -> " +
+                targetTask + "\n");
+
     }
 
     public void toDoTask(String userInput) {
