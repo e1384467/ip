@@ -24,3 +24,4 @@ event eat /from /from /to /to
 event /from 1pm /to
 event /from /to 1pm
 event /from 1pm /to 1pm
+bye

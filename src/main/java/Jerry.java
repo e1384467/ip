@@ -117,15 +117,24 @@ public class Jerry {
         }
     }
 
-    public void eventTask(String userInput) {
-        String information = userInput.substring(EVENT_TASK.length()).trim();
-        String[] informationSeparate = information.split("\\s*/from\\s*",2);
-        String taskDescription = informationSeparate[0];
-        String[] furtherSplit = informationSeparate[1].split("\\s*/to\\s*",2);
-        String from = furtherSplit[0];
-        String to = furtherSplit[1];
-        Task task = new Event(taskDescription, from, to);
-        addTaskPrint(task);
+    public void eventTask(String userInput) throws MissingArgumentException {
+        try {
+            String information = userInput.substring(EVENT_TASK.length()).trim();
+            String[] informationSeparate = information.split("\\s*/from\\s*", 2);
+            String taskDescription = informationSeparate[0];
+            String[] furtherSplit = informationSeparate[1].split("\\s*/to\\s*", 2);
+            String from = furtherSplit[0];
+            String to = furtherSplit[1];
+            if (taskDescription.isEmpty() || from.isEmpty() || to.isEmpty()) {
+                throw new MissingArgumentException("Missing Argument >:( !!!! Please try:\n" +
+                        "Event <your task goes here> /from <add your start date/time here> /to <add your end date/time here>\n");
+            }
+            Task task = new Event(taskDescription, from, to);
+            addTaskPrint(task);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new MissingArgumentException("Missing Argument >:( !!!! Please try:\n" +
+                    "Event <your task goes here> /from <add your start date/time here> /to <add your end date/time here>\n");
+        }
     }
 
     public void readUserInput() {
