@@ -10,7 +10,8 @@ public class Jerry {
     public static final String UNMARK_TASK = "unmark";
     public static final String TODO_TASK = "todo";
     public static final String DEADLINE_TASK = "deadline";
-    public static final String EVENT_TASK= "event";
+    public static final String EVENT_TASK = "event";
+    public static final String DELETE_TASK = "delete";
 
     private final ArrayList<Task> taskList;
 
@@ -48,7 +49,9 @@ public class Jerry {
             if (userInputByWord.length < 2) {
                 throw new MissingArgumentException("Mark <your task index from list>\n" +
                         "or\n" +
-                        "Unmark <your task index from list>\n");
+                        "Unmark <your task index from list>\n" +
+                        "or\n" +
+                        "Delete <your task index from list>\n");
             }
             throw new WrongArgumentException((taskList.isEmpty() ?
                     ("Your task list is empty currently") :
@@ -58,6 +61,15 @@ public class Jerry {
         }
 
 
+    }
+    public void deleteTask(Task targetTask) throws RepeatedActionsException {
+        taskList.remove(targetTask);
+        System.out.println(CHATBOT_NAME +
+                "Got it! I've removed " +
+                targetTask +
+                ". You now have " +
+                taskList.size() +
+                " left\n");
     }
 
     public void markTask(Task targetTask) throws RepeatedActionsException  {
@@ -174,6 +186,9 @@ public class Jerry {
                         eventTask(userInput);
                         break;
 
+                    case DELETE_TASK:
+                        deleteTask(getTask(userInputByWord));
+                        break;
                     default:
                         throw new InvalidCommandException();
                 }
