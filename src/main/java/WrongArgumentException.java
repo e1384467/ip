@@ -1,5 +1,5 @@
 public class WrongArgumentException extends DukeException {
     WrongArgumentException(String outputMessage) {
-        super(outputMessage);
+        super("Wrong Argument >:( !!!!\n" + outputMessage);
     }
 }

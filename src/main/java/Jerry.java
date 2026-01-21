@@ -43,17 +43,16 @@ public class Jerry {
             int index = Integer.parseInt(userInputByWord[1]);
             return this.taskList.get(index - 1);
         } catch (NumberFormatException e) {
-            throw new WrongArgumentException("Wrong Argument >:( !!!! THIS IS NOT A NUMBER\n");
+            throw new WrongArgumentException("THIS IS NOT A NUMBER\n");
         } catch (IndexOutOfBoundsException e) {
             if (userInputByWord.length < 2) {
-                throw new MissingArgumentException("Missing Argument >:( !!!! Please try:\n" +
-                        "Mark <your task index from list>\n" +
+                throw new MissingArgumentException("Mark <your task index from list>\n" +
                         "or\n" +
                         "Unmark <your task index from list>\n");
             }
             throw new WrongArgumentException((taskList.isEmpty() ?
-                    ("Wrong Argument >:( !!!! Your task list is empty currently") :
-                    ("Wrong Argument >:( !!!! Please enter a number in the range of 1 to " +
+                    ("Your task list is empty currently") :
+                    ("Please enter a number in the range of 1 to " +
                             taskList.size())) +
                     "\nUse Command: list. To check your task list first :)\n");
         }
@@ -63,8 +62,7 @@ public class Jerry {
 
     public void markTask(Task targetTask) throws RepeatedActionsException  {
         if (targetTask.isDone) {
-            throw new RepeatedActionsException("Repeated Action >:( !!!!\n" +
-                    "You've made a mistake, " +
+            throw new RepeatedActionsException( "You've made a mistake, " +
                     targetTask +
                     " is already marked as done\n");
         }
@@ -77,8 +75,7 @@ public class Jerry {
 
     public void unmarkTask(Task targetTask) throws RepeatedActionsException{
         if (!targetTask.isDone) {
-            throw new RepeatedActionsException("Repeated Action >:( !!!!\n" +
-                    "You've made a mistake, " +
+            throw new RepeatedActionsException("You've made a mistake, " +
                     targetTask +
                     " is already unmarked as not done yet\n");
         }
@@ -92,8 +89,7 @@ public class Jerry {
     public void toDoTask(String userInput) throws MissingArgumentException {
         String taskDescription = userInput.substring(TODO_TASK.length()).trim();
         if (taskDescription.isEmpty()) {
-            throw new MissingArgumentException("Missing Argument >:( !!!! Please try:\n" +
-                    "Todo <your task goes here>\n");
+            throw new MissingArgumentException("Todo <your task goes here>\n");
         }
         Task task = new ToDo(taskDescription);
         addTaskPrint(task);
@@ -106,14 +102,12 @@ public class Jerry {
             String taskDescription = informationSeparate[0];
             String deadline = informationSeparate[1];
             if (taskDescription.isEmpty()|| deadline.isEmpty()) {
-                throw new MissingArgumentException("Missing Argument >:( !!!! Please try:\n" +
-                        "deadline <your task goes here> /by <add your date/time here\n");
+                throw new MissingArgumentException("deadline <your task goes here> /by <add your date/time here>\n");
             }
             Task task = new Deadline(taskDescription, deadline);
             addTaskPrint(task);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new MissingArgumentException("Missing Argument >:( !!!! Please try:\n" +
-                    "deadline <your task goes here>\n");
+            throw new MissingArgumentException("deadline <your task goes here> /by <add your date/time here>\n");
         }
     }
 
@@ -126,14 +120,12 @@ public class Jerry {
             String from = furtherSplit[0];
             String to = furtherSplit[1];
             if (taskDescription.isEmpty() || from.isEmpty() || to.isEmpty()) {
-                throw new MissingArgumentException("Missing Argument >:( !!!! Please try:\n" +
-                        "Event <your task goes here> /from <add your start date/time here> /to <add your end date/time here>\n");
+                throw new MissingArgumentException("Event <your task goes here> /from <add your start date/time here> /to <add your end date/time here>\n");
             }
             Task task = new Event(taskDescription, from, to);
             addTaskPrint(task);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new MissingArgumentException("Missing Argument >:( !!!! Please try:\n" +
-                    "Event <your task goes here> /from <add your start date/time here> /to <add your end date/time here>\n");
+            throw new MissingArgumentException("Event <your task goes here> /from <add your start date/time here> /to <add your end date/time here>\n");
         }
     }
 
