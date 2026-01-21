@@ -101,42 +101,44 @@ public class Jerry {
             userInput = scan.nextLine();
             String[] userInputByWord = userInput.split("\\s+");
             String userCommand = userInputByWord[0].toLowerCase();
+            try {
+                switch (userCommand) {
+                    case EXIT:
+                        return;
 
-            switch (userCommand) {
-                case EXIT:
-                    return;
+                    case SHOW_LIST:
+                        if (this.taskList.isEmpty()) {
+                            System.out.println(CHATBOT_NAME +
+                                    ": your list is currently empty. Type to add more!\n");
+                        } else {
+                            printList();
+                        }
+                        break;
 
-                case SHOW_LIST:
-                    if (this.taskList.isEmpty()) {
-                        System.out.println(CHATBOT_NAME +
-                                ": your list is currently empty. Type to add more!\n");
-                    } else {
-                        printList();
-                    }
-                    break;
+                    case MARK_TASK:
+                        markTask(getTask(userInputByWord[1]));
+                        break;
+                    case UNMARK_TASK:
+                        unmarkTask(getTask(userInputByWord[1]));
+                        break;
 
-                case MARK_TASK:
-                    markTask(getTask(userInputByWord[1]));
-                    break;
-                case UNMARK_TASK:
-                    unmarkTask(getTask(userInputByWord[1]));
-                    break;
+                    case TODO_TASK:
+                        toDoTask(userInput);
+                        break;
 
-                case TODO_TASK:
-                    toDoTask(userInput);
-                    break;
+                    case DEADLINE_TASK:
+                        deadlineTask(userInput);
+                        break;
 
-                case DEADLINE_TASK:
-                    deadlineTask(userInput);
-                    break;
+                    case EVENT_TASK:
+                        eventTask(userInput);
+                        break;
 
-                case EVENT_TASK:
-                    eventTask(userInput);
-                    break;
-
-                default:
-                    System.out.println("Invalid Command");
-
+                    default:
+                        throw new InvalidCommandException();
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
