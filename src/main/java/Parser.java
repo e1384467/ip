@@ -31,7 +31,7 @@ public class Parser {
         }
 
         if (taskTypeFlag.equalsIgnoreCase("D")) {
-            String[] details = taskDetails.split("(?i)\\s*/b\\s*", 2);
+            String[] details = taskDetails.split("(?i)\\s*/by\\s*", 2);
             String taskDescription = details[0];
             String by = details[1];
             return new Deadline(isDoneFlag, taskDescription, by);
@@ -39,7 +39,7 @@ public class Parser {
 
         String[] details = taskDetails.split("(?i)\\s*/from\\s*",2);
         String taskDescription = details[0];
-        String[] taskDuration = details[1].split("(?i)\\s*/by\\s*",2);
+        String[] taskDuration = details[1].split("(?i)\\s*/to\\s*",2);
         String from = taskDuration[0];
         String to = taskDuration[1];
 
