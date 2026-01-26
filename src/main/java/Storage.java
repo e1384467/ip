@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    private static Path FILE_PATH = Path.of("data/Jerry.txt");
+    private final static Path FILE_PATH = Path.of("data/Jerry.txt");
 
     public static ArrayList<Task> initialise() throws IOException {
         File taskFile =  new File(FILE_PATH.toString());
