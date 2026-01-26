@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -6,8 +7,8 @@ public class Jerry {
     public static final String CHATBOT_NAME = "Jerry";
     private final ArrayList<Task> taskList;
 
-    public Jerry() {
-        this.taskList = new ArrayList<>();
+    public Jerry() throws IOException {
+        this.taskList = Storage.initialise();
     }
 
     public void printList() {
@@ -117,9 +118,9 @@ public class Jerry {
     public void eventTask(String userInput) throws MissingArgumentException {
         try {
             String information = userInput.substring(Commands.EVENT.toString().length()).trim();
-            String[] informationSeparate = information.split("\\s*/from\\s*", 2);
+            String[] informationSeparate = information.split("(?i)\\s*/from\\s*", 2);
             String taskDescription = informationSeparate[0];
-            String[] furtherSplit = informationSeparate[1].split("\\s*/to\\s*", 2);
+            String[] furtherSplit = informationSeparate[1].split("(?i)\\s*/to\\s*", 2);
             String from = furtherSplit[0];
             String to = furtherSplit[1];
             if (taskDescription.isEmpty() || from.isEmpty() || to.isEmpty()) {
@@ -187,11 +188,16 @@ public class Jerry {
         }
     }
 
-    public static void main(String[] args) {
-        Jerry jerry = new Jerry();
-        System.out.println("Hello! I'm " + CHATBOT_NAME);
-        System.out.println("What can I do for you?\n");
-        jerry.readUserInput();
-        System.out.println("Bye. Hope to see you again soon!");
+    public static void main(String[] args)  {
+        try {
+            Jerry jerry = new Jerry();
+            System.out.println("Hello! I'm " + CHATBOT_NAME);
+            System.out.println("What can I do for you?\n");
+            jerry.readUserInput();
+            System.out.println("Bye. Hope to see you again soon!");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }
