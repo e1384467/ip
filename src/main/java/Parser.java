@@ -26,11 +26,11 @@ public class Parser {
 
     public static Task commandParse(boolean isDoneFlag, String taskTypeFlag, String taskDetails) {
 
-        if (taskTypeFlag == "T") {
+        if (taskTypeFlag.equalsIgnoreCase("T")) {
             return new ToDo(isDoneFlag, taskDetails);
         }
 
-        if (taskTypeFlag == "D") {
+        if (taskTypeFlag.equalsIgnoreCase("D")) {
             String[] details = taskDetails.split("(?i)\\s*/b\\s*", 2);
             String taskDescription = details[0];
             String by = details[1];
