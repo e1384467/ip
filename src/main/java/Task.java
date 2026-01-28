@@ -20,6 +20,8 @@ public abstract class Task {
         this.isDone = !this.isDone;
     }
 
+    public abstract String fileFormat();
+
     @Override
     public String toString() {
         return "[" +

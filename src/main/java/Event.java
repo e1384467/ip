@@ -16,6 +16,14 @@ public class Event extends Task {
     }
 
     @Override
+    public String fileFormat() {
+        return (super.isDone ? "1 E " : "0 E ")
+                + super.description
+                + " /from " + this.from
+                + " /to " + this.to;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() +
                 " (from: " + this.from + " to: " + this.to + ")";
