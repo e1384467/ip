@@ -30,11 +30,17 @@ public class Parser {
         if (taskDescription.isEmpty()) {
             throw new MissingArgumentException("todo <your task goes here>\n");
         }
+        if (taskDescription.contains("|")) {
+            throw new WrongArgumentException("Character '|' is not allowed in your task description.\n");
+        }
         return new ToDo(taskDescription);
     }
 
     public static Task parseDeadline(String userInput) throws JerryException {
         try {
+            if (userInput.contains("|")) {
+                throw new WrongArgumentException("Character '|' is not allowed in your input.\n");
+            }
             String[] split = userInput.split("(?i)\\s*/by\\s*",2);
             String taskDescription = split[0];
             String by = split[1];
@@ -49,6 +55,9 @@ public class Parser {
 
     public static Task parseEvent(String userInput) throws JerryException {
         try {
+            if (userInput.contains("|")) {
+                throw new WrongArgumentException("Character '|' is not allowed in your input.\n");
+            }
             String[] firstSplit = userInput.split("(?i)\\s*/from\\s*", 2);
             String taskDescription = firstSplit[0];
             String[] secondSplit = firstSplit[1].split("(?i)\\s*/to\\s*", 2);
