@@ -9,6 +9,20 @@ public class Event extends Task {
         this.to = to;
     }
 
+    public Event(boolean isDone, String descriptor, String from, String to) {
+        super(isDone, descriptor);
+        this.from = from;
+        this.to = to;
+    }
+
+    @Override
+    public String fileFormat() {
+        return (super.isDone ? "1|E|" : "0|E|")
+                + super.description
+                + "|" + this.from
+                + "|" + this.to;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() +

@@ -7,6 +7,11 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public Task(boolean isDone,String description) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
@@ -14,6 +19,8 @@ public abstract class Task {
     public void toggleIsDone() {
         this.isDone = !this.isDone;
     }
+
+    public abstract String fileFormat();
 
     @Override
     public String toString() {
