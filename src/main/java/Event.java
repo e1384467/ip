@@ -1,15 +1,18 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
-    protected String from;
-    protected String to;
+    protected LocalDateTime from;
+    protected LocalDateTime to;
 
-    public Event(String descriptor, String from, String to) {
+    public Event(String descriptor, LocalDateTime from, LocalDateTime to) {
         super(descriptor);
         this.from = from;
         this.to = to;
     }
 
-    public Event(boolean isDone, String descriptor, String from, String to) {
+    public Event(boolean isDone, String descriptor, LocalDateTime from, LocalDateTime to) {
         super(isDone, descriptor);
         this.from = from;
         this.to = to;
@@ -19,13 +22,14 @@ public class Event extends Task {
     public String fileFormat() {
         return (super.isDone ? "1|E|" : "0|E|")
                 + super.description
-                + "|" + this.from
-                + "|" + this.to;
+                + "|" + this.from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm"))
+                + "|" + this.to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm"));
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() +
-                " (from: " + this.from + " to: " + this.to + ")";
+                " (from: " + this.from.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"))
+                + " to: " + this.to.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")) + ")";
     }
 }

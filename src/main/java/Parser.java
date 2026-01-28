@@ -1,5 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,10 +20,15 @@ public class Parser {
                         taskList.add(new ToDo(isDone, split[2]));
                         break;
                     case "D":
-                        taskList.add(new Deadline(isDone, split[2], split[3]));
+                        taskList.add(new Deadline(isDone
+                                , split[2]
+                                , LocalDateTime.parse(split[3], DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm"))));
                         break;
                     case "E":
-                        taskList.add(new Event(isDone, split[2], split[3], split[4]));
+                        taskList.add(new Event(isDone
+                                , split[2]
+                                , LocalDateTime.parse(split[3], DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm"))
+                                , LocalDateTime.parse(split[4], DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm"))));
                         break;
                     default:
                         throw new CorruptedSavedFileException("There is no such task type.\n"
@@ -34,6 +42,10 @@ public class Parser {
         } catch (FileNotFoundException e) {
             throw new MissingFileException("Oh noo!!! Jerry.txt file is missing or inaccessible.\n"
                     + "Please make sure that Jerry.txt is in the data/ directory and that it is writable.\n");
+        } catch (DateTimeParseException e) {
+            throw new CorruptedSavedFileException("The data time format of one of the entries in Jerry.txt seems to be corrupted\n"
+                    + "Please ensure that it is in <yyyy-mm-dd>T<hh-mm> format (24-hour clock).\n"
+                    + "E.g. 2022-12-06T18-00\n");
         }
     }
 
@@ -47,20 +59,25 @@ public class Parser {
         return new ToDo(taskDescription);
     }
 
+
     public static Task parseDeadline(String userInput) throws JerryException {
         try {
             if (userInput.contains("|")) {
                 throw new WrongArgumentException("Character '|' is not allowed in your input.\n");
             }
-            String[] split = userInput.split("(?i)\\s*/by\\s*",2);
+            String[] split = userInput.split("(?i)\\s*/by\\s*", 2);
             String taskDescription = split[0];
             String by = split[1];
             if (taskDescription.isEmpty() || by.isEmpty()) {
-                throw new MissingArgumentException("deadline <your task goes here> /by <add your date/time here>\n");
+                throw new MissingArgumentException("deadline <your task goes here> /by <ddmmyyyy hhmm (24-hour clock)>\n");
             }
-            return new Deadline(taskDescription, by);
+            return new Deadline(taskDescription, LocalDateTime.parse(by, DateTimeFormatter.ofPattern("ddMMyyyy HHmm")));
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new MissingArgumentException("deadline <your task goes here> /by <add your date/time here>\n");
+            throw new MissingArgumentException("deadline <your task goes here> /by <ddmmyyyy hhmm (24-hour clock)>\n");
+        } catch (DateTimeParseException e) {
+            throw new WrongArgumentException("There is issue with your date and time format.\n"
+                    + "Try: ddmmyyyy hhmm (24-hour clock)\n"
+                    + "E.g. 06062002 0530\n");
         }
     }
 
@@ -75,11 +92,22 @@ public class Parser {
             String from = secondSplit[0];
             String to = secondSplit[1];
             if (taskDescription.isEmpty() || from.isEmpty() || to.isEmpty()) {
-                throw new MissingArgumentException("Event <your task goes here> /from <add your start date/time here> /to <add your end date/time here>\n");
+                throw new MissingArgumentException("event <your task goes here> /from <ddmmyyyy hhmm (24-hour clock)> /to <ddmmyyyy hhmm (24-hour clock)>\n");
             }
-            return new Event(taskDescription, from, to);
+            LocalDateTime formattedFrom = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("ddMMyyyy HHmm"));
+            LocalDateTime formattedTo = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("ddMMyyyy HHmm"));
+
+            if (formattedFrom.isAfter(formattedTo)) {
+                throw new WrongArgumentException("Invalid Time Range\n"
+                        + "Your start time must be before end time\n");
+            }
+            return new Event(taskDescription, formattedFrom, formattedTo);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new MissingArgumentException("Event <your task goes here> /from <add your start date/time here> /to <add your end date/time here>\n");
+            throw new MissingArgumentException("event <your task goes here> /from <ddmmyyyy hhmm (24-hour clock)> /to <ddmmyyyy hhmm (24-hour clock)>\n");
+        } catch (DateTimeParseException e) {
+            throw new WrongArgumentException("There is issue with your date and time format.\n"
+                    + "Try: ddmmyyyy hhmm (24-hour clock)\n"
+                    + "E.g. 06062002 0530\n");
         }
     }
 
