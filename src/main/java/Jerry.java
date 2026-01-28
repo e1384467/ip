@@ -148,6 +148,7 @@ public class Jerry {
 
                 switch (userCommand) {
                     case BYE:
+                        Storage.save(taskList);
                         return;
 
                     case LIST:
@@ -161,29 +162,38 @@ public class Jerry {
 
                     case MARK:
                         markTask(getTask(userInputByWord));
+                        Storage.save(taskList);
                         break;
+
                     case UNMARK:
                         unmarkTask(getTask(userInputByWord));
+                        Storage.save(taskList);
                         break;
 
                     case TODO:
                         toDoTask(userInput);
+                        Storage.save(taskList);
                         break;
 
                     case DEADLINE:
                         deadlineTask(userInput);
+                        Storage.save(taskList);
                         break;
 
                     case EVENT:
                         eventTask(userInput);
+                        Storage.save(taskList);
                         break;
 
                     case DELETE:
                         deleteTask(getTask(userInputByWord));
+                        Storage.save(taskList);
                         break;
                 }
             } catch (JerryException e) {
                 System.out.println(e.getMessage());
+            } catch (IOException e) {
+                System.out.println("saving file error");
             }
         }
     }

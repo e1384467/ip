@@ -6,26 +6,21 @@ import java.util.Scanner;
 public class Parser {
 
     public static ArrayList<Task> fileParse (File taskFile) throws FileNotFoundException {
-        try {
-            ArrayList<Task> taskList = new ArrayList<Task>();
-            Scanner fileScan = new Scanner(taskFile);
-            while (fileScan.hasNextLine()) {
-                String line = fileScan.nextLine();
-                String[] lineSplit = line.split("\\s",3);
-                boolean isDoneFlag = Integer.parseInt(lineSplit[0]) == 1;
-                String taskTypeFlag = lineSplit[1];
-                String taskDetails = lineSplit[2];
-                Task task = Parser.commandParse(isDoneFlag, taskTypeFlag, taskDetails);
-                taskList.add(task);
-            }
-            return taskList;
-        } catch (FileNotFoundException e) {
-            throw new FileNotFoundException("File not found cannot parse");
+        ArrayList<Task> taskList = new ArrayList<Task>();
+        Scanner fileScan = new Scanner(taskFile);
+        while (fileScan.hasNextLine()) {
+            String line = fileScan.nextLine();
+            String[] lineSplit = line.split("\\s",3);
+            boolean isDoneFlag = Integer.parseInt(lineSplit[0]) == 1;
+            String taskTypeFlag = lineSplit[1];
+            String taskDetails = lineSplit[2];
+            Task task = Parser.commandParse(isDoneFlag, taskTypeFlag, taskDetails);
+            taskList.add(task);
         }
+        return taskList;
     }
 
     public static Task commandParse(boolean isDoneFlag, String taskTypeFlag, String taskDetails) {
-
         if (taskTypeFlag.equalsIgnoreCase("T")) {
             return new ToDo(isDoneFlag, taskDetails);
         }
