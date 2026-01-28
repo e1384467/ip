@@ -1,5 +1,7 @@
+package jerry.exceptions;
+
 public class MissingArgumentException extends JerryException {
-    MissingArgumentException(String correctUsage) {
+    public MissingArgumentException(String correctUsage) {
         super("Missing Argument >:( !!!! Please try:\n" + correctUsage);
     }
 }

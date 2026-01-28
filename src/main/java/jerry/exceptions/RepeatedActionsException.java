@@ -1,5 +1,7 @@
+package jerry.exceptions;
+
 public class RepeatedActionsException extends JerryException {
-    RepeatedActionsException(String outputMessage) {
+    public RepeatedActionsException(String outputMessage) {
         super("Repeated Action >:( !!!!\n" + outputMessage);
     }
 }

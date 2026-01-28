@@ -1,3 +1,9 @@
+package jerry.task;
+
+import jerry.exceptions.JerryException;
+import jerry.exceptions.RepeatedActionsException;
+import jerry.exceptions.WrongArgumentException;
+
 import java.util.ArrayList;
 
 public class TaskList {

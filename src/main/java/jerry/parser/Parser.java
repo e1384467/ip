@@ -1,3 +1,10 @@
+package jerry.parser;
+
+import jerry.exceptions.*;
+import jerry.task.Deadline;
+import jerry.task.Event;
+import jerry.task.Task;
+import jerry.task.ToDo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
@@ -32,18 +39,18 @@ public class Parser {
                         break;
                     default:
                         throw new CorruptedSavedFileException("There is no such task type.\n"
-                                + "The Jerry.txt file could be corrupted\n");
+                                + "The jerry.Jerry.txt file could be corrupted\n");
                 }
             }
             return taskList;
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new CorruptedSavedFileException("The Jerry.txt file seems to be corrupted :(\n"
+            throw new CorruptedSavedFileException("The jerry.Jerry.txt file seems to be corrupted :(\n"
                     + "There could be invalid entries in it.\n");
         } catch (FileNotFoundException e) {
-            throw new MissingFileException("Oh noo!!! Jerry.txt file is missing or inaccessible.\n"
-                    + "Please make sure that Jerry.txt is in the data/ directory and that it is writable.\n");
+            throw new MissingFileException("Oh noo!!! jerry.Jerry.txt file is missing or inaccessible.\n"
+                    + "Please make sure that jerry.Jerry.txt is in the data/ directory and that it is writable.\n");
         } catch (DateTimeParseException e) {
-            throw new CorruptedSavedFileException("The data time format of one of the entries in Jerry.txt seems to be corrupted\n"
+            throw new CorruptedSavedFileException("The data time format of one of the entries in jerry.Jerry.txt seems to be corrupted\n"
                     + "Please ensure that it is in <yyyy-mm-dd>T<hh-mm> format (24-hour clock).\n"
                     + "E.g. 2022-12-06T18-00\n");
         }
@@ -123,9 +130,6 @@ public class Parser {
                     + "Unmark <your task index from list>\n"
                     + "or\n"
                     + "Delete <your task index from list>\n");
-
-
         }
     }
-
 }

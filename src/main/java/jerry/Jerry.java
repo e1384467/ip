@@ -1,3 +1,12 @@
+package jerry;
+
+import jerry.commands.Commands;
+import jerry.exceptions.JerryException;
+import jerry.parser.Parser;
+import jerry.storage.Storage;
+import jerry.task.Task;
+import jerry.task.TaskList;
+import jerry.ui.Ui;
 import java.util.Scanner;
 
 public class Jerry {

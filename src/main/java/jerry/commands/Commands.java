@@ -1,3 +1,7 @@
+package jerry.commands;
+
+import jerry.exceptions.InvalidCommandException;
+
 public enum Commands {
     BYE,
     LIST,

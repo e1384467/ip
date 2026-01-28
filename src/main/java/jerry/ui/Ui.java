@@ -1,3 +1,10 @@
+package jerry.ui;
+
+import jerry.exceptions.EmptyInputException;
+import jerry.exceptions.WrongArgumentException;
+import jerry.task.Task;
+import jerry.task.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {

@@ -1,3 +1,10 @@
+package jerry.storage;
+
+import jerry.exceptions.FileErrorException;
+import jerry.exceptions.JerryException;
+import jerry.parser.Parser;
+import jerry.task.Task;
+import jerry.task.TaskList;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -26,7 +33,7 @@ public class Storage {
            }
            return Parser.loadTasksFromFile(taskFile, taskList);
        } catch (IOException e) {
-           throw new FileErrorException("There is an I/O error when creating Jerry.txt.\n"
+           throw new FileErrorException("There is an I/O error when creating jerry.Jerry.txt.\n"
                    + "Please make sure that the folder is writable.\n");
        } catch (SecurityException e) {
            throw new FileErrorException("There seems to be some issue with the permissions of the folder/file.\n"
@@ -53,8 +60,8 @@ public class Storage {
             }
             writeTaskFile.close();
         } catch (IOException e) {
-            throw new FileErrorException("There seems to be an error when writing to Jerry.txt.\n"
-                    + "Please make sure that data/Jerry.txt exist and is writable.\n");
+            throw new FileErrorException("There seems to be an error when writing to jerry.Jerry.txt.\n"
+                    + "Please make sure that data/jerry.Jerry.txt exist and is writable.\n");
         } catch (SecurityException e) {
             throw new FileErrorException("There seems to be some issue with the permissions of the folder/file.\n"
                     + "Please make sure that the folder/file is writable.\n");

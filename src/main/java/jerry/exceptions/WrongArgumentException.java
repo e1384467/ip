@@ -1,5 +1,7 @@
+package jerry.exceptions;
+
 public class WrongArgumentException extends JerryException {
-    WrongArgumentException(String outputMessage) {
+    public WrongArgumentException(String outputMessage) {
         super("Wrong Argument >:( !!!!\n" + outputMessage);
     }
 }
