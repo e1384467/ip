@@ -5,25 +5,36 @@ import java.util.Scanner;
 
 public class Parser {
 
-    public static ArrayList<Task> loadTasksFromFile (File taskFile, ArrayList<Task> taskList) throws FileNotFoundException {
-        Scanner fileScan = new Scanner(taskFile);
-        while (fileScan.hasNextLine()) {
-            String line = fileScan.nextLine();
-            String[] split = line.split("\\|");
-            boolean isDone = split[0].equals("1");
-            switch (split[1].toUpperCase()) {
-            case "T":
-                taskList.add(new ToDo(isDone, split[2]));
-                break;
-            case "D" :
-                taskList.add(new Deadline(isDone, split[2], split[3]));
-                break;
-            default :
-                taskList.add(new Event(isDone, split[2], split[3], split[4]));
-                break;
+    public static ArrayList<Task> loadTasksFromFile (File taskFile, ArrayList<Task> taskList) throws JerryException {
+        try {
+            Scanner fileScan = new Scanner(taskFile);
+            while (fileScan.hasNextLine()) {
+                String line = fileScan.nextLine();
+                String[] split = line.split("\\|");
+                boolean isDone = split[0].equals("1");
+                switch (split[1].toUpperCase()) {
+                    case "T":
+                        taskList.add(new ToDo(isDone, split[2]));
+                        break;
+                    case "D":
+                        taskList.add(new Deadline(isDone, split[2], split[3]));
+                        break;
+                    case "E":
+                        taskList.add(new Event(isDone, split[2], split[3], split[4]));
+                        break;
+                    default:
+                        throw new CorruptedSavedFileException("There is no such task type.\n"
+                                + "The Jerry.txt file could be corrupted\n");
+                }
             }
+            return taskList;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new CorruptedSavedFileException("The Jerry.txt file seems to be corrupted :(\n"
+                    + "There could be invalid or empty entries in it.\n");
+        } catch (FileNotFoundException e) {
+            throw new MissingFileException("Oh noo!!! Jerry.txt file is missing or inaccessible.\n"
+                    + "Please make sure that Jerry.txt is in the data/ directory and that it is writable.\n");
         }
-        return taskList;
     }
 
     public static Task parseTodo(String taskDescription) throws JerryException {

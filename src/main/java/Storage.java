@@ -1,5 +1,4 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -26,9 +25,6 @@ public class Storage {
                 return taskList;
            }
            return Parser.loadTasksFromFile(taskFile, taskList);
-       } catch (FileNotFoundException e) {
-           throw new MissingFileException("Oh noo!!! Jerry.txt file is missing or inaccessible.\n"
-                   + "Please make sure that Jerry.txt is in the data/ directory and that it is writable.\n");
        } catch (IOException e) {
            throw new FileErrorException("There is an I/O error when creating Jerry.txt.\n"
                    + "Please make sure that the folder is writable.\n");
