@@ -7,7 +7,7 @@ public class Jerry {
     public static final String CHATBOT_NAME = "Jerry";
     private final ArrayList<Task> taskList;
 
-    public Jerry() throws IOException {
+    public Jerry() throws JerryException {
         this.taskList = Storage.initialise();
     }
 
@@ -192,8 +192,6 @@ public class Jerry {
                 }
             } catch (JerryException e) {
                 System.out.println(e.getMessage());
-            } catch (IOException e) {
-                System.out.println("saving file error");
             }
         }
     }
@@ -205,7 +203,7 @@ public class Jerry {
             System.out.println("What can I do for you?\n");
             jerry.readUserInput();
             System.out.println("Bye. Hope to see you again soon!");
-        } catch (IOException e) {
+        } catch (JerryException e) {
             System.out.println(e.getMessage());
         }
 
