@@ -9,35 +9,21 @@ public class Parser {
         Scanner fileScan = new Scanner(taskFile);
         while (fileScan.hasNextLine()) {
             String line = fileScan.nextLine();
-            String[] lineSplit = line.split("\\s",3);
-            boolean isDoneFlag = Integer.parseInt(lineSplit[0]) == 1;
-            String taskTypeFlag = lineSplit[1];
-            String taskDetails = lineSplit[2];
-            Task task = Parser.parseTaskFromFile(isDoneFlag, taskTypeFlag, taskDetails);
-            taskList.add(task);
+            String[] split = line.split("\\|");
+            boolean isDone = split[0].equals("1");
+            switch (split[1].toUpperCase()) {
+            case "T":
+                taskList.add(new ToDo(isDone, split[2]));
+                break;
+            case "D" :
+                taskList.add(new Deadline(isDone, split[2], split[3]));
+                break;
+            default :
+                taskList.add(new Event(isDone, split[2], split[3], split[4]));
+                break;
+            }
         }
         return taskList;
-    }
-
-    public static Task parseTaskFromFile(boolean isDoneFlag, String taskTypeFlag, String taskDetails) {
-        if (taskTypeFlag.equalsIgnoreCase("T")) {
-            return new ToDo(isDoneFlag, taskDetails);
-        }
-
-        if (taskTypeFlag.equalsIgnoreCase("D")) {
-            String[] split = taskDetails.split("(?i)\\s*/by\\s*", 2);
-            String taskDescription = split[0];
-            String by = split[1];
-            return new Deadline(isDoneFlag, taskDescription, by);
-        }
-
-        String[] details = taskDetails.split("(?i)\\s*/from\\s*",2);
-        String taskDescription = details[0];
-        String[] taskDuration = details[1].split("(?i)\\s*/to\\s*",2);
-        String from = taskDuration[0];
-        String to = taskDuration[1];
-
-        return new Event(isDoneFlag, taskDescription, from, to);
     }
 
     public static Task parseTodo(String taskDescription) throws JerryException {

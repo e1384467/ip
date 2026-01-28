@@ -17,10 +17,10 @@ public class Event extends Task {
 
     @Override
     public String fileFormat() {
-        return (super.isDone ? "1 E " : "0 E ")
+        return (super.isDone ? "1|E|" : "0|E|")
                 + super.description
-                + " /from " + this.from
-                + " /to " + this.to;
+                + "|" + this.from
+                + "|" + this.to;
     }
 
     @Override

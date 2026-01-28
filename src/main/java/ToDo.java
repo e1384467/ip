@@ -10,7 +10,7 @@ public class ToDo extends Task {
 
     @Override
     public String fileFormat() {
-        return (super.isDone ? "1 T " : "0 T ")  + super.description;
+        return (super.isDone ? "1|T|" : "0|T|")  + super.description;
     }
 
     @Override

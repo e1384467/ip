@@ -89,48 +89,48 @@ public class Jerry {
                 Commands userCommand = Commands.getCommand(userInputArray[0]);
 
                 switch (userCommand) {
-                    case BYE:
-                        Storage.save(taskList);
-                        return;
+                case BYE:
+                    Storage.save(taskList);
+                    return;
 
-                    case LIST:
-                        if (this.taskList.isEmpty()) {
-                            System.out.println(CHATBOT_NAME
-                                    + ": your list is currently empty. Type to add more!\n");
-                        } else {
-                            printList();
-                        }
-                        break;
+                case LIST:
+                    if (this.taskList.isEmpty()) {
+                        System.out.println(CHATBOT_NAME
+                                + ": your list is currently empty. Type to add more!\n");
+                    } else {
+                        printList();
+                    }
+                    break;
 
-                    case MARK:
-                        markTask(Parser.getArrayIndex(userInputArray, this.taskList.size()));
-                        Storage.save(taskList);
-                        break;
+                case MARK:
+                    markTask(Parser.getArrayIndex(userInputArray, this.taskList.size()));
+                    Storage.save(taskList);
+                    break;
 
-                    case UNMARK:
-                        unmarkTask(Parser.getArrayIndex(userInputArray, this.taskList.size()));
-                        Storage.save(taskList);
-                        break;
+                case UNMARK:
+                    unmarkTask(Parser.getArrayIndex(userInputArray, this.taskList.size()));
+                    Storage.save(taskList);
+                    break;
 
-                    case TODO:
-                        addTodoTask(userInput.substring(Commands.TODO.toString().length()).trim());
-                        Storage.save(taskList);
-                        break;
+                case TODO:
+                    addTodoTask(userInput.substring(Commands.TODO.toString().length()).trim());
+                    Storage.save(taskList);
+                    break;
 
-                    case DEADLINE:
-                        addDeadlineTask(userInput.substring(Commands.DEADLINE.toString().length()).trim());
-                        Storage.save(taskList);
-                        break;
+                case DEADLINE:
+                    addDeadlineTask(userInput.substring(Commands.DEADLINE.toString().length()).trim());
+                    Storage.save(taskList);
+                    break;
 
-                    case EVENT:
-                        addEventTask(userInput.substring(Commands.EVENT.toString().length()).trim());
-                        Storage.save(taskList);
-                        break;
+                case EVENT:
+                    addEventTask(userInput.substring(Commands.EVENT.toString().length()).trim());
+                    Storage.save(taskList);
+                    break;
 
-                    case DELETE:
-                        deleteTask(Parser.getArrayIndex(userInputArray, this.taskList.size()));
-                        Storage.save(taskList);
-                        break;
+                case DELETE:
+                    deleteTask(Parser.getArrayIndex(userInputArray, this.taskList.size()));
+                    Storage.save(taskList);
+                    break;
                 }
             } catch (JerryException e) {
                 System.out.println(e.getMessage());
