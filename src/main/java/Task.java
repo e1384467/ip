@@ -20,6 +20,10 @@ public abstract class Task {
         this.isDone = !this.isDone;
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     public abstract String fileFormat();
 
     @Override

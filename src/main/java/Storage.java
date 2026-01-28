@@ -35,16 +35,29 @@ public class Storage {
 
     }
 
-    public static void save(ArrayList<Task> taskList) throws JerryException {
+    public static void save(TaskList taskList) throws JerryException {
         try {
-            FileWriter taskFile = new FileWriter(FILE_PATH.toString());
-            for (Task task : taskList) {
-                taskFile.write(task.fileFormat() + System.lineSeparator());
+            File taskFile =  new File(FILE_PATH.toString());
+            File parentDirectory = new File(taskFile.getParent());
+
+           if (!parentDirectory.exists()) {
+                if (!parentDirectory.mkdirs()){
+                    throw new FileErrorException("Failed trying to create data/ directory.\n"
+                            + "Please ensure that the folder is writable.");
+                }
             }
-            taskFile.close();
+
+            FileWriter writeTaskFile = new FileWriter(FILE_PATH.toString());
+            for (int index = 0; index < taskList.size(); index += 1) {
+                writeTaskFile.write(taskList.get(index).fileFormat() + System.lineSeparator());
+            }
+            writeTaskFile.close();
         } catch (IOException e) {
             throw new FileErrorException("There seems to be an error when writing to Jerry.txt.\n"
-                    + "Please make sure that Jerry.txt is writable.\n");
+                    + "Please make sure that data/Jerry.txt exist and is writable.\n");
+        } catch (SecurityException e) {
+            throw new FileErrorException("There seems to be some issue with the permissions of the folder/file.\n"
+                    + "Please make sure that the folder/file is writable.\n");
         }
     }
 }
