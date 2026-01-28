@@ -3,36 +3,18 @@ import java.util.ArrayList;
 
 public class Jerry {
 
-    public static final String CHATBOT_NAME = "Jerry";
     private final ArrayList<Task> taskList;
+    private final Ui ui;
 
     public Jerry() throws JerryException {
         this.taskList = Storage.initialise();
-    }
-
-    public void printList() {
-        System.out.println("Your list:");
-        for (int index = 0; index < this.taskList.size(); index += 1) {
-            System.out.println(index + 1 + "." + this.taskList.get(index));
-        }
-        System.out.println();
-    }
-
-    public void addTaskAndPrint(Task task) {
-        taskList.add(task);
-        System.out.println(CHATBOT_NAME
-                + ": I have added '" + task + "' to your list!");
-        System.out.println("Now you have "
-                + taskList.size() + " tasks in the list!\n");
+        this.ui = new Ui(new Scanner(System.in));
     }
 
     public void deleteTask(int targetIndex) throws JerryException {
         Task targetTask = taskList.get(targetIndex);
         taskList.remove(targetTask);
-        System.out.println(CHATBOT_NAME
-                + "Got it! I've removed "
-                + targetTask
-                + ". You now have " + taskList.size() + " task/s left\n");
+        ui.showDelete(targetTask, taskList.size());
     }
 
     public void markTask(int targetIndex) throws JerryException  {
@@ -43,9 +25,7 @@ public class Jerry {
                     + " is already marked as done\n");
         }
         targetTask.toggleIsDone();
-        System.out.println(CHATBOT_NAME
-                + ": Nice! I've marked this task as done -> "
-                + targetTask + "\n");
+        ui.showMark(targetTask);
 
     }
 
@@ -57,49 +37,44 @@ public class Jerry {
                     + " is already unmarked as not done yet\n");
         }
         targetTask.toggleIsDone();
-        System.out.println(CHATBOT_NAME
-                + ": Okiee! I've unmarked this task as not done yet -> "
-                + targetTask + "\n");
+        ui.showMark(targetTask);
 
     }
 
     public void addTodoTask(String taskDescription) throws JerryException {
-        addTaskAndPrint(Parser.parseTodo(taskDescription));
+        Task task = Parser.parseTodo(taskDescription);
+        taskList.add(task);
+        ui.showAdd(task, taskList.size());
     }
 
     public void addDeadlineTask(String userInput) throws JerryException {
-        addTaskAndPrint(Parser.parseDeadline(userInput));
+        Task task = Parser.parseDeadline(userInput);
+        taskList.add(task);
+        ui.showAdd(task, taskList.size());
     }
 
     public void addEventTask(String userInput) throws JerryException {
-        addTaskAndPrint(Parser.parseEvent(userInput));
+        Task task = Parser.parseEvent(userInput);
+        taskList.add(task);
+        ui.showAdd(task, taskList.size());
     }
 
-    public void readUserInput() {
-        Scanner scan = new Scanner(System.in);
-        String userInput;
+    public void  run() {
+        ui.showWelcome();
         while (true) {
             try {
-                System.out.print("User input: ");
-                userInput = scan.nextLine().trim();
-                if (userInput.isEmpty()) {
-                    throw new EmptyInputException();
-                }
+                String userInput = this.ui.readUserInput();
                 String[] userInputArray = userInput.split("\\s+");
                 Commands userCommand = Commands.getCommand(userInputArray[0]);
 
                 switch (userCommand) {
                 case BYE:
                     Storage.save(taskList);
+                    ui.showBye();
                     return;
 
                 case LIST:
-                    if (this.taskList.isEmpty()) {
-                        System.out.println(CHATBOT_NAME
-                                + ": your list is currently empty. Type to add more!\n");
-                    } else {
-                        printList();
-                    }
+                    ui.displayList(taskList);
                     break;
 
                 case MARK:
@@ -133,7 +108,7 @@ public class Jerry {
                     break;
                 }
             } catch (JerryException e) {
-                System.out.println(e.getMessage());
+                ui.showError(e.getMessage());
             }
         }
     }
@@ -141,10 +116,7 @@ public class Jerry {
     public static void main(String[] args)  {
         try {
             Jerry jerry = new Jerry();
-            System.out.println("Hello! I'm " + CHATBOT_NAME);
-            System.out.println("What can I do for you?\n");
-            jerry.readUserInput();
-            System.out.println("Bye. Hope to see you again soon!");
+            jerry.run();
         } catch (JerryException e) {
             System.out.println(e.getMessage());
         }
