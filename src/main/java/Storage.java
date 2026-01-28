@@ -9,13 +9,14 @@ public class Storage {
 
     private final static Path FILE_PATH = Path.of("data/Jerry.txt");
 
-    public static ArrayList<Task> initialise() throws MissingFileException, FileErrorException {
+    public static ArrayList<Task> initialise() throws JerryException {
        try {
            File taskFile =  new File(FILE_PATH.toString());
+           ArrayList<Task> taskList = new ArrayList<Task>();
            if (taskFile.createNewFile()) {
-               return new ArrayList<Task>();
+               return taskList;
            }
-           return Parser.fileParse(taskFile);
+           return Parser.loadTasksFromFile(taskFile, taskList);
        } catch (FileNotFoundException e) {
            throw new MissingFileException("Oh noo!!! Jerry.txt file is missing or stored in the wrong directory.\n"
                    + "Make sure to use data/ directory or restart me.\n");
@@ -25,7 +26,7 @@ public class Storage {
 
     }
 
-    public static void save(ArrayList<Task> taskList) throws FileErrorException {
+    public static void save(ArrayList<Task> taskList) throws JerryException {
         try {
             FileWriter taskFile = new FileWriter(FILE_PATH.toString());
             for (Task task : taskList) {
