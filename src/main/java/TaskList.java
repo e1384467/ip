@@ -4,6 +4,10 @@ public class TaskList {
 
     private final ArrayList<Task> taskList;
 
+    public TaskList() {
+        this.taskList = new ArrayList<Task>();
+    }
+
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }

@@ -62,7 +62,7 @@ public class Ui {
                 + size + " tasks in the list!\n");
     }
 
-    public static void showError(String errorMessage) {
+    public void showError(String errorMessage) {
         System.out.println(errorMessage);
     }
 

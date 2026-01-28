@@ -1,12 +1,17 @@
 import java.util.Scanner;
 
 public class Jerry {
-    private final Ui ui;
-    private final TaskList taskList;
+    private Ui ui;
+    private TaskList taskList;
 
-    public Jerry() throws JerryException {
+    public Jerry() {
         this.ui = new Ui(new Scanner(System.in));
-        this.taskList = new TaskList(Storage.initialise());
+        try {
+            this.taskList = new TaskList(Storage.initialise());
+        } catch (JerryException e) {
+            this.ui.showError(e.getMessage());
+            this.taskList = new TaskList();
+        }
     }
 
     public void  run() {
@@ -67,18 +72,14 @@ public class Jerry {
                     break;
                 }
             } catch (JerryException e) {
-                Ui.showError(e.getMessage());
+                this.ui.showError(e.getMessage());
             }
         }
     }
 
     public static void main(String[] args)  {
-            try {
-                Jerry jerry = new Jerry();
-                jerry.run();
-            } catch (JerryException e) {
-                Ui.showError(e.getMessage()
-                        + "You may need to delete Jerry.txt and try again\n");
-            }
+            Jerry jerry = new Jerry();
+            jerry.run();
+
     }
 }
