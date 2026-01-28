@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -28,16 +27,13 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public void displayList(ArrayList<Task> taskList) {
+    public void displayList(TaskList taskList ) throws WrongArgumentException {
         if (taskList.isEmpty()) {
             System.out.println(CHATBOT_NAME
                     + ": your list is currently empty. Type to add more!\n");
         } else {
             System.out.println("Your list:");
-            for (int index = 0; index < taskList.size(); index += 1) {
-                System.out.println(index + 1 + "." + taskList.get(index));
-            }
-            System.out.println();
+            System.out.println(taskList.buildListOutput());
         }
     }
     public void showMark(Task targetTask) {
@@ -66,14 +62,8 @@ public class Ui {
                 + size + " tasks in the list!\n");
     }
 
-    public void showError(String errorMessage) {
+    public static void showError(String errorMessage) {
         System.out.println(errorMessage);
     }
-
-
-
-
-
-
 
 }

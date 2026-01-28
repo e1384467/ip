@@ -35,16 +35,16 @@ public class Storage {
 
     }
 
-    public static void save(ArrayList<Task> taskList) throws JerryException {
+    public static void save(TaskList taskList) throws JerryException {
         try {
             FileWriter taskFile = new FileWriter(FILE_PATH.toString());
-            for (Task task : taskList) {
-                taskFile.write(task.fileFormat() + System.lineSeparator());
+            for (int index = 0; index < taskList.size(); index += 1) {
+                taskFile.write(taskList.get(index).fileFormat() + System.lineSeparator());
             }
             taskFile.close();
         } catch (IOException e) {
             throw new FileErrorException("There seems to be an error when writing to Jerry.txt.\n"
-                    + "Please make sure that Jerry.txt is writable.\n");
+                    + "Please make sure that data/Jerry.txt exist and is writable.\n");
         }
     }
 }

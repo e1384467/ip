@@ -38,7 +38,7 @@ public class Parser {
             return taskList;
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new CorruptedSavedFileException("The Jerry.txt file seems to be corrupted :(\n"
-                    + "There could be invalid or empty entries in it.\n");
+                    + "There could be invalid entries in it.\n");
         } catch (FileNotFoundException e) {
             throw new MissingFileException("Oh noo!!! Jerry.txt file is missing or inaccessible.\n"
                     + "Please make sure that Jerry.txt is in the data/ directory and that it is writable.\n");
@@ -111,25 +111,20 @@ public class Parser {
         }
     }
 
-    public static int getArrayIndex(String[] userInputArray, int listSize) throws JerryException {
+    public static int getArrayIndex(String[] userInputArray) throws JerryException {
         try {
             int index = Integer.parseInt(userInputArray[1]);
             return index - 1;
         } catch (NumberFormatException e) {
             throw new WrongArgumentException("THIS IS NOT A NUMBER\n");
         } catch (IndexOutOfBoundsException e) {
-            if (userInputArray.length < 2) {
-                throw new MissingArgumentException("Mark <your task index from list>\n"
-                        + "or\n"
-                        + "Unmark <your task index from list>\n"
-                        + "or\n"
-                        + "Delete <your task index from list>\n");
-            }
-            throw new WrongArgumentException(
-                    (listSize == 0
-                    ? ("Your task list is empty currently")
-                    : ("Please enter a number in the range of 1 to " + listSize))
-                    + "\nUse Command: list. To check your task list first :)\n");
+            throw new MissingArgumentException("Mark <your task index from list>\n"
+                    + "or\n"
+                    + "Unmark <your task index from list>\n"
+                    + "or\n"
+                    + "Delete <your task index from list>\n");
+
+
         }
     }
 
