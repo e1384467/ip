@@ -9,10 +9,21 @@ import jerry.task.TaskList;
 import jerry.ui.Ui;
 import java.util.Scanner;
 
+/**
+ * Drives the execution of the Jerry task management application.
+ */
 public class Jerry {
+
+    /** Handles user interaction such as reading input and displaying messages or error messages. */
     private Ui ui;
+
+    /** Stores and manages the user's tasks. */
     private TaskList taskList;
 
+    /**
+     * Constructs a {@code Jerry} instance and initializes storage and task data.
+     * If loading from storage fails, an empty task list is used.
+     */
     public Jerry() {
         this.ui = new Ui(new Scanner(System.in));
         try {
@@ -23,6 +34,9 @@ public class Jerry {
         }
     }
 
+    /**
+     * Runs the main program loop to process user commands until the user exits.
+     */
     public void  run() {
         ui.showWelcome();
         while (true) {
@@ -86,6 +100,11 @@ public class Jerry {
         }
     }
 
+    /**
+     * Starts the Jerry application.
+     *
+     * @param args Command-line arguments (unused).
+     */
     public static void main(String[] args)  {
             Jerry jerry = new Jerry();
             jerry.run();
