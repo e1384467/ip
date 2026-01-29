@@ -141,9 +141,16 @@ public class TaskList {
         return listOutput;
     }
 
+    /**
+     * Returns a list of tasks whose descriptions match the given search query.
+     * The matching logic is delegated to each task.
+     *
+     * @param searchQuery The keyword used to search for matching tasks.
+     * @return A {@code TaskList} containing all tasks that match the search query.
+     */
     public TaskList find(String searchQuery) {
         TaskList possibleResults = new TaskList();
-        for(int index = 0; index < this.taskList.size(); index += 1) {
+        for (int index = 0; index < this.taskList.size(); index += 1) {
             Task task = this.taskList.get(index);
             if (task.matchesSearchQuery(searchQuery)) {
                 possibleResults.add(task);

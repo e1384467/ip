@@ -192,9 +192,19 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the validated search query extracted from user input.
+     * The query must be non-empty to be considered valid.
+     *
+     * @param searchQuery The raw search query provided by the user.
+     * @return The validated search query.
+     * @throws JerryException If the search query is empty.
+     */
     public static String getSearchQuery(String searchQuery) throws JerryException {
         if (searchQuery.isEmpty()) {
-            throw new MissingArgumentException("Please enter a search query\n");
+            throw new MissingArgumentException("Please enter a search query.\n"
+                    + "Command: Find <your search query>\n"
+                    + "E.g. find book\n");
         }
         return searchQuery;
     }

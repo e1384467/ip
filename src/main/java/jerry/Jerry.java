@@ -99,9 +99,12 @@ public class Jerry {
                     break;
 
                 case FIND:
-                    String searchQuery = Parser.getSearchQuery(userInput.substring(Commands.FIND.toString().length()).trim());
+                    String searchQuery = Parser.getSearchQuery(userInput
+                            .substring(Commands.FIND.toString().length())
+                            .trim());
                     TaskList possibleResults = taskList.find(searchQuery);
                     ui.displayList(possibleResults);
+                    break;
 
                 default:
                     break;

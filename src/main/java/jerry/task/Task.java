@@ -80,6 +80,13 @@ public abstract class Task {
                 + this.description;
     }
 
+    /**
+     * Returns whether this task matches the given search query.
+     * The match is performed by checking if the task description contains the query.
+     *
+     * @param searchQuery The search keyword to match against the task description.
+     * @return {@code true} if the task matches the search query, or {@code false} otherwise.
+     */
     public boolean matchesSearchQuery(String searchQuery) {
         return this.description.contains(searchQuery);
     }
