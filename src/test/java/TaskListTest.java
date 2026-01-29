@@ -34,7 +34,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void get_success() throws WrongArgumentException {
+    public void get_success() throws JerryException {
         TaskList list = new TaskList();
         Task task = new ToDo("Sleep");
         list.add(task);
