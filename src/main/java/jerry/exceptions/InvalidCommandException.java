@@ -1,7 +1,11 @@
 package jerry.exceptions;
 
+/**
+ * Represents an exception thrown when the user enters an invalid or unrecognized command.
+ */
 public class InvalidCommandException extends JerryException {
 
+    /** List of valid Commands and their example usages */
     private static final String COMMAND_LIST =
             "Command: list (to view your tasks in a list)\n"
                     + "e.g. list\n"
@@ -20,10 +24,19 @@ public class InvalidCommandException extends JerryException {
                     + "Command: Bye\n"
                     + "e.g. bye\n" ;
 
+    /**
+     * Constructs an {@code InvalidCommandException} with a default error message followed by a list of valid commands and example usages.
+     */
     public InvalidCommandException() {
         super("Invalid Command >:c\n" + COMMAND_LIST);
     }
-    InvalidCommandException(String outputMessage) {
+
+    /**
+     * Constructs an {@code InvalidCommandException} with the specified error message followed by a list of valid commands and example usages.
+     *
+     * @param outputMessage The error message describing why the command is invalid.
+     */
+    public InvalidCommandException(String outputMessage) {
         super(outputMessage + COMMAND_LIST);
     }
 }
