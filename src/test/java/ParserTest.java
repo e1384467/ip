@@ -1,13 +1,16 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import org.junit.jupiter.api.Test;
+
 import jerry.exceptions.JerryException;
 import jerry.parser.Parser;
 import jerry.task.Deadline;
 import jerry.task.Event;
 import jerry.task.ToDo;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
 
@@ -40,27 +43,32 @@ public class ParserTest {
     }
 
     @Test
-    public void parseDeadline_success() throws JerryException{
-        assertEquals(new Deadline("Sleep"
-                        , LocalDateTime.parse("06062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString()
-                , Parser.parseDeadline("Sleep /by 06062002 0540").toString());
-        assertEquals(new Deadline("Sleep"
-                        , LocalDateTime.parse("06062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString()
-                , Parser.parseDeadline("Sleep /By 06062002 0540").toString());
-        assertEquals(new Deadline("Sleep"
-                        , LocalDateTime.parse("06062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString()
-                , Parser.parseDeadline("Sleep /bY 06062002 0540").toString());
-        assertEquals(new Deadline("Sleep"
-                        , LocalDateTime.parse("06062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString()
-                , Parser.parseDeadline("Sleep /BY 06062002 0540").toString());
+    public void parseDeadline_success() throws JerryException {
+        assertEquals(new Deadline("Sleep",
+                        LocalDateTime.parse("06062002 0540",
+                                DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString(),
+                Parser.parseDeadline("Sleep /by 06062002 0540").toString());
+        assertEquals(new Deadline("Sleep",
+                        LocalDateTime.parse("06062002 0540",
+                                DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString(),
+                Parser.parseDeadline("Sleep /By 06062002 0540").toString());
+        assertEquals(new Deadline("Sleep",
+                        LocalDateTime.parse("06062002 0540",
+                                DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString(),
+                Parser.parseDeadline("Sleep /bY 06062002 0540").toString());
+        assertEquals(new Deadline("Sleep",
+                        LocalDateTime.parse("06062002 0540",
+                                DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString(),
+                Parser.parseDeadline("Sleep /BY 06062002 0540").toString());
     }
 
     @Test
     public void parseDeadline_userInputContainsPipe_wrongArgumentExceptionThrown() {
         try {
-            assertEquals(new Deadline("Sleep"
-                            , LocalDateTime.parse("06062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString()
-                    , Parser.parseDeadline("Sleep | /by 06062002 0540").toString());
+            assertEquals(new Deadline("Sleep",
+                            LocalDateTime.parse("06062002 0540",
+                                    DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString(),
+                    Parser.parseDeadline("Sleep | /by 06062002 0540").toString());
             fail();
         } catch (JerryException e) {
             assertEquals("Wrong Argument >:( !!!!\n"
@@ -71,9 +79,10 @@ public class ParserTest {
     @Test
     public void parseDeadline_emptyTaskField_missingArgumentExceptionThrown() {
         try {
-            assertEquals(new Deadline("Sleep"
-                            , LocalDateTime.parse("06062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString()
-                    , Parser.parseDeadline("/by 06062002 1300").toString());
+            assertEquals(new Deadline("Sleep",
+                            LocalDateTime.parse("06062002 0540",
+                                    DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString(),
+                    Parser.parseDeadline("/by 06062002 1300").toString());
             fail();
         } catch (JerryException e) {
             assertEquals("Missing Argument >:( !!!! Please try:\n"
@@ -84,9 +93,10 @@ public class ParserTest {
     @Test
     public void parseDeadline_emptyByField_missingArgumentExceptionThrown() {
         try {
-            assertEquals(new Deadline("Sleep"
-                            , LocalDateTime.parse("06062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString()
-                    , Parser.parseDeadline("Sleep").toString());
+            assertEquals(new Deadline("Sleep",
+                            LocalDateTime.parse("06062002 0540",
+                                    DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString(),
+                    Parser.parseDeadline("Sleep").toString());
             fail();
         } catch (JerryException e) {
             assertEquals("Missing Argument >:( !!!! Please try:\n"
@@ -98,9 +108,10 @@ public class ParserTest {
     @Test
     public void parseDeadline_emptyUserInput_missingArgumentExceptionThrown() {
         try {
-            assertEquals(new Deadline("Sleep"
-                            , LocalDateTime.parse("06062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString()
-                    , Parser.parseDeadline("").toString());
+            assertEquals(new Deadline("Sleep",
+                            LocalDateTime.parse("06062002 0540",
+                                    DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString(),
+                    Parser.parseDeadline("").toString());
             fail();
         } catch (JerryException e) {
             assertEquals("Missing Argument >:( !!!! Please try:\n"
@@ -111,9 +122,10 @@ public class ParserTest {
     @Test
     public void parseDeadline_wrongDateTimeFormate_wrongArgumentExceptionThrown() {
         try {
-            assertEquals(new Deadline("Sleep"
-                            , LocalDateTime.parse("06062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString()
-                    , Parser.parseDeadline("Sleep /by 06062002-0540").toString());
+            assertEquals(new Deadline("Sleep",
+                            LocalDateTime.parse("06062002 0540",
+                                    DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString(),
+                    Parser.parseDeadline("Sleep /by 06062002-0540").toString());
             fail();
         } catch (JerryException e) {
             assertEquals("Wrong Argument >:( !!!!\n"
@@ -125,24 +137,30 @@ public class ParserTest {
 
     @Test
     public void parseEvent_success() throws JerryException {
-        assertEquals(new Event("Sleep"
-                        , LocalDateTime.parse("06062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))
-                        , LocalDateTime.parse("07062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString()
-                , Parser.parseEvent("Sleep /from 06062002 0540 /to 07062002 0540").toString());
-        assertEquals(new Event("Sleep"
-                        , LocalDateTime.parse("06062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))
-                        , LocalDateTime.parse("07062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString()
-                , Parser.parseEvent("Sleep /FroM 06062002 0540 /tO 07062002 0540").toString());
+        assertEquals(new Event("Sleep",
+                        LocalDateTime.parse("06062002 0540",
+                                DateTimeFormatter.ofPattern("ddMMyyyy HHmm")),
+                        LocalDateTime.parse("07062002 0540",
+                                DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString(),
+                Parser.parseEvent("Sleep /from 06062002 0540 /to 07062002 0540").toString());
+        assertEquals(new Event("Sleep",
+                        LocalDateTime.parse("06062002 0540",
+                                DateTimeFormatter.ofPattern("ddMMyyyy HHmm")),
+                        LocalDateTime.parse("07062002 0540",
+                                DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString(),
+                Parser.parseEvent("Sleep /FroM 06062002 0540 /tO 07062002 0540").toString());
 
     }
 
     @Test
     public void parseEvent_userInputContainsPipe_wrongArgumentExceptionThrown() {
         try {
-            assertEquals(new Event("Sleep"
-                            , LocalDateTime.parse("06062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))
-                            , LocalDateTime.parse("07062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString()
-                    , Parser.parseEvent("Sleep | /from 06062002 0540 /to 07062002 0540").toString());
+            assertEquals(new Event("Sleep",
+                            LocalDateTime.parse("06062002 0540",
+                                    DateTimeFormatter.ofPattern("ddMMyyyy HHmm")),
+                            LocalDateTime.parse("07062002 0540",
+                                    DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString(),
+                    Parser.parseEvent("Sleep | /from 06062002 0540 /to 07062002 0540").toString());
             fail();
         } catch (JerryException e) {
             assertEquals("Wrong Argument >:( !!!!\n"
@@ -153,70 +171,84 @@ public class ParserTest {
     @Test
     public void parseEvent_emptyTaskField_missingArgumentExceptionThrown() {
         try {
-            assertEquals(new Event("Sleep"
-                            , LocalDateTime.parse("06062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))
-                            , LocalDateTime.parse("07062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString()
-                    , Parser.parseEvent("/from 06062002 0540 /to 07062002 0540").toString());
+            assertEquals(new Event("Sleep",
+                            LocalDateTime.parse("06062002 0540",
+                                    DateTimeFormatter.ofPattern("ddMMyyyy HHmm")),
+                            LocalDateTime.parse("07062002 0540",
+                                    DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString(),
+                    Parser.parseEvent("/from 06062002 0540 /to 07062002 0540").toString());
             fail();
         } catch (JerryException e) {
             assertEquals("Missing Argument >:( !!!! Please try:\n"
-                            + "event <your task goes here> /from <ddmmyyyy hhmm (24-hour clock)> /to <ddmmyyyy hhmm (24-hour clock)>\n"
-                    , e.getMessage());
+                            + "event <your task goes here> "
+                            + "/from <ddmmyyyy hhmm (24-hour clock)> /to <ddmmyyyy hhmm (24-hour clock)>\n",
+                    e.getMessage());
         }
     }
 
     @Test
     public void parseEvent_emptyFromField_missingArgumentExceptionThrown() {
         try {
-            assertEquals(new Event("Sleep"
-                            , LocalDateTime.parse("06062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))
-                            , LocalDateTime.parse("07062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString()
-                    , Parser.parseEvent("Sleep /to 07062002 0540").toString());
+            assertEquals(new Event("Sleep",
+                            LocalDateTime.parse("06062002 0540",
+                                    DateTimeFormatter.ofPattern("ddMMyyyy HHmm")),
+                            LocalDateTime.parse("07062002 0540",
+                                    DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString(),
+                    Parser.parseEvent("Sleep /to 07062002 0540").toString());
             fail();
         } catch (JerryException e) {
             assertEquals("Missing Argument >:( !!!! Please try:\n"
-                            + "event <your task goes here> /from <ddmmyyyy hhmm (24-hour clock)> /to <ddmmyyyy hhmm (24-hour clock)>\n"
-                    , e.getMessage());
+                            + "event <your task goes here> "
+                            + "/from <ddmmyyyy hhmm (24-hour clock)> /to <ddmmyyyy hhmm (24-hour clock)>\n",
+                    e.getMessage());
         }
     }
 
     @Test
     public void parseEvent_emptyToField_missingArgumentExceptionThrown() {
         try {
-            assertEquals(new Event("Sleep"
-                            , LocalDateTime.parse("06062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))
-                            , LocalDateTime.parse("07062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString()
-                    , Parser.parseEvent("Sleep /from 06062002 0540").toString());
+            assertEquals(new Event("Sleep",
+                            LocalDateTime.parse("06062002 0540",
+                                    DateTimeFormatter.ofPattern("ddMMyyyy HHmm")),
+                            LocalDateTime.parse("07062002 0540",
+                                    DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString(),
+                    Parser.parseEvent("Sleep /from 06062002 0540").toString());
             fail();
         } catch (JerryException e) {
             assertEquals("Missing Argument >:( !!!! Please try:\n"
-                            + "event <your task goes here> /from <ddmmyyyy hhmm (24-hour clock)> /to <ddmmyyyy hhmm (24-hour clock)>\n"
-                    , e.getMessage());
+                            + "event <your task goes here> "
+                            + "/from <ddmmyyyy hhmm (24-hour clock)> /to <ddmmyyyy hhmm (24-hour clock)>\n",
+                    e.getMessage());
         }
     }
 
     @Test
     public void parseEvent_emptyUserInput_missingArgumentExceptionThrown() {
         try {
-            assertEquals(new Event("Sleep"
-                            , LocalDateTime.parse("06062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))
-                            , LocalDateTime.parse("07062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString()
-                    , Parser.parseEvent("").toString());
+            assertEquals(new Event("Sleep",
+                            LocalDateTime.parse("06062002 0540",
+                                    DateTimeFormatter.ofPattern("ddMMyyyy HHmm")),
+                            LocalDateTime.parse("07062002 0540",
+                                    DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString(),
+                    Parser.parseEvent("").toString());
             fail();
         } catch (JerryException e) {
             assertEquals("Missing Argument >:( !!!! Please try:\n"
-                            + "event <your task goes here> /from <ddmmyyyy hhmm (24-hour clock)> /to <ddmmyyyy hhmm (24-hour clock)>\n"
-                    , e.getMessage());
+                            + "event <your task goes here> "
+                            + "/from <ddmmyyyy hhmm (24-hour clock)> /to <ddmmyyyy hhmm (24-hour clock)>\n",
+                    e.getMessage());
         }
     }
 
     @Test
     public void parseEvent_invalidTimeFrame_wrongArgumentExceptionThrown() {
         try {
-            assertEquals(new Event("Sleep"
-                            , LocalDateTime.parse("06062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))
-                            , LocalDateTime.parse("07062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString()
-                    , Parser.parseEvent("Sleep /from 07062002 0540 /to 06062002 0540").toString());
+            assertEquals(new Event("Sleep",
+                            LocalDateTime.parse("06062002 0540",
+                                    DateTimeFormatter.ofPattern("ddMMyyyy HHmm")),
+                            LocalDateTime.parse("07062002 0540",
+                                    DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString(),
+                    Parser.parseEvent("Sleep /from 07062002 0540 /to 06062002 0540").toString());
             fail();
         } catch (JerryException e) {
             assertEquals("Wrong Argument >:( !!!!\n"
@@ -228,10 +260,12 @@ public class ParserTest {
     @Test
     public void parseEvent_wrongDateTimeFormate_wrongArgumentExceptionThrown() {
         try {
-            assertEquals(new Event("Sleep"
-                            , LocalDateTime.parse("06062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))
-                            , LocalDateTime.parse("07062002 0540", DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString()
-                    , Parser.parseEvent("Sleep /from 06062002-0540 /to 07062002T0540").toString());
+            assertEquals(new Event("Sleep",
+                            LocalDateTime.parse("06062002 0540",
+                                    DateTimeFormatter.ofPattern("ddMMyyyy HHmm")),
+                            LocalDateTime.parse("07062002 0540",
+                                    DateTimeFormatter.ofPattern("ddMMyyyy HHmm"))).toString(),
+                    Parser.parseEvent("Sleep /from 06062002-0540 /to 07062002T0540").toString());
             fail();
         } catch (JerryException e) {
             assertEquals("Wrong Argument >:( !!!!\n"

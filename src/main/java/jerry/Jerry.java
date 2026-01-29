@@ -1,5 +1,7 @@
 package jerry;
 
+import java.util.Scanner;
+
 import jerry.commands.Commands;
 import jerry.exceptions.JerryException;
 import jerry.parser.Parser;
@@ -7,7 +9,6 @@ import jerry.storage.Storage;
 import jerry.task.Task;
 import jerry.task.TaskList;
 import jerry.ui.Ui;
-import java.util.Scanner;
 
 /**
  * Drives the execution of the Jerry task management application.
@@ -37,7 +38,7 @@ public class Jerry {
     /**
      * Runs the main program loop to process user commands until the user exits.
      */
-    public void  run() {
+    public void run() {
         ui.showWelcome();
         while (true) {
             try {
@@ -75,7 +76,10 @@ public class Jerry {
                     break;
 
                 case DEADLINE:
-                    Task deadlineTask = Parser.parseDeadline(userInput.substring(Commands.DEADLINE.toString().length()).trim());
+                    Task deadlineTask = Parser
+                            .parseDeadline(userInput
+                                    .substring(Commands.DEADLINE.toString().length())
+                                    .trim());
                     this.taskList.add(deadlineTask);
                     ui.showAdd(deadlineTask, taskList.size());
                     Storage.save(taskList);
@@ -93,6 +97,8 @@ public class Jerry {
                     ui.showDelete(deletedTask, taskList.size());
                     Storage.save(taskList);
                     break;
+                default:
+                    break;
                 }
             } catch (JerryException e) {
                 this.ui.showError(e.getMessage());
@@ -105,9 +111,8 @@ public class Jerry {
      *
      * @param args Command-line arguments (unused).
      */
-    public static void main(String[] args)  {
-            Jerry jerry = new Jerry();
-            jerry.run();
-
+    public static void main(String[] args) {
+        Jerry jerry = new Jerry();
+        jerry.run();
     }
 }

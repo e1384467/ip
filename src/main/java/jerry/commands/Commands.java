@@ -24,12 +24,11 @@ public enum Commands {
      * @return The corresponding {@code Commands} enum constant.
      * @throws InvalidCommandException If {@code userCommandInput} does not match any supported command keyword.
      */
-    public  static Commands getCommand(String userCommandInput) throws InvalidCommandException {
+    public static Commands getCommand(String userCommandInput) throws InvalidCommandException {
         try {
             return Commands.valueOf(userCommandInput.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new InvalidCommandException();
         }
     }
-
 }

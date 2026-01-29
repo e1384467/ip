@@ -1,12 +1,11 @@
 package jerry.ui;
 
+import java.util.Scanner;
+
 import jerry.exceptions.EmptyInputException;
 import jerry.exceptions.JerryException;
-import jerry.exceptions.WrongArgumentException;
 import jerry.task.Task;
 import jerry.task.TaskList;
-
-import java.util.Scanner;
 
 /**
  * Handles all user interaction for Jerry, including reading user input and displaying messages to the user.

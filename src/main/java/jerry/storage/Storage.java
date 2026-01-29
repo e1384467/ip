@@ -1,15 +1,16 @@
 package jerry.storage;
 
-import jerry.exceptions.FileErrorException;
-import jerry.exceptions.JerryException;
-import jerry.parser.Parser;
-import jerry.task.Task;
-import jerry.task.TaskList;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+
+import jerry.exceptions.FileErrorException;
+import jerry.exceptions.JerryException;
+import jerry.parser.Parser;
+import jerry.task.Task;
+import jerry.task.TaskList;
 
 /**
  * Handles loading and saving of task data to storage.
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 public class Storage {
 
     /** Path to the file used for storing task data. */
-    private final static Path FILE_PATH = Path.of("data/Jerry.txt");
+    private static final Path FILE_PATH = Path.of("data/Jerry.txt");
 
     /**
      * Returns a list of tasks loaded from the saved data file.
@@ -27,29 +28,28 @@ public class Storage {
      * @throws JerryException If the file cannot be created, accessed, or contains corrupted data.
      */
     public static ArrayList<Task> initialise() throws JerryException {
-       try {
-           File taskFile =  new File(FILE_PATH.toString());
-           File parentDirectory = new File(taskFile.getParent());
+        try {
+            File taskFile = new File(FILE_PATH.toString());
+            File parentDirectory = new File(taskFile.getParent());
+            if (!parentDirectory.exists()) {
+                if (!parentDirectory.mkdirs()) {
+                    throw new FileErrorException("Failed trying to create data/ directory.\n"
+                            + "Please ensure that the folder is writable.");
+                }
+            }
 
-           if (!parentDirectory.exists()) {
-               if (!parentDirectory.mkdirs()){
-                   throw new FileErrorException("Failed trying to create data/ directory.\n"
-                           + "Please ensure that the folder is writable.");
-               }
-           }
-
-           ArrayList<Task> taskList = new ArrayList<Task>();
-           if (taskFile.createNewFile()) {
+            ArrayList<Task> taskList = new ArrayList<Task>();
+            if (taskFile.createNewFile()) {
                 return taskList;
-           }
-           return Parser.loadTasksFromFile(taskFile, taskList);
-       } catch (IOException e) {
-           throw new FileErrorException("There is an I/O error when creating jerry.Jerry.txt.\n"
-                   + "Please make sure that the folder is writable.\n");
-       } catch (SecurityException e) {
-           throw new FileErrorException("There seems to be some issue with the permissions of the folder/file.\n"
-                   + "Please make sure that the folder/file is writable.\n");
-       }
+            }
+            return Parser.loadTasksFromFile(taskFile, taskList);
+        } catch (IOException e) {
+            throw new FileErrorException("There is an I/O error when creating jerry.Jerry.txt.\n"
+                    + "Please make sure that the folder is writable.\n");
+        } catch (SecurityException e) {
+            throw new FileErrorException("There seems to be some issue with the permissions of the folder/file.\n"
+                    + "Please make sure that the folder/file is writable.\n");
+        }
 
     }
 
@@ -62,11 +62,10 @@ public class Storage {
      */
     public static void save(TaskList taskList) throws JerryException {
         try {
-            File taskFile =  new File(FILE_PATH.toString());
+            File taskFile = new File(FILE_PATH.toString());
             File parentDirectory = new File(taskFile.getParent());
-
-           if (!parentDirectory.exists()) {
-                if (!parentDirectory.mkdirs()){
+            if (!parentDirectory.exists()) {
+                if (!parentDirectory.mkdirs()) {
                     throw new FileErrorException("Failed trying to create data/ directory.\n"
                             + "Please ensure that the folder is writable.");
                 }

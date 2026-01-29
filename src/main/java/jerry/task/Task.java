@@ -30,7 +30,7 @@ public abstract class Task {
      * @param isDone Whether the task is marked as completed.
      * @param description The description of the task.
      */
-    public Task(boolean isDone,String description) {
+    public Task(boolean isDone, String description) {
         this.description = description;
         this.isDone = isDone;
     }
@@ -74,9 +74,9 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" +
-                this.getStatusIcon() +
-                "] " +
-                this.description;
+        return "["
+                + this.getStatusIcon()
+                + "] "
+                + this.description;
     }
 }

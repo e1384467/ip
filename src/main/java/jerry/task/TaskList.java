@@ -1,9 +1,10 @@
 package jerry.task;
 
+import java.util.ArrayList;
+
 import jerry.exceptions.JerryException;
 import jerry.exceptions.RepeatedActionsException;
 import jerry.exceptions.WrongArgumentException;
-import java.util.ArrayList;
 
 /**
  * Represents a list of tasks and provides operations to add, retrieve, update, and remove tasks.
@@ -53,11 +54,12 @@ public class TaskList {
      * @return The deleted task.
      * @throws JerryException If the index is out of range.
      */
-    public Task deleteTask(int targetIndex) throws JerryException {;
+    public Task deleteTask(int targetIndex) throws JerryException {
         Task targetTask = get(targetIndex);
         this.taskList.remove(targetTask);
         return targetTask;
     }
+
 
     /**
      * Marks the task at the specified zero-based index as done.
@@ -66,10 +68,10 @@ public class TaskList {
      * @return The marked task.
      * @throws JerryException If the index is out of range or the task is already marked as done.
      */
-    public Task markTask(int targetIndex) throws JerryException{
+    public Task markTask(int targetIndex) throws JerryException {
         Task targetTask = get(targetIndex);
         if (targetTask.isDone()) {
-            throw new RepeatedActionsException( "You've made a mistake, "
+            throw new RepeatedActionsException("You've made a mistake, "
                     + targetTask
                     + " is already marked as done\n");
         }
@@ -132,7 +134,9 @@ public class TaskList {
         String listOutput = "";
         for (int index = 0; index < taskList.size(); index += 1) {
             int displayIndex = index + 1;
-            listOutput = listOutput.concat(Integer.toString(displayIndex) + ". " + get(index).toString() + System.lineSeparator());
+            listOutput = listOutput.concat(Integer.toString(displayIndex) + ". "
+                    + get(index).toString()
+                    + System.lineSeparator());
         }
         return listOutput;
     }

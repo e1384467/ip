@@ -1,12 +1,16 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
 import jerry.exceptions.JerryException;
-import jerry.exceptions.WrongArgumentException;
-import jerry.parser.Parser;
 import jerry.task.Task;
 import jerry.task.TaskList;
 import jerry.task.ToDo;
-import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskListTest {
 
@@ -14,7 +18,7 @@ public class TaskListTest {
     public void constructor_emptyList_success() {
         TaskList taskList = new TaskList();
         assertTrue(taskList.isEmpty());
-        assertEquals(0,taskList.size());
+        assertEquals(0, taskList.size());
     }
 
     @Test
@@ -60,7 +64,7 @@ public class TaskListTest {
         TaskList list = new TaskList();
         list.add(new ToDo("Sleep"));
         try {
-            assertEquals("Sleep",list.get(1).toString());
+            assertEquals("Sleep", list.get(1).toString());
             fail();
         } catch (JerryException e) {
             assertEquals("Wrong Argument >:( !!!!\n"
@@ -106,7 +110,7 @@ public class TaskListTest {
     @Test
     public void unmarkTask_success() throws JerryException {
         TaskList list = new TaskList();
-        Task task = new ToDo(true,"Sleep");
+        Task task = new ToDo(true, "Sleep");
         list.add(task);
         Task unmarkTask = list.unmarkTask(0);
         assertFalse(unmarkTask.isDone());
