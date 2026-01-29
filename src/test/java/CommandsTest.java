@@ -43,6 +43,8 @@ public class CommandsTest {
                     + "e.g. unmark 2\n"
                     + "Command: Delete <your task index from list>\n"
                     + "e.g. delete 3\n"
+                    + "Command: Find <your search query>"
+                    + "e.g. find book"
                     + "Command: Bye\n"
                     + "e.g. bye\n", e.getMessage());
         }
