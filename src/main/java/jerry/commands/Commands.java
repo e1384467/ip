@@ -14,7 +14,8 @@ public enum Commands {
     TODO,
     DEADLINE,
     EVENT,
-    DELETE;
+    DELETE,
+    FIND;
 
     /**
      * Returns the {@code Commands} enum that matches the given user command input.

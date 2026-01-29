@@ -79,4 +79,9 @@ public abstract class Task {
                 + "] "
                 + this.description;
     }
+
+    public boolean matchesSearchQuery(String searchQuery) {
+        return this.description.contains(searchQuery);
+    }
 }
+

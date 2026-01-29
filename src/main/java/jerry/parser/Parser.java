@@ -191,4 +191,11 @@ public class Parser {
                     + "Delete <your task index from list>\n");
         }
     }
+
+    public static String getSearchQuery(String searchQuery) throws JerryException {
+        if (searchQuery.isEmpty()) {
+            throw new MissingArgumentException("Please enter a search query\n");
+        }
+        return searchQuery;
+    }
 }

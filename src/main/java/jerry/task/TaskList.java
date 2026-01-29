@@ -140,4 +140,15 @@ public class TaskList {
         }
         return listOutput;
     }
+
+    public TaskList find(String searchQuery) {
+        TaskList possibleResults = new TaskList();
+        for(int index = 0; index < this.taskList.size(); index += 1) {
+            Task task = this.taskList.get(index);
+            if (task.matchesSearchQuery(searchQuery)) {
+                possibleResults.add(task);
+            }
+        }
+        return possibleResults;
+    }
 }
