@@ -79,6 +79,11 @@ public class Jerry {
                     ui.showDelete(deletedTask, taskList.size());
                     Storage.save(taskList);
                     break;
+
+                case FIND:
+                    String searchQuery = Parser.getSearchQuery(userInput.substring(Commands.FIND.toString().length()).trim());
+                    TaskList possibleResults = taskList.find(searchQuery);
+                    ui.displayList(possibleResults);
                 }
             } catch (JerryException e) {
                 this.ui.showError(e.getMessage());

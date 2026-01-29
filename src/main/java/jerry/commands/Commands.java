@@ -10,7 +10,8 @@ public enum Commands {
     TODO,
     DEADLINE,
     EVENT,
-    DELETE;
+    DELETE,
+    FIND;
 
     public  static Commands getCommand(String userCommandInput) throws InvalidCommandException {
         try {
