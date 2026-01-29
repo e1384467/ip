@@ -8,14 +8,14 @@ public class Event extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
 
-    public Event(String descriptor, LocalDateTime from, LocalDateTime to) {
-        super(descriptor);
+    public Event(String description, LocalDateTime from, LocalDateTime to) {
+        super(description);
         this.from = from;
         this.to = to;
     }
 
-    public Event(boolean isDone, String descriptor, LocalDateTime from, LocalDateTime to) {
-        super(isDone, descriptor);
+    public Event(boolean isDone, String description, LocalDateTime from, LocalDateTime to) {
+        super(isDone, description);
         this.from = from;
         this.to = to;
     }
@@ -30,8 +30,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() +
-                " (from: " + this.from.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"))
+        return "[E]" + super.toString()
+                + " (from: " + this.from.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"))
                 + " to: " + this.to.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")) + ")";
     }
 }

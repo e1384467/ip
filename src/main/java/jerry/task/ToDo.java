@@ -2,17 +2,17 @@ package jerry.task;
 
 public class ToDo extends Task {
 
-    public ToDo(String descriptor) {
-        super(descriptor);
+    public ToDo(String description) {
+        super(description);
     }
 
-    public ToDo(boolean isDone, String descriptor) {
-        super(isDone, descriptor);
+    public ToDo(boolean isDone, String description) {
+        super(isDone, description);
     }
 
     @Override
     public String fileFormat() {
-        return (super.isDone ? "1|T|" : "0|T|")  + super.description;
+        return (super.isDone ? "1|T|" : "0|T|") + super.description;
     }
 
     @Override

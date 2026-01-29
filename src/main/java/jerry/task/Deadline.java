@@ -7,13 +7,13 @@ public class Deadline extends Task {
 
     protected LocalDateTime by;
 
-    public Deadline(String descriptor, LocalDateTime by) {
-        super(descriptor);
+    public Deadline(String description, LocalDateTime by) {
+        super(description);
         this.by = by;
     }
 
-    public Deadline(boolean isDone, String descriptor, LocalDateTime by) {
-        super(isDone, descriptor);
+    public Deadline(boolean isDone, String description, LocalDateTime by) {
+        super(isDone, description);
         this.by = by;
     }
 
@@ -26,7 +26,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() +
-                " (by: " + this.by.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")) + ")";
+        return "[D]" + super.toString()
+                + " (by: " + this.by.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")) + ")";
     }
 }

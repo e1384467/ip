@@ -1,10 +1,10 @@
 package jerry.task;
 
+import java.util.ArrayList;
+
 import jerry.exceptions.JerryException;
 import jerry.exceptions.RepeatedActionsException;
 import jerry.exceptions.WrongArgumentException;
-
-import java.util.ArrayList;
 
 public class TaskList {
 
@@ -28,16 +28,16 @@ public class TaskList {
         return this.taskList.get(index);
     }
 
-    public Task deleteTask(int targetIndex) throws JerryException {;
+    public Task deleteTask(int targetIndex) throws JerryException {
         Task targetTask = get(targetIndex);
         this.taskList.remove(targetTask);
         return targetTask;
     }
 
-    public Task markTask(int targetIndex) throws JerryException{
+    public Task markTask(int targetIndex) throws JerryException {
         Task targetTask = get(targetIndex);
         if (targetTask.isDone()) {
-            throw new RepeatedActionsException( "You've made a mistake, "
+            throw new RepeatedActionsException("You've made a mistake, "
                     + targetTask
                     + " is already marked as done\n");
         }
@@ -72,9 +72,10 @@ public class TaskList {
         String listOutput = "";
         for (int index = 0; index < taskList.size(); index += 1) {
             int displayIndex = index + 1;
-            listOutput = listOutput.concat(Integer.toString(displayIndex) + ". " + get(index).toString() + System.lineSeparator());
+            listOutput = listOutput.concat(Integer.toString(displayIndex) + ". "
+                    + get(index).toString()
+                    + System.lineSeparator());
         }
         return listOutput;
     }
-
 }

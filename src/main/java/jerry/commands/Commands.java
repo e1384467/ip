@@ -12,12 +12,11 @@ public enum Commands {
     EVENT,
     DELETE;
 
-    public  static Commands getCommand(String userCommandInput) throws InvalidCommandException {
+    public static Commands getCommand(String userCommandInput) throws InvalidCommandException {
         try {
             return Commands.valueOf(userCommandInput.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new InvalidCommandException();
         }
     }
-
 }

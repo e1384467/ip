@@ -1,11 +1,11 @@
 package jerry.ui;
 
+import java.util.Scanner;
+
 import jerry.exceptions.EmptyInputException;
 import jerry.exceptions.WrongArgumentException;
 import jerry.task.Task;
 import jerry.task.TaskList;
-
-import java.util.Scanner;
 
 public class Ui {
 
@@ -34,7 +34,7 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public void displayList(TaskList taskList ) throws WrongArgumentException {
+    public void displayList(TaskList taskList) throws WrongArgumentException {
         if (taskList.isEmpty()) {
             System.out.println(CHATBOT_NAME
                     + ": your list is currently empty. Type to add more!\n");
