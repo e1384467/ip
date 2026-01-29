@@ -13,8 +13,20 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Parses user input and saved file data into commands and task objects.
+ */
 public class Parser {
 
+    /**
+     * Loads tasks from the specified saved file and adds them to the given task list.
+     * Each line in the file is parsed into a corresponding {@code Task} based on the expected save file format.
+     *
+     * @param taskFile The file containing the saved task data.
+     * @param taskList The list to which the parsed tasks will be added.
+     * @return The updated task list containing all loaded tasks.
+     * @throws JerryException If the file is missing, inaccessible, contains corrupted or invalid task data.
+     */
     public static ArrayList<Task> loadTasksFromFile (File taskFile, ArrayList<Task> taskList) throws JerryException {
         try {
             Scanner fileScan = new Scanner(taskFile);
@@ -56,6 +68,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a {@code ToDo} task parsed from the given task description.
+     * The description is validated to ensure it is non-empty and does not
+     * contain invalid characters.
+     *
+     * @param taskDescription The description of the to-do task.
+     * @return A {@code ToDo} task created from the given description.
+     * @throws JerryException If the description is empty or contains invalid characters.
+     */
     public static Task parseTodo(String taskDescription) throws JerryException {
         if (taskDescription.isEmpty()) {
             throw new MissingArgumentException("todo <your task goes here>\n");
@@ -66,7 +87,14 @@ public class Parser {
         return new ToDo(taskDescription);
     }
 
-
+    /**
+     * Returns a {@code Deadline} task parsed from the given user input.
+     * The input is validated to ensure it contains a task description and a valid deadline specified using the {@code /by} delimiter.
+     *
+     * @param userInput The raw user input containing the deadline task description and due date.
+     * @return A {@code Deadline} task created from the parsed input.
+     * @throws JerryException If required arguments are missing, invalid characters are present or the date-time format is incorrect.
+     */
     public static Task parseDeadline(String userInput) throws JerryException {
         try {
             if (userInput.contains("|")) {
@@ -88,6 +116,16 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns an {@code Event} task parsed from the given user input.
+     * The input is validated to ensure it contains a task description, a start time
+     * specified using {@code /from}, and an end time specified using {@code /to},
+     * with the start time occurring before the end time.
+     *
+     * @param userInput The raw user input containing the event description, start time, and end time.
+     * @return An {@code Event} task created from the parsed input.
+     * @throws JerryException If there are missing arguments, invalid characters, incorrect date-time format or the time range is wrong
+     */
     public static Task parseEvent(String userInput) throws JerryException {
         try {
             if (userInput.contains("|")) {
@@ -118,6 +156,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the zero-based array index parsed from the given user input array.
+     *
+     * @param userInputArray The array containing the command and its arguments.
+     * @return The zero-based index corresponding to the user-provided task index.
+     * @throws JerryException If the index is missing or is not a valid number.
+     */
     public static int getArrayIndex(String[] userInputArray) throws JerryException {
         try {
             int index = Integer.parseInt(userInputArray[1]);
