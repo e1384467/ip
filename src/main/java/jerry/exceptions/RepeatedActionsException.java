@@ -6,7 +6,8 @@ package jerry.exceptions;
 public class RepeatedActionsException extends JerryException {
 
     /**
-     * Constructs a {@code RepeatedActionsException} with the specified error message describing the invalid repeated action.
+     * Constructs a {@code RepeatedActionsException} with the specified error message
+     * describing the invalid repeated action.
      *
      * @param outputMessage The message detailing the cause of the repeated action error.
      */

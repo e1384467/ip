@@ -95,11 +95,13 @@ public class Parser {
 
     /**
      * Returns a {@code Deadline} task parsed from the given user input.
-     * The input is validated to ensure it contains a task description and a valid deadline specified using the {@code /by} delimiter.
+     * The input is validated to ensure it contains a task description
+     * and a valid deadline specified using the {@code /by} delimiter.
      *
      * @param userInput The raw user input containing the deadline task description and due date.
      * @return A {@code Deadline} task created from the parsed input.
-     * @throws JerryException If required arguments are missing, invalid characters are present or the date-time format is incorrect.
+     * @throws JerryException If required arguments are missing,
+     *              invalid characters are present or the date-time format is incorrect.
      */
     public static Task parseDeadline(String userInput) throws JerryException {
         try {
@@ -131,7 +133,8 @@ public class Parser {
      *
      * @param userInput The raw user input containing the event description, start time, and end time.
      * @return An {@code Event} task created from the parsed input.
-     * @throws JerryException If there are missing arguments, invalid characters, incorrect date-time format or the time range is wrong
+     * @throws JerryException If there are missing arguments,
+     *              invalid characters, incorrect date-time format or the time range is wrong
      */
     public static Task parseEvent(String userInput) throws JerryException {
         try {

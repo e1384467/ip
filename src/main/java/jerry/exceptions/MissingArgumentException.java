@@ -6,7 +6,8 @@ package jerry.exceptions;
 public class MissingArgumentException extends JerryException {
 
     /**
-     * Constructs a {@code MissingArgumentException} with a message indicating that a required argument is missing, followed by the correct usage format.
+     * Constructs a {@code MissingArgumentException} with a message indicating
+     * that a required argument is missing, followed by the correct usage format.
      *
      * @param correctUsage The correct usage format of the command.
      */

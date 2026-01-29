@@ -26,14 +26,16 @@ public class InvalidCommandException extends JerryException {
                     + "e.g. bye\n";
 
     /**
-     * Constructs an {@code InvalidCommandException} with a default error message followed by a list of valid commands and example usages.
+     * Constructs an {@code InvalidCommandException} with a default error message
+     * followed by a list of valid commands and example usages.
      */
     public InvalidCommandException() {
         super("Invalid Command >:c\n" + COMMAND_LIST);
     }
 
     /**
-     * Constructs an {@code InvalidCommandException} with the specified error message followed by a list of valid commands and example usages.
+     * Constructs an {@code InvalidCommandException} with the specified error message
+     * followed by a list of valid commands and example usages.
      *
      * @param outputMessage The error message describing why the command is invalid.
      */
