@@ -88,7 +88,7 @@ public abstract class Task {
      * @return {@code true} if the task matches the search query, or {@code false} otherwise.
      */
     public boolean matchesSearchQuery(String searchQuery) {
-        return this.description.contains(searchQuery);
+        return this.description.toLowerCase().contains(searchQuery.toLowerCase());
     }
 }
 
