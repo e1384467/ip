@@ -1,7 +1,5 @@
 package jerry;
 
-import java.util.Scanner;
-
 import jerry.commands.Commands;
 import jerry.exceptions.JerryException;
 import jerry.parser.Parser;
@@ -15,8 +13,11 @@ import jerry.ui.Ui;
  */
 public class Jerry {
 
+    protected boolean isExit;
+    protected String startUpError;
+
     /** Handles user interaction such as reading input and displaying messages or error messages. */
-    private Ui ui;
+    private final Ui ui;
 
     /** Stores and manages the user's tasks. */
     private TaskList taskList;
@@ -26,102 +27,95 @@ public class Jerry {
      * If loading from storage fails, an empty task list is used.
      */
     public Jerry() {
-        this.ui = new Ui(new Scanner(System.in));
+        this.isExit = false;
+        this.ui = new Ui();
+        this.startUpError = "";
         try {
             this.taskList = new TaskList(Storage.initialise());
         } catch (JerryException e) {
-            this.ui.showError(e.getMessage());
+            this.startUpError = e.getMessage();
             this.taskList = new TaskList();
         }
     }
 
     /**
-     * Runs the main program loop to process user commands until the user exits.
+     * Returns the welcome message shown to the user when the application starts.
+     *
+     * @return Greeting text displayed at the beginning of the session.
      */
-    public void run() {
-        ui.showWelcome();
-        while (true) {
-            try {
-                String userInput = this.ui.readUserInput();
-                String[] userInputArray = userInput.split("\\s+");
-                Commands userCommand = Commands.getCommand(userInputArray[0]);
-
-                switch (userCommand) {
-                case BYE:
-                    Storage.save(taskList);
-                    ui.showBye();
-                    return;
-
-                case LIST:
-                    ui.displayList(taskList);
-                    break;
-
-                case MARK:
-                    Task markTask = this.taskList.markTask(Parser.getArrayIndex(userInputArray));
-                    ui.showMark(markTask);
-                    Storage.save(taskList);
-                    break;
-
-                case UNMARK:
-                    Task unmarkTask = this.taskList.unmarkTask(Parser.getArrayIndex(userInputArray));
-                    ui.showUnmark(unmarkTask);
-                    Storage.save(taskList);
-                    break;
-
-                case TODO:
-                    Task todoTask = Parser.parseTodo(userInput.substring(Commands.TODO.toString().length()).trim());
-                    this.taskList.add(todoTask);
-                    ui.showAdd(todoTask, taskList.size());
-                    Storage.save(taskList);
-                    break;
-
-                case DEADLINE:
-                    Task deadlineTask = Parser
-                            .parseDeadline(userInput
-                                    .substring(Commands.DEADLINE.toString().length())
-                                    .trim());
-                    this.taskList.add(deadlineTask);
-                    ui.showAdd(deadlineTask, taskList.size());
-                    Storage.save(taskList);
-                    break;
-
-                case EVENT:
-                    Task eventTask = Parser.parseEvent(userInput.substring(Commands.EVENT.toString().length()).trim());
-                    this.taskList.add(eventTask);
-                    ui.showAdd(eventTask, taskList.size());
-                    Storage.save(taskList);
-                    break;
-
-                case DELETE:
-                    Task deletedTask = taskList.deleteTask(Parser.getArrayIndex(userInputArray));
-                    ui.showDelete(deletedTask, taskList.size());
-                    Storage.save(taskList);
-                    break;
-
-                case FIND:
-                    String searchQuery = Parser.getSearchQuery(userInput
-                            .substring(Commands.FIND.toString().length())
-                            .trim());
-                    TaskList possibleResults = taskList.find(searchQuery);
-                    ui.displayList(possibleResults);
-                    break;
-
-                default:
-                    break;
-                }
-            } catch (JerryException e) {
-                this.ui.showError(e.getMessage());
-            }
-        }
+    public String welcomeText() {
+        return "Hello! What can I do for you?\n";
     }
 
     /**
-     * Starts the Jerry application.
+     * Executes the command from the user input and returns the message to display.
      *
-     * @param args Command-line arguments (unused).
+     * @param userInput user’s input command.
+     * @return Message to be display.
      */
-    public static void main(String[] args) {
-        Jerry jerry = new Jerry();
-        jerry.run();
+    public String getResponse(String userInput) {
+        try {
+            String[] userInputArray = userInput.trim().split("\\s+");
+            Commands userCommand = Commands.getCommand(userInputArray[0]);
+
+            switch (userCommand) {
+            case BYE:
+                isExit = true;
+                Storage.save(taskList);
+                return ui.showBye();
+
+            case LIST:
+                return ui.displayList(taskList);
+
+            case MARK:
+                Task markTask = this.taskList.markTask(Parser.getArrayIndex(userInputArray));
+                Storage.save(taskList);
+                return ui.showMark(markTask);
+
+            case UNMARK:
+                Task unmarkTask = this.taskList.unmarkTask(Parser.getArrayIndex(userInputArray));
+                Storage.save(taskList);
+                return ui.showUnmark(unmarkTask);
+
+            case TODO:
+                Task todoTask = Parser.parseTodo(userInput.substring(Commands.TODO.toString().length()).trim());
+                this.taskList.add(todoTask);
+                Storage.save(taskList);
+                return ui.showAdd(todoTask, taskList.size());
+
+            case DEADLINE:
+                Task deadlineTask = Parser
+                        .parseDeadline(userInput
+                                .substring(Commands.DEADLINE.toString().length())
+                                .trim());
+                this.taskList.add(deadlineTask);
+                Storage.save(taskList);
+                return ui.showAdd(deadlineTask, taskList.size());
+
+            case EVENT:
+                Task eventTask = Parser.parseEvent(userInput.substring(Commands.EVENT.toString().length()).trim());
+                this.taskList.add(eventTask);
+                Storage.save(taskList);
+                return ui.showAdd(eventTask, taskList.size());
+
+            case DELETE:
+                Task deletedTask = taskList.deleteTask(Parser.getArrayIndex(userInputArray));
+                Storage.save(taskList);
+                return ui.showDelete(deletedTask, taskList.size());
+
+            case FIND:
+                String searchQuery = Parser.getSearchQuery(userInput
+                        .substring(Commands.FIND.toString().length())
+                        .trim());
+                TaskList possibleResults = taskList.find(searchQuery);
+                return ui.displayList(possibleResults);
+
+            default:
+                return "You have managed something not even god can do.";
+            }
+        } catch (JerryException e) {
+            return e.getMessage();
+        }
     }
+
 }
