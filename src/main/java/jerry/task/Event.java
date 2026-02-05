@@ -51,7 +51,7 @@ public class Event extends Task {
      * @return A formatted string describing this event task in file storage format.
      */
     @Override
-    public String fileFormat() {
+    public String getFileFormat() {
         return (super.isDone ? "1|E|" : "0|E|")
                 + super.description
                 + "|" + this.from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm"))

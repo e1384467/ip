@@ -60,7 +60,7 @@ public class Storage {
      * @param taskList The task list to be saved to storage.
      * @throws JerryException If an error occurs while writing to the data file or creating the parent directory
      */
-    public static void save(TaskList taskList) throws JerryException {
+    public static void writeTasksToFile(TaskList taskList) throws JerryException {
         try {
             File taskFile = new File(FILE_PATH.toString());
             File parentDirectory = new File(taskFile.getParent());
@@ -73,7 +73,7 @@ public class Storage {
 
             FileWriter writeTaskFile = new FileWriter(FILE_PATH.toString());
             for (int index = 0; index < taskList.size(); index += 1) {
-                writeTaskFile.write(taskList.get(index).fileFormat() + System.lineSeparator());
+                writeTaskFile.write(taskList.get(index).getFileFormat() + System.lineSeparator());
             }
             writeTaskFile.close();
         } catch (IOException e) {

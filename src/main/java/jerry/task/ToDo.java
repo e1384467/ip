@@ -33,7 +33,7 @@ public class ToDo extends Task {
      * @return A string representing this todo task in file storage format.
      */
     @Override
-    public String fileFormat() {
+    public String getFileFormat() {
         return (super.isDone ? "1|T|" : "0|T|") + super.description;
     }
 

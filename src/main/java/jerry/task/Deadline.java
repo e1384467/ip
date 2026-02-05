@@ -43,7 +43,7 @@ public class Deadline extends Task {
      * @return A formatted string describing this deadline task in file storage format.
      */
     @Override
-    public String fileFormat() {
+    public String getFileFormat() {
         return (super.isDone ? "1|D|" : "0|D|")
                 + super.description
                 + "|" + this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm"));

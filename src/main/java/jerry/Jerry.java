@@ -61,7 +61,7 @@ public class Jerry {
             switch (userCommand) {
             case BYE:
                 isExit = true;
-                Storage.save(taskList);
+                Storage.writeTasksToFile(taskList);
                 return ui.showBye();
 
             case LIST:
@@ -69,18 +69,18 @@ public class Jerry {
 
             case MARK:
                 Task markTask = this.taskList.markTask(Parser.getArrayIndex(userInputArray));
-                Storage.save(taskList);
+                Storage.writeTasksToFile(taskList);
                 return ui.showMark(markTask);
 
             case UNMARK:
                 Task unmarkTask = this.taskList.unmarkTask(Parser.getArrayIndex(userInputArray));
-                Storage.save(taskList);
+                Storage.writeTasksToFile(taskList);
                 return ui.showUnmark(unmarkTask);
 
             case TODO:
                 Task todoTask = Parser.parseTodo(userInput.substring(Commands.TODO.toString().length()).trim());
                 this.taskList.add(todoTask);
-                Storage.save(taskList);
+                Storage.writeTasksToFile(taskList);
                 return ui.showAdd(todoTask, taskList.size());
 
             case DEADLINE:
@@ -89,18 +89,18 @@ public class Jerry {
                                 .substring(Commands.DEADLINE.toString().length())
                                 .trim());
                 this.taskList.add(deadlineTask);
-                Storage.save(taskList);
+                Storage.writeTasksToFile(taskList);
                 return ui.showAdd(deadlineTask, taskList.size());
 
             case EVENT:
                 Task eventTask = Parser.parseEvent(userInput.substring(Commands.EVENT.toString().length()).trim());
                 this.taskList.add(eventTask);
-                Storage.save(taskList);
+                Storage.writeTasksToFile(taskList);
                 return ui.showAdd(eventTask, taskList.size());
 
             case DELETE:
                 Task deletedTask = taskList.deleteTask(Parser.getArrayIndex(userInputArray));
-                Storage.save(taskList);
+                Storage.writeTasksToFile(taskList);
                 return ui.showDelete(deletedTask, taskList.size());
 
             case FIND:

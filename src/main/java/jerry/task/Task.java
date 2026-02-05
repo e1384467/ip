@@ -65,7 +65,7 @@ public abstract class Task {
      *
      * @return A string representing this task in file storage format.
      */
-    public abstract String fileFormat();
+    public abstract String getFileFormat();
 
     /**
      * Returns a string representation of this task.
