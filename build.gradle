@@ -46,9 +46,8 @@ test {
         showStandardStreams = false
     }
 }
-
 application {
-    mainClass.set("Launcher")
+    mainClass.set("jerry.Launcher")
 }
 
 
