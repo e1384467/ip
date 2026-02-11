@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 import jerry.exceptions.CorruptedSavedFileException;
@@ -22,6 +23,9 @@ import jerry.task.ToDo;
  * Parses user input and saved file data into commands and task objects.
  */
 public class Parser {
+
+    private static final DateTimeFormatter FILE_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm");
+    private static final DateTimeFormatter USER_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("ddMMyyyy HHmm");
 
     /**
      * Loads tasks from the specified saved file and adds them to the given task list.
@@ -46,13 +50,13 @@ public class Parser {
                 case "D":
                     taskList.add(new Deadline(isDone,
                             split[2],
-                            LocalDateTime.parse(split[3], DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm"))));
+                            LocalDateTime.parse(split[3], FILE_DATE_TIME_FORMAT)));
                     break;
                 case "E":
                     taskList.add(new Event(isDone,
                             split[2],
-                            LocalDateTime.parse(split[3], DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm")),
-                            LocalDateTime.parse(split[4], DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm"))));
+                            LocalDateTime.parse(split[3], FILE_DATE_TIME_FORMAT),
+                            LocalDateTime.parse(split[4], FILE_DATE_TIME_FORMAT)));
                     break;
                 default:
                     throw new CorruptedSavedFileException("There is no such task type.\n"
@@ -115,7 +119,7 @@ public class Parser {
                 throw new MissingArgumentException(
                         "deadline <your task goes here> /by <ddmmyyyy hhmm (24-hour clock)>\n");
             }
-            return new Deadline(taskDescription, LocalDateTime.parse(by, DateTimeFormatter.ofPattern("ddMMyyyy HHmm")));
+            return new Deadline(taskDescription, LocalDateTime.parse(by, USER_DATE_TIME_FORMAT));
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new MissingArgumentException("deadline <your task goes here> /by <ddmmyyyy hhmm (24-hour clock)>\n");
         } catch (DateTimeParseException e) {
@@ -151,8 +155,8 @@ public class Parser {
                         "event <your task goes here> "
                                 + "/from <ddmmyyyy hhmm (24-hour clock)> /to <ddmmyyyy hhmm (24-hour clock)>\n");
             }
-            LocalDateTime formattedFrom = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("ddMMyyyy HHmm"));
-            LocalDateTime formattedTo = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("ddMMyyyy HHmm"));
+            LocalDateTime formattedFrom = LocalDateTime.parse(from, USER_DATE_TIME_FORMAT);
+            LocalDateTime formattedTo = LocalDateTime.parse(to, USER_DATE_TIME_FORMAT);
 
             if (formattedFrom.isAfter(formattedTo)) {
                 throw new WrongArgumentException("Invalid Time Range\n"
