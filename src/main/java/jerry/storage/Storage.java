@@ -48,7 +48,7 @@ public class Storage {
      * Existing file contents will be overwritten.
      *
      * @param taskList The task list to be saved to storage.
-     * @throws JerryException If an error occurs while writing to the data file or creating the parent directory
+     * @throws JerryException If an error occurs while writing to the data file or creating the parent directory.
      */
     public static void writeTasksToFile(TaskList taskList) throws JerryException {
         ensureDataDirectoryExists();

@@ -141,7 +141,7 @@ public class Parser {
      * @param userInputArgument The raw user input containing the event description, start time, and end time.
      * @return An {@code Event} task created from the parsed input.
      * @throws JerryException If there are missing arguments,
-     *              invalid characters, incorrect date-time format or the time range is wrong
+     *              invalid characters, incorrect date-time format or the time range is wrong.
      */
     public static Task parseEvent(String userInputArgument) throws JerryException {
         validateNoPipeCharacter(userInputArgument);

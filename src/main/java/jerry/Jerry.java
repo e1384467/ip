@@ -51,7 +51,6 @@ public class Jerry {
             String userInputArguments = Parser.getUserInputArguments(userInput);
 
             return userCommand.execute(this.taskList, this.ui, userInputArguments);
-
         } catch (JerryException e) {
             return e.getMessage();
         }
