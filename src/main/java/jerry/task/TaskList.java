@@ -27,6 +27,7 @@ public class TaskList {
      * @param taskList The list of tasks to be managed by this task list.
      */
     public TaskList(ArrayList<Task> taskList) {
+        assert taskList != null : "taskList should not be null";
         this.taskList = taskList;
     }
 
@@ -44,7 +45,9 @@ public class TaskList {
                             : ("Please enter a number in the range of 1 to " + this.taskList.size()))
                             + "\nUse Command: list. To check your task list first :)\n");
         }
-        return this.taskList.get(index);
+        Task t = this.taskList.get(index);
+        assert t != null : "targetTask should not be null";
+        return t;
     }
 
     /**
@@ -56,6 +59,7 @@ public class TaskList {
      */
     public Task deleteTask(int targetIndex) throws JerryException {
         Task targetTask = get(targetIndex);
+        assert targetTask != null : "targetTask should not be null";
         this.taskList.remove(targetTask);
         return targetTask;
     }
@@ -70,15 +74,16 @@ public class TaskList {
      */
     public Task markTask(int targetIndex) throws JerryException {
         Task targetTask = get(targetIndex);
+        assert targetTask != null : "targetTask should not be null";
         if (targetTask.isDone()) {
             throw new RepeatedActionsException("You've made a mistake, "
                     + targetTask
                     + " is already marked as done\n");
         }
         targetTask.toggleIsDone();
+        assert targetTask.isDone : "task should be mark as done";
         return targetTask;
     }
-
     /**
      * Unmarks the task at the specified zero-based index as not done.
      *
@@ -88,12 +93,14 @@ public class TaskList {
      */
     public Task unmarkTask(int targetIndex) throws JerryException {
         Task targetTask = get(targetIndex);
+        assert targetTask != null : "taskList contains null task";
         if (!targetTask.isDone()) {
             throw new RepeatedActionsException("You've made a mistake, "
                     + targetTask
                     + " is already unmarked as not done yet\n");
         }
         targetTask.toggleIsDone();
+        assert !targetTask.isDone : "task should be unmark as not done";
         return targetTask;
     }
 
@@ -103,6 +110,7 @@ public class TaskList {
      * @param task The task to add.
      */
     public void add(Task task) {
+        assert task != null : "task should not be null";
         this.taskList.add(task);
     }
 
@@ -128,14 +136,13 @@ public class TaskList {
      * Returns a formatted list of all tasks with one-based indices for display.
      *
      * @return A formatted string containing all tasks in the list.
-     * @throws JerryException If a task retrieval fails due to an invalid index.
      */
-    public String buildListOutput() throws JerryException {
+    public String buildListOutput() {
         String listOutput = "";
         for (int index = 0; index < taskList.size(); index += 1) {
             int displayIndex = index + 1;
             listOutput = listOutput.concat(Integer.toString(displayIndex) + ". "
-                    + get(index).toString()
+                    + taskList.get(index).toString()
                     + System.lineSeparator());
         }
         return listOutput;

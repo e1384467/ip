@@ -34,6 +34,8 @@ public class Parser {
      */
     public static ArrayList<Task> loadTasksFromFile(File taskFile, ArrayList<Task> taskList) throws JerryException {
         try {
+            assert taskFile != null : "taskFile should not be null";
+            assert taskList != null : "taskList should not be null";
             Scanner fileScan = new Scanner(taskFile);
             while (fileScan.hasNextLine()) {
                 String line = fileScan.nextLine();
