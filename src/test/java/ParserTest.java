@@ -38,7 +38,7 @@ public class ParserTest {
             fail();
         } catch (JerryException e) {
             assertEquals("Wrong Argument >:( !!!!\n"
-                    + "Character '|' is not allowed in your task description.\n", e.getMessage());
+                    + "Character '|' is not allowed in your input.\n", e.getMessage());
         }
     }
 
