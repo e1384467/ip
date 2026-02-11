@@ -40,7 +40,7 @@ public class Parser {
             Scanner fileScan = new Scanner(taskFile);
             while (fileScan.hasNextLine()) {
                 String line = fileScan.nextLine();
-                Task task = extracted(line);
+                Task task = parseTaskFromLine(line);
                 taskList.add(task);
             }
             return taskList;
@@ -58,7 +58,7 @@ public class Parser {
         }
     }
 
-    private static Task extracted(String line) throws CorruptedSavedFileException {
+    private static Task parseTaskFromLine(String line) throws CorruptedSavedFileException {
         String[] split = line.split("\\|");
         boolean isDone = split[0].equals("1");
         return switch (split[1].toUpperCase()) {
