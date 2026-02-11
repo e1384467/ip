@@ -176,22 +176,23 @@ public class Parser {
     /**
      * Returns the zero-based array index parsed from the given user input array.
      *
-     * @param userInputArray The array containing the command and its arguments.
+     * @param userInputArgument The string containing the task's index.
      * @return The zero-based index corresponding to the user-provided task index.
      * @throws JerryException If the index is missing or is not a valid number.
      */
-    public static int getArrayIndex(String[] userInputArray) throws JerryException {
-        try {
-            int index = Integer.parseInt(userInputArray[1]);
-            return index - 1;
-        } catch (NumberFormatException e) {
-            throw new WrongArgumentException("THIS IS NOT A NUMBER\n");
-        } catch (IndexOutOfBoundsException e) {
+    public static int getArrayIndex(String userInputArgument) throws JerryException {
+        if (userInputArgument.isEmpty()) {
             throw new MissingArgumentException("Mark <your task index from list>\n"
                     + "or\n"
                     + "Unmark <your task index from list>\n"
                     + "or\n"
                     + "Delete <your task index from list>\n");
+        }
+        try {
+            int index = Integer.parseInt(userInputArgument);
+            return index - 1;
+        } catch (NumberFormatException e) {
+            throw new WrongArgumentException("THIS IS NOT A NUMBER\n");
         }
     }
 
@@ -210,5 +211,20 @@ public class Parser {
                     + "E.g. find book\n");
         }
         return searchQuery;
+    }
+
+    public static String getUserInputArguments(String userInput) {
+        String[] userInputParts = getUserInputParts(userInput);
+        return (userInputParts.length < 2 ? "" : userInputParts[1].trim());
+    }
+
+    public static String getUserInputCommand(String userInput) {
+        String[] userInputParts = getUserInputParts(userInput);
+        return (userInputParts.length < 2 ? "" : userInputParts[0].trim());
+    }
+
+    private static String[] getUserInputParts(String userInput) {
+        String trimmedUserInput = userInput.trim();
+        return trimmedUserInput.split("\\s+", 2);
     }
 }

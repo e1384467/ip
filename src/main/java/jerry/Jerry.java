@@ -4,7 +4,6 @@ import jerry.commands.Commands;
 import jerry.exceptions.JerryException;
 import jerry.parser.Parser;
 import jerry.storage.Storage;
-import jerry.task.Task;
 import jerry.task.TaskList;
 import jerry.ui.Ui;
 
@@ -55,64 +54,13 @@ public class Jerry {
      */
     public String getResponse(String userInput) {
         try {
-            String[] userInputArray = userInput.trim().split("\\s+");
-            Commands userCommand = Commands.getCommand(userInputArray[0]);
+            String userInputCommand = Parser.getUserInputCommand(userInput);
+            Commands userCommand = Commands.getCommand(userInputCommand);
 
-            switch (userCommand) {
-            case BYE:
-                isExit = true;
-                Storage.writeTasksToFile(taskList);
-                return ui.showBye();
+            String userInputArguments = Parser.getUserInputArguments(userInput);
 
-            case LIST:
-                return ui.displayList(taskList);
+            return userCommand.execute(taskList, ui, userInputArguments);
 
-            case MARK:
-                Task markTask = this.taskList.markTask(Parser.getArrayIndex(userInputArray));
-                Storage.writeTasksToFile(taskList);
-                return ui.showMark(markTask);
-
-            case UNMARK:
-                Task unmarkTask = this.taskList.unmarkTask(Parser.getArrayIndex(userInputArray));
-                Storage.writeTasksToFile(taskList);
-                return ui.showUnmark(unmarkTask);
-
-            case TODO:
-                Task todoTask = Parser.parseTodo(userInput.substring(Commands.TODO.toString().length()).trim());
-                this.taskList.add(todoTask);
-                Storage.writeTasksToFile(taskList);
-                return ui.showAdd(todoTask, taskList.size());
-
-            case DEADLINE:
-                Task deadlineTask = Parser
-                        .parseDeadline(userInput
-                                .substring(Commands.DEADLINE.toString().length())
-                                .trim());
-                this.taskList.add(deadlineTask);
-                Storage.writeTasksToFile(taskList);
-                return ui.showAdd(deadlineTask, taskList.size());
-
-            case EVENT:
-                Task eventTask = Parser.parseEvent(userInput.substring(Commands.EVENT.toString().length()).trim());
-                this.taskList.add(eventTask);
-                Storage.writeTasksToFile(taskList);
-                return ui.showAdd(eventTask, taskList.size());
-
-            case DELETE:
-                Task deletedTask = taskList.deleteTask(Parser.getArrayIndex(userInputArray));
-                Storage.writeTasksToFile(taskList);
-                return ui.showDelete(deletedTask, taskList.size());
-
-            case FIND:
-                String searchQuery = Parser.getSearchQuery(userInput
-                        .substring(Commands.FIND.toString().length())
-                        .trim());
-                TaskList possibleResults = taskList.find(searchQuery);
-                return ui.displayList(possibleResults);
-
-            default:
-                return "You have managed something not even god can do.";
-            }
         } catch (JerryException e) {
             return e.getMessage();
         }
