@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
 import jerry.exceptions.CorruptedSavedFileException;
@@ -102,26 +101,32 @@ public class Parser {
      * The input is validated to ensure it contains a task description
      * and a valid deadline specified using the {@code /by} delimiter.
      *
-     * @param userInput The raw user input containing the deadline task description and due date.
+     * @param userInputArgument The raw user input containing the deadline task description and due date.
      * @return A {@code Deadline} task created from the parsed input.
      * @throws JerryException If required arguments are missing,
      *              invalid characters are present or the date-time format is incorrect.
      */
-    public static Task parseDeadline(String userInput) throws JerryException {
+    public static Task parseDeadline(String userInputArgument) throws JerryException {
+        if (userInputArgument.contains("|")) {
+            throw new WrongArgumentException("Character '|' is not allowed in your input.\n");
+        }
+
+        String[] split = userInputArgument.split("(?i)\\s*/by\\s*", 2);
+        if (split.length < 2) {
+            throw new MissingArgumentException(
+                    "deadline <your task goes here> /by <ddmmyyyy hhmm (24-hour clock)>\n");
+        }
+
+        String taskDescription = split[0].trim();
+        String byString = split[1].trim();
+        if (taskDescription.isEmpty() || byString.isEmpty()) {
+            throw new MissingArgumentException(
+                    "deadline <your task goes here> /by <ddmmyyyy hhmm (24-hour clock)>\n");
+        }
+
         try {
-            if (userInput.contains("|")) {
-                throw new WrongArgumentException("Character '|' is not allowed in your input.\n");
-            }
-            String[] split = userInput.split("(?i)\\s*/by\\s*", 2);
-            String taskDescription = split[0];
-            String by = split[1];
-            if (taskDescription.isEmpty() || by.isEmpty()) {
-                throw new MissingArgumentException(
-                        "deadline <your task goes here> /by <ddmmyyyy hhmm (24-hour clock)>\n");
-            }
-            return new Deadline(taskDescription, LocalDateTime.parse(by, USER_DATE_TIME_FORMAT));
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new MissingArgumentException("deadline <your task goes here> /by <ddmmyyyy hhmm (24-hour clock)>\n");
+            LocalDateTime by = LocalDateTime.parse(byString, USER_DATE_TIME_FORMAT);
+            return new Deadline(taskDescription, by);
         } catch (DateTimeParseException e) {
             throw new WrongArgumentException("There is issue with your date and time format.\n"
                     + "Try: ddmmyyyy hhmm (24-hour clock)\n"
