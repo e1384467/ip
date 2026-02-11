@@ -40,27 +40,8 @@ public class Parser {
             Scanner fileScan = new Scanner(taskFile);
             while (fileScan.hasNextLine()) {
                 String line = fileScan.nextLine();
-                String[] split = line.split("\\|");
-                boolean isDone = split[0].equals("1");
-                switch (split[1].toUpperCase()) {
-                case "T":
-                    taskList.add(new ToDo(isDone, split[2]));
-                    break;
-                case "D":
-                    taskList.add(new Deadline(isDone,
-                            split[2],
-                            LocalDateTime.parse(split[3], FILE_DATE_TIME_FORMAT)));
-                    break;
-                case "E":
-                    taskList.add(new Event(isDone,
-                            split[2],
-                            LocalDateTime.parse(split[3], FILE_DATE_TIME_FORMAT),
-                            LocalDateTime.parse(split[4], FILE_DATE_TIME_FORMAT)));
-                    break;
-                default:
-                    throw new CorruptedSavedFileException("There is no such task type.\n"
-                            + "The jerry.Jerry.txt file could be corrupted\n");
-                }
+                Task task = extracted(line);
+                taskList.add(task);
             }
             return taskList;
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -75,6 +56,24 @@ public class Parser {
                     + "Please ensure that it is in <yyyy-mm-dd>T<hh-mm> format (24-hour clock).\n"
                     + "E.g. 2022-12-06T18-00\n");
         }
+    }
+
+    private static Task extracted(String line) throws CorruptedSavedFileException {
+        String[] split = line.split("\\|");
+        boolean isDone = split[0].equals("1");
+        return switch (split[1].toUpperCase()) {
+            case "T" -> new ToDo(isDone, split[2]);
+            case "D" -> new Deadline(isDone, split[2], parseDateTime(split[3], FILE_DATE_TIME_FORMAT));
+            case "E" -> new Event(isDone, split[2],
+                    parseDateTime(split[3], FILE_DATE_TIME_FORMAT),
+                    parseDateTime(split[4], FILE_DATE_TIME_FORMAT));
+            default -> throw new CorruptedSavedFileException("There is no such task type.\n"
+                    + "The jerry.Jerry.txt file could be corrupted\n");
+        };
+    }
+
+    private static LocalDateTime parseDateTime(String dateTimeString, DateTimeFormatter dateTimeFormat) {
+        return LocalDateTime.parse(dateTimeString, dateTimeFormat);
     }
 
     private static void validateNoPipeCharacter(String userInputArgument) throws WrongArgumentException {
@@ -121,7 +120,7 @@ public class Parser {
         String taskDescription = split[0].trim();
         String byString = split[1].trim();
         try {
-            LocalDateTime by = LocalDateTime.parse(byString, USER_DATE_TIME_FORMAT);
+            LocalDateTime by = parseDateTime(byString, USER_DATE_TIME_FORMAT);
             return new Deadline(taskDescription, by);
         } catch (DateTimeParseException e) {
             throw new WrongArgumentException("There is issue with your date and time format.\n"
@@ -160,8 +159,8 @@ public class Parser {
         String fromString = secondSplit[0].trim();
         String toString = secondSplit[1].trim();
         try {
-            LocalDateTime from = LocalDateTime.parse(fromString, USER_DATE_TIME_FORMAT);
-            LocalDateTime to = LocalDateTime.parse(toString, USER_DATE_TIME_FORMAT);
+            LocalDateTime from = parseDateTime(fromString, USER_DATE_TIME_FORMAT);
+            LocalDateTime to = parseDateTime(toString, USER_DATE_TIME_FORMAT);
             if (from.isAfter(to)) {
                 throw new WrongArgumentException("Invalid Time Range\n"
                         + "Your start time must be before end time\n");
