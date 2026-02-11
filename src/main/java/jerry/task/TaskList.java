@@ -1,6 +1,8 @@
 package jerry.task;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import jerry.exceptions.JerryException;
 import jerry.exceptions.RepeatedActionsException;
@@ -150,12 +152,10 @@ public class TaskList {
      */
     public TaskList find(String searchQuery) {
         TaskList possibleResults = new TaskList();
-        for (int index = 0; index < this.taskList.size(); index += 1) {
-            Task task = this.taskList.get(index);
-            if (task.matchesSearchQuery(searchQuery)) {
-                possibleResults.add(task);
-            }
-        }
+
+        this.taskList.stream()
+                .filter(task -> task.matchesSearchQuery(searchQuery))
+                .forEach(possibleResults::add);
         return possibleResults;
     }
 }
