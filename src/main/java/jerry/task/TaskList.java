@@ -2,7 +2,6 @@ package jerry.task;
 
 import java.util.ArrayList;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 import jerry.exceptions.JerryException;
 import jerry.exceptions.RepeatedActionsException;
@@ -130,17 +129,14 @@ public class TaskList {
      * Returns a formatted list of all tasks with one-based indices for display.
      *
      * @return A formatted string containing all tasks in the list.
-     * @throws JerryException If a task retrieval fails due to an invalid index.
      */
-    public String buildListOutput() throws JerryException {
-        String listOutput = "";
-        for (int index = 0; index < taskList.size(); index += 1) {
-            int displayIndex = index + 1;
-            listOutput = listOutput.concat(Integer.toString(displayIndex) + ". "
-                    + get(index).toString()
-                    + System.lineSeparator());
-        }
-        return listOutput;
+    public String buildListOutput() {
+        return Stream.iterate(1, x -> x <= this.taskList.size(), x -> x + 1)
+                .map(index -> index
+                        + ". "
+                        + taskList.get(index - 1)
+                        + System.lineSeparator())
+                .reduce("", (acc, line) -> acc + line);
     }
 
     /**
