@@ -111,19 +111,14 @@ public class Parser {
             throw new WrongArgumentException("Character '|' is not allowed in your input.\n");
         }
 
-        String[] split = userInputArgument.split("(?i)\\s*/by\\s*", 2);
-        if (split.length < 2) {
+        if (!userInputArgument.toLowerCase().contains(" /by ")) {
             throw new MissingArgumentException(
                     "deadline <your task goes here> /by <ddmmyyyy hhmm (24-hour clock)>\n");
         }
 
+        String[] split = userInputArgument.split("(?i)\\s+/by\\s+", 2);
         String taskDescription = split[0].trim();
         String byString = split[1].trim();
-        if (taskDescription.isEmpty() || byString.isEmpty()) {
-            throw new MissingArgumentException(
-                    "deadline <your task goes here> /by <ddmmyyyy hhmm (24-hour clock)>\n");
-        }
-
         try {
             LocalDateTime by = LocalDateTime.parse(byString, USER_DATE_TIME_FORMAT);
             return new Deadline(taskDescription, by);
