@@ -63,13 +63,14 @@ public class Parser {
     private static Task parseTaskFromLine(String line) throws CorruptedSavedFileException {
         String[] split = line.split("\\|");
         boolean isDone = split[0].equals("1");
+
         return switch (split[1].toUpperCase()) {
-            case "T" -> new ToDo(isDone, split[2]);
-            case "D" -> new Deadline(isDone, split[2], parseDateTime(split[3], FILE_DATE_TIME_FORMAT));
-            case "E" -> new Event(isDone, split[2],
-                    parseDateTime(split[3], FILE_DATE_TIME_FORMAT),
-                    parseDateTime(split[4], FILE_DATE_TIME_FORMAT));
-            default -> throw new CorruptedSavedFileException("There is no such task type.\n"
+        case "T" -> new ToDo(isDone, split[2]);
+        case "D" -> new Deadline(isDone, split[2], parseDateTime(split[3], FILE_DATE_TIME_FORMAT));
+        case "E" -> new Event(isDone, split[2],
+                parseDateTime(split[3], FILE_DATE_TIME_FORMAT),
+                parseDateTime(split[4], FILE_DATE_TIME_FORMAT));
+        default -> throw new CorruptedSavedFileException("There is no such task type.\n"
                     + "The jerry.Jerry.txt file could be corrupted\n");
         };
     }
@@ -222,7 +223,7 @@ public class Parser {
 
     public static String getUserInputCommand(String userInput) {
         String[] userInputParts = getUserInputParts(userInput);
-        return (userInputParts.length < 2 ? "" : userInputParts[0].trim());
+        return userInputParts[0];
     }
 
     private static String[] getUserInputParts(String userInput) {

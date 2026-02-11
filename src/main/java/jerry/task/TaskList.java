@@ -3,6 +3,7 @@ package jerry.task;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
+import jerry.exceptions.DuplicatedTasksException;
 import jerry.exceptions.JerryException;
 import jerry.exceptions.RepeatedActionsException;
 import jerry.exceptions.WrongArgumentException;
@@ -111,8 +112,12 @@ public class TaskList {
      *
      * @param task The task to add.
      */
-    public void add(Task task) {
+    public void add(Task task) throws JerryException {
         assert task != null : "task should not be null";
+        if (hasDuplicatedTasks(task)) {
+            TaskList duplicatedTasks = getDuplicatedTasks(task);
+            throw new DuplicatedTasksException(duplicatedTasks.buildListOutput());
+        }
         this.taskList.add(task);
     }
 
@@ -156,11 +161,22 @@ public class TaskList {
      * @return A {@code TaskList} containing all tasks that match the search query.
      */
     public TaskList find(String searchQuery) {
-        TaskList possibleResults = new TaskList();
+        ArrayList<Task> possibleResults = new ArrayList<>();
 
         this.taskList.stream()
                 .filter(task -> task.matchesSearchQuery(searchQuery))
                 .forEach(possibleResults::add);
-        return possibleResults;
+        return new TaskList(possibleResults);
+    }
+
+    private boolean hasDuplicatedTasks(Task task) {
+        return this.taskList.stream().anyMatch(t -> t.equals(task));
+    }
+
+    private TaskList getDuplicatedTasks(Task task) {
+        ArrayList<Task> duplicatedTasks = new ArrayList<>();
+        this.taskList.stream().filter(t -> t.equals(task))
+                .forEach(duplicatedTasks::add);
+        return new TaskList(duplicatedTasks);
     }
 }

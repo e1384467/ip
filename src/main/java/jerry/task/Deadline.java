@@ -59,4 +59,19 @@ public class Deadline extends Task {
         return "[D]" + super.toString()
                 + " (by: " + this.by.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")) + ")";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj instanceof Deadline t) {
+            boolean sameDescription = this.description.equalsIgnoreCase(t.description);
+            boolean sameBy = this.by.equals(t.by);
+            return sameDescription && sameBy;
+        }
+
+        return false;
+    }
 }

@@ -31,7 +31,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void add_success() {
+    public void add_success() throws JerryException {
         TaskList taskList = new TaskList();
         taskList.add(new ToDo("Sleep"));
         assertEquals(1, taskList.size());
@@ -60,7 +60,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void get_outOfRange_wrongArgumentExceptionThrown() {
+    public void get_outOfRange_wrongArgumentExceptionThrown() throws JerryException {
         TaskList list = new TaskList();
         list.add(new ToDo("Sleep"));
         try {

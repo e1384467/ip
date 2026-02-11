@@ -9,9 +9,6 @@ import jerry.task.TaskList;
  */
 public class Ui {
 
-    /** Name of the chatbot shown in user-facing messages. */
-    public static final String CHATBOT_NAME = "Jerry";
-
     /**
      * Returns the welcome message shown to the user when the application starts.
      *
@@ -39,8 +36,7 @@ public class Ui {
      */
     public String displayList(TaskList taskList) throws JerryException {
         if (taskList.isEmpty()) {
-            return CHATBOT_NAME
-                    + ": your list is currently empty. Type to add more!\n";
+            return "Your list is currently empty. Type to add more!\n";
         } else {
             return "Your list:" + "\n"
                     + taskList.buildListOutput();
@@ -54,8 +50,7 @@ public class Ui {
      * @return The marked task to be displayed.
      */
     public String showMark(Task targetTask) {
-        return CHATBOT_NAME
-                + ": Nice! I've marked this task as done -> "
+        return "Nice! I've marked this task as done -> "
                 + targetTask + "\n";
     }
 
@@ -66,8 +61,7 @@ public class Ui {
      * @return The unmarked task to be displayed.
      */
     public String showUnmark(Task targetTask) {
-        return CHATBOT_NAME
-                + ": Okiee! I've unmarked this task as not done yet -> "
+        return "Okiee! I've unmarked this task as not done yet -> "
                 + targetTask + "\n";
     }
 
@@ -79,10 +73,9 @@ public class Ui {
      * @return The delete task and the resulting list to be displayed.
      */
     public String showDelete(Task targetTask, int size) {
-        return CHATBOT_NAME
-                + "Got it! I've removed "
+        return "Got it! I've removed "
                 + targetTask
-                + ". You now have " + size + " task/s left\n";
+                + ". You now have " + size + " task(s) left\n";
     }
 
     /**
@@ -93,8 +86,7 @@ public class Ui {
      * @return The task added and the size of the list to be displayed.
      */
     public String showAdd(Task task, int size) {
-        return CHATBOT_NAME
-                + ": I have added '" + task + "' to your list!\n"
+        return "I have added '" + task + "' to your list!\n"
                 + "Now you have "
                 + size + " tasks in the list!";
     }
