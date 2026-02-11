@@ -38,15 +38,6 @@ public class Jerry {
     }
 
     /**
-     * Returns the welcome message shown to the user when the application starts.
-     *
-     * @return Greeting text displayed at the beginning of the session.
-     */
-    public String welcomeText() {
-        return "Hello! What can I do for you?\n";
-    }
-
-    /**
      * Executes the command from the user input and returns the message to display.
      *
      * @param userInput user’s input.
