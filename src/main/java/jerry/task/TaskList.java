@@ -1,6 +1,7 @@
 package jerry.task;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 import jerry.exceptions.JerryException;
 import jerry.exceptions.RepeatedActionsException;
@@ -84,6 +85,7 @@ public class TaskList {
         assert targetTask.isDone : "task should be mark as done";
         return targetTask;
     }
+
     /**
      * Unmarks the task at the specified zero-based index as not done.
      *
@@ -138,14 +140,12 @@ public class TaskList {
      * @return A formatted string containing all tasks in the list.
      */
     public String buildListOutput() {
-        String listOutput = "";
-        for (int index = 0; index < taskList.size(); index += 1) {
-            int displayIndex = index + 1;
-            listOutput = listOutput.concat(Integer.toString(displayIndex) + ". "
-                    + taskList.get(index).toString()
-                    + System.lineSeparator());
-        }
-        return listOutput;
+        return Stream.iterate(1, x -> x <= this.taskList.size(), x -> x + 1)
+                .map(index -> index
+                        + ". "
+                        + taskList.get(index - 1)
+                        + System.lineSeparator())
+                .reduce("", (acc, line) -> acc + line);
     }
 
     /**
@@ -157,12 +157,10 @@ public class TaskList {
      */
     public TaskList find(String searchQuery) {
         TaskList possibleResults = new TaskList();
-        for (int index = 0; index < this.taskList.size(); index += 1) {
-            Task task = this.taskList.get(index);
-            if (task.matchesSearchQuery(searchQuery)) {
-                possibleResults.add(task);
-            }
-        }
+
+        this.taskList.stream()
+                .filter(task -> task.matchesSearchQuery(searchQuery))
+                .forEach(possibleResults::add);
         return possibleResults;
     }
 }
