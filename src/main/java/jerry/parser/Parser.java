@@ -135,38 +135,40 @@ public class Parser {
      * specified using {@code /from}, and an end time specified using {@code /to},
      * with the start time occurring before the end time.
      *
-     * @param userInput The raw user input containing the event description, start time, and end time.
+     * @param userInputArgument The raw user input containing the event description, start time, and end time.
      * @return An {@code Event} task created from the parsed input.
      * @throws JerryException If there are missing arguments,
      *              invalid characters, incorrect date-time format or the time range is wrong
      */
-    public static Task parseEvent(String userInput) throws JerryException {
-        try {
-            if (userInput.contains("|")) {
-                throw new WrongArgumentException("Character '|' is not allowed in your input.\n");
-            }
-            String[] firstSplit = userInput.split("(?i)\\s*/from\\s*", 2);
-            String taskDescription = firstSplit[0];
-            String[] secondSplit = firstSplit[1].split("(?i)\\s*/to\\s*", 2);
-            String from = secondSplit[0];
-            String to = secondSplit[1];
-            if (taskDescription.isEmpty() || from.isEmpty() || to.isEmpty()) {
-                throw new MissingArgumentException(
-                        "event <your task goes here> "
-                                + "/from <ddmmyyyy hhmm (24-hour clock)> /to <ddmmyyyy hhmm (24-hour clock)>\n");
-            }
-            LocalDateTime formattedFrom = LocalDateTime.parse(from, USER_DATE_TIME_FORMAT);
-            LocalDateTime formattedTo = LocalDateTime.parse(to, USER_DATE_TIME_FORMAT);
+    public static Task parseEvent(String userInputArgument) throws JerryException {
+        if (userInputArgument.contains("|")) {
+            throw new WrongArgumentException("Character '|' is not allowed in your input.\n");
+        }
 
-            if (formattedFrom.isAfter(formattedTo)) {
-                throw new WrongArgumentException("Invalid Time Range\n"
-                        + "Your start time must be before end time\n");
-            }
-            return new Event(taskDescription, formattedFrom, formattedTo);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        if (!userInputArgument.toLowerCase().contains(" /from ")) {
             throw new MissingArgumentException(
                     "event <your task goes here> "
                             + "/from <ddmmyyyy hhmm (24-hour clock)> /to <ddmmyyyy hhmm (24-hour clock)>\n");
+        }
+        String[] firstSplit = userInputArgument.split("(?i)\\s+/from\\s+", 2);
+        String taskDescription = firstSplit[0].trim();
+
+        if (!firstSplit[1].toLowerCase().contains(" /to ")) {
+            throw new MissingArgumentException(
+                    "event <your task goes here> "
+                            + "/from <ddmmyyyy hhmm (24-hour clock)> /to <ddmmyyyy hhmm (24-hour clock)>\n");
+        }
+        String[] secondSplit = firstSplit[1].split("(?i)\\s+/to\\s+", 2);
+        String fromString = secondSplit[0].trim();
+        String toString = secondSplit[1].trim();
+        try {
+            LocalDateTime from = LocalDateTime.parse(fromString, USER_DATE_TIME_FORMAT);
+            LocalDateTime to = LocalDateTime.parse(toString, USER_DATE_TIME_FORMAT);
+            if (from.isAfter(to)) {
+                throw new WrongArgumentException("Invalid Time Range\n"
+                        + "Your start time must be before end time\n");
+            }
+            return new Event(taskDescription, from, to);
         } catch (DateTimeParseException e) {
             throw new WrongArgumentException("There is issue with your date and time format.\n"
                     + "Try: ddmmyyyy hhmm (24-hour clock)\n"
