@@ -77,6 +77,12 @@ public class Parser {
         }
     }
 
+    private static void validateNoPipeCharacter(String userInputArgument) throws WrongArgumentException {
+        if (userInputArgument.contains("|")) {
+            throw new WrongArgumentException("Character '|' is not allowed in your input.\n");
+        }
+    }
+
     /**
      * Returns a {@code ToDo} task parsed from the given task description.
      * The description is validated to ensure it is non-empty and does not
@@ -90,9 +96,7 @@ public class Parser {
         if (taskDescription.isEmpty()) {
             throw new MissingArgumentException("todo <your task goes here>\n");
         }
-        if (taskDescription.contains("|")) {
-            throw new WrongArgumentException("Character '|' is not allowed in your task description.\n");
-        }
+        validateNoPipeCharacter(taskDescription);
         return new ToDo(taskDescription);
     }
 
@@ -107,10 +111,7 @@ public class Parser {
      *              invalid characters are present or the date-time format is incorrect.
      */
     public static Task parseDeadline(String userInputArgument) throws JerryException {
-        if (userInputArgument.contains("|")) {
-            throw new WrongArgumentException("Character '|' is not allowed in your input.\n");
-        }
-
+        validateNoPipeCharacter(userInputArgument);
         if (!userInputArgument.toLowerCase().contains(" /by ")) {
             throw new MissingArgumentException(
                     "deadline <your task goes here> /by <ddmmyyyy hhmm (24-hour clock)>\n");
@@ -141,10 +142,7 @@ public class Parser {
      *              invalid characters, incorrect date-time format or the time range is wrong
      */
     public static Task parseEvent(String userInputArgument) throws JerryException {
-        if (userInputArgument.contains("|")) {
-            throw new WrongArgumentException("Character '|' is not allowed in your input.\n");
-        }
-
+        validateNoPipeCharacter(userInputArgument);
         if (!userInputArgument.toLowerCase().contains(" /from ")) {
             throw new MissingArgumentException(
                     "event <your task goes here> "
