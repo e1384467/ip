@@ -25,7 +25,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setMinHeight(700);
             stage.setMinWidth(500);
-            fxmlLoader.<MainWindow>getController().setJerry(jerry); // inject the Duke instance
+            fxmlLoader.<MainWindow>getController().setJerry(jerry); // inject the Jerry instance
             fxmlLoader.<MainWindow>getController().startUpMessage();
             stage.setTitle("Jerry");
             stage.show();

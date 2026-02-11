@@ -13,6 +13,15 @@ public class Ui {
     public static final String CHATBOT_NAME = "Jerry";
 
     /**
+     * Returns the welcome message shown to the user when the application starts.
+     *
+     * @return Greeting text displayed at the beginning of the session.
+     */
+    public static String welcomeText() {
+        return "Hello! What can I do for you?\n";
+    }
+
+    /**
      * Displays the goodbye message to the user.
      *
      * @return The goodbye message to be displayed.

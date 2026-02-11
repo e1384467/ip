@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import jerry.ui.Ui;
 
 /**
  * Controller for the main GUI.
@@ -72,7 +73,7 @@ public class MainWindow extends AnchorPane {
             dialogContainer.getChildren().addAll(startupErrorDialogBox);
         }
 
-        DialogBox welcomeDialogBox = DialogBox.getJerryDialog("Jerry: " + jerry.welcomeText(), jerryImage);
+        DialogBox welcomeDialogBox = DialogBox.getJerryDialog("Jerry: " + Ui.welcomeText(), jerryImage);
         dialogContainer.getChildren().addAll(welcomeDialogBox);
     }
 }

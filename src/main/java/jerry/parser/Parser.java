@@ -23,6 +23,9 @@ import jerry.task.ToDo;
  */
 public class Parser {
 
+    private static final DateTimeFormatter FILE_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm");
+    private static final DateTimeFormatter USER_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("ddMMyyyy HHmm");
+
     /**
      * Loads tasks from the specified saved file and adds them to the given task list.
      * Each line in the file is parsed into a corresponding {@code Task} based on the expected save file format.
@@ -39,27 +42,8 @@ public class Parser {
             Scanner fileScan = new Scanner(taskFile);
             while (fileScan.hasNextLine()) {
                 String line = fileScan.nextLine();
-                String[] split = line.split("\\|");
-                boolean isDone = split[0].equals("1");
-                switch (split[1].toUpperCase()) {
-                case "T":
-                    taskList.add(new ToDo(isDone, split[2]));
-                    break;
-                case "D":
-                    taskList.add(new Deadline(isDone,
-                            split[2],
-                            LocalDateTime.parse(split[3], DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm"))));
-                    break;
-                case "E":
-                    taskList.add(new Event(isDone,
-                            split[2],
-                            LocalDateTime.parse(split[3], DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm")),
-                            LocalDateTime.parse(split[4], DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm"))));
-                    break;
-                default:
-                    throw new CorruptedSavedFileException("There is no such task type.\n"
-                            + "The jerry.Jerry.txt file could be corrupted\n");
-                }
+                Task task = parseTaskFromLine(line);
+                taskList.add(task);
             }
             return taskList;
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -76,6 +60,30 @@ public class Parser {
         }
     }
 
+    private static Task parseTaskFromLine(String line) throws CorruptedSavedFileException {
+        String[] split = line.split("\\|");
+        boolean isDone = split[0].equals("1");
+        return switch (split[1].toUpperCase()) {
+            case "T" -> new ToDo(isDone, split[2]);
+            case "D" -> new Deadline(isDone, split[2], parseDateTime(split[3], FILE_DATE_TIME_FORMAT));
+            case "E" -> new Event(isDone, split[2],
+                    parseDateTime(split[3], FILE_DATE_TIME_FORMAT),
+                    parseDateTime(split[4], FILE_DATE_TIME_FORMAT));
+            default -> throw new CorruptedSavedFileException("There is no such task type.\n"
+                    + "The jerry.Jerry.txt file could be corrupted\n");
+        };
+    }
+
+    private static LocalDateTime parseDateTime(String dateTimeString, DateTimeFormatter dateTimeFormat) {
+        return LocalDateTime.parse(dateTimeString, dateTimeFormat);
+    }
+
+    private static void validateNoPipeCharacter(String userInputArgument) throws WrongArgumentException {
+        if (userInputArgument.contains("|")) {
+            throw new WrongArgumentException("Character '|' is not allowed in your input.\n");
+        }
+    }
+
     /**
      * Returns a {@code ToDo} task parsed from the given task description.
      * The description is validated to ensure it is non-empty and does not
@@ -89,9 +97,7 @@ public class Parser {
         if (taskDescription.isEmpty()) {
             throw new MissingArgumentException("todo <your task goes here>\n");
         }
-        if (taskDescription.contains("|")) {
-            throw new WrongArgumentException("Character '|' is not allowed in your task description.\n");
-        }
+        validateNoPipeCharacter(taskDescription);
         return new ToDo(taskDescription);
     }
 
@@ -100,26 +106,24 @@ public class Parser {
      * The input is validated to ensure it contains a task description
      * and a valid deadline specified using the {@code /by} delimiter.
      *
-     * @param userInput The raw user input containing the deadline task description and due date.
+     * @param userInputArgument The raw user input containing the deadline task description and due date.
      * @return A {@code Deadline} task created from the parsed input.
      * @throws JerryException If required arguments are missing,
      *              invalid characters are present or the date-time format is incorrect.
      */
-    public static Task parseDeadline(String userInput) throws JerryException {
+    public static Task parseDeadline(String userInputArgument) throws JerryException {
+        validateNoPipeCharacter(userInputArgument);
+        if (!userInputArgument.toLowerCase().contains(" /by ")) {
+            throw new MissingArgumentException(
+                    "deadline <your task goes here> /by <ddmmyyyy hhmm (24-hour clock)>\n");
+        }
+
+        String[] split = userInputArgument.split("(?i)\\s+/by\\s+", 2);
+        String taskDescription = split[0].trim();
+        String byString = split[1].trim();
         try {
-            if (userInput.contains("|")) {
-                throw new WrongArgumentException("Character '|' is not allowed in your input.\n");
-            }
-            String[] split = userInput.split("(?i)\\s*/by\\s*", 2);
-            String taskDescription = split[0];
-            String by = split[1];
-            if (taskDescription.isEmpty() || by.isEmpty()) {
-                throw new MissingArgumentException(
-                        "deadline <your task goes here> /by <ddmmyyyy hhmm (24-hour clock)>\n");
-            }
-            return new Deadline(taskDescription, LocalDateTime.parse(by, DateTimeFormatter.ofPattern("ddMMyyyy HHmm")));
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new MissingArgumentException("deadline <your task goes here> /by <ddmmyyyy hhmm (24-hour clock)>\n");
+            LocalDateTime by = parseDateTime(byString, USER_DATE_TIME_FORMAT);
+            return new Deadline(taskDescription, by);
         } catch (DateTimeParseException e) {
             throw new WrongArgumentException("There is issue with your date and time format.\n"
                     + "Try: ddmmyyyy hhmm (24-hour clock)\n"
@@ -133,38 +137,37 @@ public class Parser {
      * specified using {@code /from}, and an end time specified using {@code /to},
      * with the start time occurring before the end time.
      *
-     * @param userInput The raw user input containing the event description, start time, and end time.
+     * @param userInputArgument The raw user input containing the event description, start time, and end time.
      * @return An {@code Event} task created from the parsed input.
      * @throws JerryException If there are missing arguments,
      *              invalid characters, incorrect date-time format or the time range is wrong
      */
-    public static Task parseEvent(String userInput) throws JerryException {
-        try {
-            if (userInput.contains("|")) {
-                throw new WrongArgumentException("Character '|' is not allowed in your input.\n");
-            }
-            String[] firstSplit = userInput.split("(?i)\\s*/from\\s*", 2);
-            String taskDescription = firstSplit[0];
-            String[] secondSplit = firstSplit[1].split("(?i)\\s*/to\\s*", 2);
-            String from = secondSplit[0];
-            String to = secondSplit[1];
-            if (taskDescription.isEmpty() || from.isEmpty() || to.isEmpty()) {
-                throw new MissingArgumentException(
-                        "event <your task goes here> "
-                                + "/from <ddmmyyyy hhmm (24-hour clock)> /to <ddmmyyyy hhmm (24-hour clock)>\n");
-            }
-            LocalDateTime formattedFrom = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("ddMMyyyy HHmm"));
-            LocalDateTime formattedTo = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("ddMMyyyy HHmm"));
-
-            if (formattedFrom.isAfter(formattedTo)) {
-                throw new WrongArgumentException("Invalid Time Range\n"
-                        + "Your start time must be before end time\n");
-            }
-            return new Event(taskDescription, formattedFrom, formattedTo);
-        } catch (ArrayIndexOutOfBoundsException e) {
+    public static Task parseEvent(String userInputArgument) throws JerryException {
+        validateNoPipeCharacter(userInputArgument);
+        if (!userInputArgument.toLowerCase().contains(" /from ")) {
             throw new MissingArgumentException(
                     "event <your task goes here> "
                             + "/from <ddmmyyyy hhmm (24-hour clock)> /to <ddmmyyyy hhmm (24-hour clock)>\n");
+        }
+        String[] firstSplit = userInputArgument.split("(?i)\\s+/from\\s+", 2);
+        String taskDescription = firstSplit[0].trim();
+
+        if (!firstSplit[1].toLowerCase().contains(" /to ")) {
+            throw new MissingArgumentException(
+                    "event <your task goes here> "
+                            + "/from <ddmmyyyy hhmm (24-hour clock)> /to <ddmmyyyy hhmm (24-hour clock)>\n");
+        }
+        String[] secondSplit = firstSplit[1].split("(?i)\\s+/to\\s+", 2);
+        String fromString = secondSplit[0].trim();
+        String toString = secondSplit[1].trim();
+        try {
+            LocalDateTime from = parseDateTime(fromString, USER_DATE_TIME_FORMAT);
+            LocalDateTime to = parseDateTime(toString, USER_DATE_TIME_FORMAT);
+            if (from.isAfter(to)) {
+                throw new WrongArgumentException("Invalid Time Range\n"
+                        + "Your start time must be before end time\n");
+            }
+            return new Event(taskDescription, from, to);
         } catch (DateTimeParseException e) {
             throw new WrongArgumentException("There is issue with your date and time format.\n"
                     + "Try: ddmmyyyy hhmm (24-hour clock)\n"
@@ -175,22 +178,23 @@ public class Parser {
     /**
      * Returns the zero-based array index parsed from the given user input array.
      *
-     * @param userInputArray The array containing the command and its arguments.
+     * @param userInputArgument The string containing the task's index.
      * @return The zero-based index corresponding to the user-provided task index.
      * @throws JerryException If the index is missing or is not a valid number.
      */
-    public static int getArrayIndex(String[] userInputArray) throws JerryException {
-        try {
-            int index = Integer.parseInt(userInputArray[1]);
-            return index - 1;
-        } catch (NumberFormatException e) {
-            throw new WrongArgumentException("THIS IS NOT A NUMBER\n");
-        } catch (IndexOutOfBoundsException e) {
+    public static int getArrayIndex(String userInputArgument) throws JerryException {
+        if (userInputArgument.isEmpty()) {
             throw new MissingArgumentException("Mark <your task index from list>\n"
                     + "or\n"
                     + "Unmark <your task index from list>\n"
                     + "or\n"
                     + "Delete <your task index from list>\n");
+        }
+        try {
+            int index = Integer.parseInt(userInputArgument);
+            return index - 1;
+        } catch (NumberFormatException e) {
+            throw new WrongArgumentException("THIS IS NOT A NUMBER\n");
         }
     }
 
@@ -209,5 +213,20 @@ public class Parser {
                     + "E.g. find book\n");
         }
         return searchQuery;
+    }
+
+    public static String getUserInputArguments(String userInput) {
+        String[] userInputParts = getUserInputParts(userInput);
+        return (userInputParts.length < 2 ? "" : userInputParts[1].trim());
+    }
+
+    public static String getUserInputCommand(String userInput) {
+        String[] userInputParts = getUserInputParts(userInput);
+        return (userInputParts.length < 2 ? "" : userInputParts[0].trim());
+    }
+
+    private static String[] getUserInputParts(String userInput) {
+        String trimmedUserInput = userInput.trim();
+        return trimmedUserInput.split("\\s+", 2);
     }
 }

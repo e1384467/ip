@@ -38,7 +38,7 @@ public class ParserTest {
             fail();
         } catch (JerryException e) {
             assertEquals("Wrong Argument >:( !!!!\n"
-                    + "Character '|' is not allowed in your task description.\n", e.getMessage());
+                    + "Character '|' is not allowed in your input.\n", e.getMessage());
         }
     }
 
@@ -276,17 +276,17 @@ public class ParserTest {
     }
 
     @Test
-    public void getArrayIndex_sucess() throws JerryException {
-        assertEquals(-1, Parser.getArrayIndex("Mark 0".split("\\s+")));
-        assertEquals(0, Parser.getArrayIndex("Mark 1".split("\\s+")));
-        assertEquals(1, Parser.getArrayIndex("Mark 2".split("\\s+")));
-        assertEquals(2, Parser.getArrayIndex("Mark 3".split("\\s+")));
+    public void getArrayIndex_success() throws JerryException {
+        assertEquals(-1, Parser.getArrayIndex(Parser.getUserInputArguments("Mark 0")));
+        assertEquals(0, Parser.getArrayIndex(Parser.getUserInputArguments("Mark 1")));
+        assertEquals(1, Parser.getArrayIndex(Parser.getUserInputArguments("Mark 2")));
+        assertEquals(2, Parser.getArrayIndex(Parser.getUserInputArguments("Mark 3")));
     }
 
     @Test
     public void getArrayIndex_notANumber_wrongArgumentExceptionThrown() {
         try {
-            assertEquals(0, Parser.getArrayIndex("Mark task1".split("\\s+")));
+            assertEquals(0, Parser.getArrayIndex(Parser.getUserInputArguments("Mark task1")));
             fail();
         } catch (JerryException e) {
             assertEquals("Wrong Argument >:( !!!!\n"
@@ -297,7 +297,7 @@ public class ParserTest {
     @Test
     public void getArrayIndex_missingUserInputs_missingArgumentExceptionThrown() {
         try {
-            assertEquals(0, Parser.getArrayIndex("".split("\\s+")));
+            assertEquals(0, Parser.getArrayIndex(Parser.getUserInputArguments("")));
             fail();
         } catch (JerryException e) {
             assertEquals("Missing Argument >:( !!!! Please try:\n"

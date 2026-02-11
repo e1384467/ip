@@ -3,7 +3,6 @@ package jerry.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 import jerry.exceptions.FileErrorException;
@@ -18,7 +17,7 @@ import jerry.task.TaskList;
 public class Storage {
 
     /** Path to the file used for storing task data. */
-    private static final Path FILE_PATH = Path.of("data/Jerry.txt");
+    private static final String FILE_PATH = "data/Jerry.txt";
 
     /**
      * Returns a list of tasks loaded from the saved data file.
@@ -28,29 +27,20 @@ public class Storage {
      * @throws JerryException If the file cannot be created, accessed, or contains corrupted data.
      */
     public static ArrayList<Task> initialise() throws JerryException {
-        try {
-            File taskFile = new File(FILE_PATH.toString());
-            File parentDirectory = new File(taskFile.getParent());
-            if (!parentDirectory.exists()) {
-                if (!parentDirectory.mkdirs()) {
-                    throw new FileErrorException("Failed trying to create data/ directory.\n"
-                            + "Please ensure that the folder is writable.");
-                }
-            }
+        ensureDataDirectoryExists();
 
-            ArrayList<Task> taskList = new ArrayList<Task>();
+        File taskFile = new File(FILE_PATH);
+        ArrayList<Task> taskList = new ArrayList<>();
+
+        try {
             if (taskFile.createNewFile()) {
                 return taskList;
             }
             return Parser.loadTasksFromFile(taskFile, taskList);
         } catch (IOException e) {
-            throw new FileErrorException("There is an I/O error when creating jerry.Jerry.txt.\n"
-                    + "Please make sure that the folder is writable.\n");
-        } catch (SecurityException e) {
-            throw new FileErrorException("There seems to be some issue with the permissions of the folder/file.\n"
-                    + "Please make sure that the folder/file is writable.\n");
+            throw new FileErrorException("There is an I/O error when creating Jerry.txt.\n"
+                    + "Please make sure that data/Jerry.txt exist and is writable.\n");
         }
-
     }
 
     /**
@@ -61,27 +51,27 @@ public class Storage {
      * @throws JerryException If an error occurs while writing to the data file or creating the parent directory
      */
     public static void writeTasksToFile(TaskList taskList) throws JerryException {
+        ensureDataDirectoryExists();
         try {
-            File taskFile = new File(FILE_PATH.toString());
-            File parentDirectory = new File(taskFile.getParent());
-            if (!parentDirectory.exists()) {
-                if (!parentDirectory.mkdirs()) {
-                    throw new FileErrorException("Failed trying to create data/ directory.\n"
-                            + "Please ensure that the folder is writable.");
-                }
-            }
-
-            FileWriter writeTaskFile = new FileWriter(FILE_PATH.toString());
+            FileWriter writeTaskFile = new FileWriter(FILE_PATH);
             for (int index = 0; index < taskList.size(); index += 1) {
-                writeTaskFile.write(taskList.get(index).getFileFormat() + System.lineSeparator());
+                Task task = taskList.get(index);
+                writeTaskFile.write(task.getFileFormat() + System.lineSeparator());
             }
             writeTaskFile.close();
         } catch (IOException e) {
-            throw new FileErrorException("There seems to be an error when writing to jerry.Jerry.txt.\n"
-                    + "Please make sure that data/jerry.Jerry.txt exist and is writable.\n");
-        } catch (SecurityException e) {
-            throw new FileErrorException("There seems to be some issue with the permissions of the folder/file.\n"
-                    + "Please make sure that the folder/file is writable.\n");
+            throw new FileErrorException("There is an I/O error when writing to Jerry.txt.\n"
+                    + "Please make sure that data/Jerry.txt exist and is writable.\n");
+        }
+    }
+
+    private static void ensureDataDirectoryExists() throws FileErrorException {
+        File taskFile = new File(FILE_PATH);
+        File parentDirectory = new File(taskFile.getParent());
+
+        if (!parentDirectory.exists() && !parentDirectory.mkdirs()) {
+            throw new FileErrorException("Failed trying to create data/ directory.\n"
+                    + "Please ensure that the folder is writable.");
         }
     }
 }
