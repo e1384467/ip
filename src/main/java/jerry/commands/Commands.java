@@ -13,20 +13,20 @@ import jerry.ui.Ui;
  * Each enum constant corresponds to a command a user can enter (e.g., {@code todo}, {@code list}).
  */
 public enum Commands {
-    BYE {
+    BYE(true) {
         @Override
         public String execute(TaskList taskList, Ui ui, String userInputArguments) throws JerryException {
             Storage.writeTasksToFile(taskList);
             return ui.showBye();
         }
     },
-    LIST{
+    LIST(false) {
         @Override
         public String execute(TaskList taskList, Ui ui, String userInputArguments) throws JerryException {
             return ui.displayList(taskList);
         }
     },
-    MARK{
+    MARK(false) {
         @Override
         public String execute(TaskList taskList, Ui ui, String userInputArguments) throws JerryException {
             int arrayIndex = Parser.getArrayIndex(userInputArguments);
@@ -36,7 +36,7 @@ public enum Commands {
             return ui.showMark(markTask);
         }
     },
-    UNMARK{
+    UNMARK(false) {
         @Override
         public String execute(TaskList taskList, Ui ui, String userInputArguments) throws JerryException {
             int arrayIndex = Parser.getArrayIndex(userInputArguments);
@@ -46,7 +46,7 @@ public enum Commands {
             return ui.showUnmark(unmarkTask);
         }
     },
-    TODO{
+    TODO(false) {
         @Override
         public String execute(TaskList taskList, Ui ui, String userInputArguments) throws JerryException {
             Task todoTask = Parser.parseTodo(userInputArguments);
@@ -56,7 +56,7 @@ public enum Commands {
             return ui.showAdd(todoTask, taskList.size());
         }
     },
-    DEADLINE{
+    DEADLINE(false) {
         @Override
         public String execute(TaskList taskList, Ui ui, String userInputArguments) throws JerryException {
             Task deadlineTask = Parser.parseDeadline(userInputArguments);
@@ -66,7 +66,7 @@ public enum Commands {
             return ui.showAdd(deadlineTask, taskList.size());
         }
     },
-    EVENT{
+    EVENT(false) {
         @Override
         public String execute(TaskList taskList, Ui ui, String userInputArguments) throws JerryException {
             Task eventTask = Parser.parseEvent(userInputArguments);
@@ -76,7 +76,7 @@ public enum Commands {
             return ui.showAdd(eventTask, taskList.size());
         }
     },
-    DELETE{
+    DELETE(false) {
         @Override
         public String execute(TaskList taskList, Ui ui, String userInputArguments) throws JerryException {
             int arrayIndex = Parser.getArrayIndex(userInputArguments);
@@ -86,7 +86,7 @@ public enum Commands {
             return ui.showDelete(deletedTask, taskList.size());
         }
     },
-    FIND{
+    FIND(false) {
         @Override
         public String execute(TaskList taskList, Ui ui, String userInputArguments) throws JerryException {
             String searchQuery = Parser.getSearchQuery(userInputArguments);
@@ -94,6 +94,12 @@ public enum Commands {
             return ui.displayList(possibleResults);
         }
     };
+
+    private final boolean isExit;
+
+    Commands(boolean isExit) {
+        this.isExit = isExit;
+    }
 
     /**
      * Returns the {@code Commands} enum that matches the given user command input.
@@ -109,6 +115,15 @@ public enum Commands {
         } catch (IllegalArgumentException e) {
             throw new InvalidCommandException();
         }
+    }
+
+    /**
+     * Returns the {@code isExit} boolean value of each constant when called
+     *
+     * @return The {@code isExit} boolean value of each constant.
+     */
+    public boolean isExit() {
+        return isExit;
     }
 
     public abstract String execute(TaskList taskList, Ui ui, String userInputArguments) throws JerryException;

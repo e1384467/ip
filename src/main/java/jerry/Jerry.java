@@ -49,17 +49,17 @@ public class Jerry {
     /**
      * Executes the command from the user input and returns the message to display.
      *
-     * @param userInput user’s input command.
+     * @param userInput user’s input.
      * @return Message to be display.
      */
     public String getResponse(String userInput) {
         try {
             String userInputCommand = Parser.getUserInputCommand(userInput);
             Commands userCommand = Commands.getCommand(userInputCommand);
-
+            this.isExit = userCommand.isExit();
             String userInputArguments = Parser.getUserInputArguments(userInput);
 
-            return userCommand.execute(taskList, ui, userInputArguments);
+            return userCommand.execute(this.taskList, this.ui, userInputArguments);
 
         } catch (JerryException e) {
             return e.getMessage();
