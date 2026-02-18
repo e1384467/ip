@@ -46,7 +46,7 @@ public class Deadline extends Task {
     public String getFileFormat() {
         return (super.isDone ? "1|D|" : "0|D|")
                 + super.description
-                + "|" + this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm"));
+                + "|" + this.by.format(FILE_DATE_TIME_FORMAT);
     }
 
     /**
@@ -57,7 +57,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString()
-                + " (by: " + this.by.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")) + ")";
+                + " (by: " + this.by.format(DISPLAY_DATE_TIME_FORMAT) + ")";
     }
 
     @Override

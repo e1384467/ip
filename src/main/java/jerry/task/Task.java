@@ -1,10 +1,16 @@
 package jerry.task;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents an abstract task with a description and completion status.
  * This class serves as the base type for all specific task implementations.
  */
 public abstract class Task {
+
+
+    protected static final DateTimeFormatter FILE_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm");
+    protected static final DateTimeFormatter DISPLAY_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
 
     /** The description of the task. */
     protected String description;

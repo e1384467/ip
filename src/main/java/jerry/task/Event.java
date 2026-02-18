@@ -54,8 +54,8 @@ public class Event extends Task {
     public String getFileFormat() {
         return (super.isDone ? "1|E|" : "0|E|")
                 + super.description
-                + "|" + this.from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm"))
-                + "|" + this.to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm"));
+                + "|" + this.from.format(FILE_DATE_TIME_FORMAT)
+                + "|" + this.to.format(FILE_DATE_TIME_FORMAT);
     }
 
     /**
@@ -66,8 +66,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + " (from: " + this.from.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"))
-                + " to: " + this.to.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")) + ")";
+                + " (from: " + this.from.format(DISPLAY_DATE_TIME_FORMAT)
+                + " to: " + this.to.format(DISPLAY_DATE_TIME_FORMAT) + ")";
     }
 
     @Override
