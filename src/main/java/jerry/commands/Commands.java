@@ -126,5 +126,15 @@ public enum Commands {
         return isExit;
     }
 
+    /**
+     * Executes the command represented by the enum constant, performing the necessary operations on the given task list
+     * and user interface.
+     *
+     * @param taskList The task list on which the command will operate.
+     * @param ui The user interface used to generate the response message after executing the command.
+     * @param userInputArguments The raw arguments string entered by the user after the command keyword.
+     * @return A string message to be shown to the user after executing the command.
+     * @throws JerryException If an error occurs during command execution, such as invalid arguments or storage issues.
+     */
     public abstract String execute(TaskList taskList, Ui ui, String userInputArguments) throws JerryException;
 }
