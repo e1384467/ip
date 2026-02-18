@@ -216,14 +216,26 @@ public class Parser {
         return searchQuery;
     }
 
+    /**
+     * Returns the user input arguments (i.e., the part of the input after the command keyword).
+     *
+     * @param userInput The raw user input containing the command and its arguments.
+     * @return The trimmed user input arguments, or an empty string if no arguments are present.
+     */
     public static String getUserInputArguments(String userInput) {
         String[] userInputParts = getUserInputParts(userInput);
         return (userInputParts.length < 2 ? "" : userInputParts[1].trim());
     }
 
+    /**
+     * Returns the user input command keyword (i.e., the first word of the input).
+     *
+     * @param userInput The raw user input containing the command and its arguments.
+     * @return The trimmed command keyword extracted from the user input.
+     */
     public static String getUserInputCommand(String userInput) {
         String[] userInputParts = getUserInputParts(userInput);
-        return userInputParts[0];
+        return userInputParts[0].trim();
     }
 
     private static String[] getUserInputParts(String userInput) {
