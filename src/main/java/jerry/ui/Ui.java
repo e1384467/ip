@@ -91,6 +91,12 @@ public class Ui {
                 + size + " tasks in the list!";
     }
 
+    /**
+     * Displays the results of a find command, showing the tasks that match the search query.
+     *
+     * @param possibleResults The list of tasks that match the search query.
+     * @return A message showing the matching tasks, or a message indicating that no matches were found.
+     */
     public String showFindResult(TaskList possibleResults) {
         if (possibleResults.isEmpty()) {
             return "No matching tasks found for your search query :(\n";
