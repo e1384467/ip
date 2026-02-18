@@ -112,6 +112,7 @@ Your data file is located in the ***data*** folder.\
 ### Duplicated task handling
 Jerry checks the list for any duplicate before performing any add task commands to ensure no duplicates are in the list.\
 ## Command Summary
+
 | Action | Formats | Examples |
 | --- | --- | --- |
 | todo | `todo <task description>` | e.g., `todo eat an orange`|
