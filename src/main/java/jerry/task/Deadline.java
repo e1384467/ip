@@ -67,9 +67,9 @@ public class Deadline extends Task {
         }
 
         if (obj instanceof Deadline t) {
-            boolean sameDescription = this.description.equalsIgnoreCase(t.description);
-            boolean sameBy = this.by.equals(t.by);
-            return sameDescription && sameBy;
+            boolean hasSameDescription = this.description.equalsIgnoreCase(t.description);
+            boolean hasSameBy = this.by.equals(t.by);
+            return hasSameDescription && hasSameBy;
         }
 
         return false;

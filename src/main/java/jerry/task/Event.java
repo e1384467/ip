@@ -77,10 +77,10 @@ public class Event extends Task {
         }
 
         if (obj instanceof Event t) {
-            boolean sameDescription = this.description.equalsIgnoreCase(t.description);
-            boolean sameFrom = this.from.equals(t.from);
-            boolean sameTo = this.to.equals(t.to);
-            return sameDescription && sameFrom && sameTo;
+            boolean hasSameDescription = this.description.equalsIgnoreCase(t.description);
+            boolean hasSameFrom = this.from.equals(t.from);
+            boolean hasSameTo = this.to.equals(t.to);
+            return hasSameDescription && hasSameFrom && hasSameTo;
         }
 
         return false;
