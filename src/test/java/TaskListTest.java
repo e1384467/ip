@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import jerry.exceptions.JerryException;
-import jerry.exceptions.WrongArgumentException;
-import jerry.exceptions.RepeatedActionsException;
 import jerry.exceptions.DuplicatedTasksException;
+import jerry.exceptions.JerryException;
+import jerry.exceptions.RepeatedActionsException;
+import jerry.exceptions.WrongArgumentException;
 import jerry.task.Task;
 import jerry.task.TaskList;
 import jerry.task.ToDo;

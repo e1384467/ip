@@ -130,26 +130,26 @@ public class ParserTest {
 
     @Test
     public void parseEvent_userInputContainsPipe_wrongArgumentExceptionThrown() {
-        assertThrows(WrongArgumentException.class,
-                () -> Parser.parseEvent("Sleep | /from 06062002 0540 /to 07062002 0540"));
+        assertThrows(WrongArgumentException.class, () ->
+                Parser.parseEvent("Sleep | /from 06062002 0540 /to 07062002 0540"));
     }
 
     @Test
     public void parseEvent_emptyTaskField_missingArgumentExceptionThrown() {
-        assertThrows(MissingArgumentException.class,
-                () -> Parser.parseEvent("/from 06062002 0540 /to 07062002 0540"));
+        assertThrows(MissingArgumentException.class, () ->
+                Parser.parseEvent("/from 06062002 0540 /to 07062002 0540"));
     }
 
     @Test
     public void parseEvent_emptyFromField_missingArgumentExceptionThrown() {
-        assertThrows(MissingArgumentException.class,
-                () -> Parser.parseEvent("Sleep /to 07062002 0540"));
+        assertThrows(MissingArgumentException.class, () ->
+                Parser.parseEvent("Sleep /to 07062002 0540"));
     }
 
     @Test
     public void parseEvent_emptyToField_missingArgumentExceptionThrown() {
-        assertThrows(MissingArgumentException.class,
-                () -> Parser.parseEvent("Sleep /from 06062002 0540"));
+        assertThrows(MissingArgumentException.class, () ->
+                Parser.parseEvent("Sleep /from 06062002 0540"));
     }
 
     @Test
@@ -159,14 +159,14 @@ public class ParserTest {
 
     @Test
     public void parseEvent_invalidTimeFrame_wrongArgumentExceptionThrown() {
-        assertThrows(WrongArgumentException.class,
-                () -> Parser.parseEvent("Sleep /from 07062002 0540 /to 06062002 0540"));
+        assertThrows(WrongArgumentException.class, () ->
+                Parser.parseEvent("Sleep /from 07062002 0540 /to 06062002 0540"));
     }
 
     @Test
     public void parseEvent_wrongDateTimeFormat_wrongArgumentExceptionThrown() {
-        assertThrows(WrongArgumentException.class,
-                () -> Parser.parseEvent("Sleep /from 06062002-0540 /to 07062002T0540"));
+        assertThrows(WrongArgumentException.class, () ->
+                Parser.parseEvent("Sleep /from 06062002-0540 /to 07062002T0540"));
     }
 
     // ============ Array Index Tests ============
@@ -180,14 +180,14 @@ public class ParserTest {
 
     @Test
     public void getArrayIndex_notANumber_wrongArgumentExceptionThrown() {
-        assertThrows(WrongArgumentException.class,
-                () -> Parser.getArrayIndex(Parser.getUserInputArguments("Mark task1")));
+        assertThrows(WrongArgumentException.class, () ->
+                Parser.getArrayIndex(Parser.getUserInputArguments("Mark task1")));
     }
 
     @Test
     public void getArrayIndex_missingUserInputs_missingArgumentExceptionThrown() {
-        assertThrows(MissingArgumentException.class,
-                () -> Parser.getArrayIndex(Parser.getUserInputArguments("")));
+        assertThrows(MissingArgumentException.class, () ->
+                Parser.getArrayIndex(Parser.getUserInputArguments("")));
     }
 
     @Test

@@ -1,7 +1,6 @@
 package jerry.task;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a task that must be completed by a specific date and time.
