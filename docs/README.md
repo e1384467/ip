@@ -112,14 +112,14 @@ Your data file is located in the ***data*** folder.\
 ### Duplicated task handling
 Jerry checks the list for any duplicate before performing any add task commands to ensure no duplicates are in the list.\
 ## Command Summary
-| Action | Formats, Examples |
-| ------ | ----------------- |
-| todo | `todo <task description>`<br/> e.g., `todo eat an orange`|
-| deadline | `deadline <task description> /by <ddmmyyyy hhmm (24-hour clock)>` <br/> e.g., `deadline submit report /by 06062002 0530` |
-| event | `event <task description> /from <ddmmyyyy hhmm (24-hour clock)> /to <ddmmyyyy hhmm (24-hour clock)>` <br/> e.g., `event project meeting /from 06062002 0530 /to 07062002 0500` |
+| Action | Formats | Examples |
+| ------ | ------- | -------- |
+| todo | `todo <task description>` | e.g., `todo eat an orange`|
+| deadline | `deadline <task description> /by <ddmmyyyy hhmm (24-hour clock)>` | e.g., `deadline submit report /by 06062002 0530` |
+| event | `event <task description> /from <ddmmyyyy hhmm (24-hour clock)> /to <ddmmyyyy hhmm (24-hour clock)>` | e.g., `event project meeting /from 06062002 0530 /to 07062002 0500` |
 | list | `list` |
-| mark |  `mark <index>` <br/> e.g., `mark 1`|
-| unmark | `unmark <index>` <br/> e.g., `unmark 1` |
-| delete | `delete <index>` <br/> e.g., `delete 1` |
-| find | `find <search query>` <br/> e.g., `find submit`|
+| mark |  `mark <index>` | e.g., `mark 1`|
+| unmark | `unmark <index>` | e.g., `unmark 1` |
+| delete | `delete <index>` | e.g., `delete 1` |
+| find | `find <search query>` | e.g., `find submit`|
 | bye | `bye`|
