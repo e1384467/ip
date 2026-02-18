@@ -23,7 +23,7 @@ public enum Commands {
     LIST(false) {
         @Override
         public String execute(TaskList taskList, Ui ui, String userInputArguments) throws JerryException {
-            return ui.displayList(taskList);
+            return ui.showList(taskList);
         }
     },
     MARK(false) {

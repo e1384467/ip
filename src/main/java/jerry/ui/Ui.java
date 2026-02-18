@@ -14,7 +14,7 @@ public class Ui {
      *
      * @return Greeting text displayed at the beginning of the session.
      */
-    public static String welcomeText() {
+    public static String showWelcomeText() {
         return "Hello! What can I do for you?\n";
     }
 
@@ -34,7 +34,7 @@ public class Ui {
      * @return The list to be displayed.
      * @throws JerryException If building the list output fails.
      */
-    public String displayList(TaskList taskList) throws JerryException {
+    public String showList(TaskList taskList) throws JerryException {
         if (taskList.isEmpty()) {
             return "Your list is currently empty. Type to add more!\n";
         }

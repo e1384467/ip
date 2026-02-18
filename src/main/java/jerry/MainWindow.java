@@ -73,7 +73,7 @@ public class MainWindow extends AnchorPane {
             dialogContainer.getChildren().addAll(startupErrorDialogBox);
         }
 
-        DialogBox welcomeDialogBox = DialogBox.getJerryDialog("Jerry: " + Ui.welcomeText(), jerryImage);
+        DialogBox welcomeDialogBox = DialogBox.getJerryDialog("Jerry: " + Ui.showWelcomeText(), jerryImage);
         dialogContainer.getChildren().addAll(welcomeDialogBox);
     }
 }
