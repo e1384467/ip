@@ -37,10 +37,10 @@ public class Ui {
     public String displayList(TaskList taskList) throws JerryException {
         if (taskList.isEmpty()) {
             return "Your list is currently empty. Type to add more!\n";
-        } else {
-            return "Your list:" + "\n"
-                    + taskList.buildListOutput();
         }
+        return "Your list:" + "\n"
+                + taskList.buildListOutput();
+
     }
 
     /**
@@ -89,5 +89,13 @@ public class Ui {
         return "I have added '" + task + "' to your list!\n"
                 + "Now you have "
                 + size + " tasks in the list!";
+    }
+
+    public String showFindResult(TaskList possibleResults) {
+        if (possibleResults.isEmpty()) {
+            return "No matching tasks found for your search query :(\n";
+        }
+        return "Here are the matching tasks in your list:" + "\n"
+                + possibleResults.buildListOutput();
     }
 }

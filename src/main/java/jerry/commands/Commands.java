@@ -91,7 +91,7 @@ public enum Commands {
         public String execute(TaskList taskList, Ui ui, String userInputArguments) throws JerryException {
             String searchQuery = Parser.getSearchQuery(userInputArguments);
             TaskList possibleResults = taskList.find(searchQuery);
-            return ui.displayList(possibleResults);
+            return ui.showFindResult(possibleResults);
         }
     };
 
