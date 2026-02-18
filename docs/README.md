@@ -113,7 +113,7 @@ Your data file is located in the ***data*** folder.\
 Jerry checks the list for any duplicate before performing any add task commands to ensure no duplicates are in the list.\
 ## Command Summary
 | Action | Formats | Examples |
-| ------ | ------- | -------- |
+| --- | --- | --- |
 | todo | `todo <task description>` | e.g., `todo eat an orange`|
 | deadline | `deadline <task description> /by <ddmmyyyy hhmm (24-hour clock)>` | e.g., `deadline submit report /by 06062002 0530` |
 | event | `event <task description> /from <ddmmyyyy hhmm (24-hour clock)> /to <ddmmyyyy hhmm (24-hour clock)>` | e.g., `event project meeting /from 06062002 0530 /to 07062002 0500` |
