@@ -2,6 +2,7 @@
 Jerry is a desktop app for managing tasks.
 
 ## Quick Start
+
 - Ensure that you are on JDK 17.
 - Get the **latest** jerry.jar release from [here](https://github.com/e1384467/ip/releases).
 - Double click to run or use `java -jar jerry.jar`
@@ -133,10 +134,11 @@ Bye. Hope to see you again soon!
 ### Saving the data
 
 Jerry automatically saves your data to the hard disk after any command except `list`.\
-Your data file is located in the ***data*** folder.\
+Your data file is located in the ***data*** folder.
 
 ### Duplicated task handling
-Jerry checks the list for any duplicate before performing any add task commands to ensure no duplicates are in the list.\
+
+Jerry checks the list for any duplicate before performing any add task commands to ensure no duplicates are in the list.
 
 ## Command Summary
 
