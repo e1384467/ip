@@ -1,11 +1,15 @@
 # Jerry User Guide
 Jerry is a desktop app for managing tasks.
+
 ## Quick Start
 - Ensure that you are on JDK 17.
 - Get the **latest** jerry.jar release from [here](https://github.com/e1384467/ip/releases).
 - Double click to run or use `java -jar jerry.jar`
+
 ## Features
+
 ### Adding a todo type task
+
 Adds a todo type task to your list of tasks.\
 Jerry will output a confirmation message with the task added.\
 \
@@ -17,7 +21,9 @@ Example output:
 I have added '[T][] eat an orange' to your list!
 Now you have 1 tasks in the list!
 ```
+
 ### Adding a deadline type task
+
 Adds a deadline type task to your list of tasks.\
 Jerry will output a confirmation message with the task added.\
 \
@@ -29,6 +35,7 @@ Example output:
 I have added '[D][] submit report (by: 2002/06/06 05:30)' to your list!
 Now you have 2 tasks in the list!
 ```
+
 ### Adding a event type task
 
 Adds a event type task to your list of tasks.\
@@ -42,7 +49,9 @@ Example output:
 I have added '[E][] project meeting (from: 2002/06/06 05:30 to: 2002/06/07 05:00)' to your list!
 Now you have 3 tasks in the list!
 ```
+
 ### Listing your tasks
+
 Displays all your tasks.\
 \
 Format: `list`\
@@ -55,7 +64,9 @@ Your list:
 2. [D][] submit report (by: 2002/06/06 05:30)
 3. [E][] project meeting (from: 2002/06/06 05:30 to: 2002/06/07 05:00)
 ```
+
 ### Marking a task
+
 Marks a task you deemed to be done.\
 Jerry will output a confirmation message with the task marked as done.\
 \
@@ -66,7 +77,9 @@ Example output:
 ```
 Nice! I've marked this task as done -> [T][X] eat an orange
 ```
+
 ### Unmarking a task
+
 Unmarks a task you deemed to be not done.\
 Jerry will output a confirmation message with the task marked as not done.\
 \
@@ -77,7 +90,9 @@ Example output:
 ```
 Okiee! I've unmarked this task as not done yet -> [T][] eat an orange
 ```
+
 ### Deleting a task
+
 Removes a task from your task list.\
 Jerry will out a confirmation message with the deleted task and number of remaining tasks.\
 \
@@ -88,7 +103,9 @@ Example output:
 ```
 Got it! I've removed [T][] eat an orange. You now have 2 task(s) left
 ```
+
 ### Finding a task
+
 Finds based on task description.\
 Jerry returns a list of the results.\
 \
@@ -100,7 +117,9 @@ Example output:
 Here are the matching tasks in your list:
 1. [D][] submit report (by: 2002/06/06 05:30)
 ```
+
 ### Exiting the application 
+
 Exits the application\
 \
 Format: `bye`\
@@ -110,11 +129,15 @@ Example output:
 ```
 Bye. Hope to see you again soon!
 ```
+
 ### Saving the data
+
 Jerry automatically saves your data to the hard disk after any command except `list`.\
 Your data file is located in the ***data*** folder.\
+
 ### Duplicated task handling
 Jerry checks the list for any duplicate before performing any add task commands to ensure no duplicates are in the list.\
+
 ## Command Summary
 
 | Action | Formats | Examples |
