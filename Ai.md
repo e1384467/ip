@@ -1,2 +1,3 @@
+Ai used: Copilot
 ParserTest and TaskListTest were using try catch block to test cases that throw exceptions. Following week 6 increment to add Ai assistance, I asked Ai to help me improve on the try catch block by using assertThrows method instead.
 I also proceed to ask it to add more edge cases to the ParserTest and TaskListTest. In doing so, I have learn a better way of testing for exceptions and also to think of more edge cases that I might have missed out on. 
