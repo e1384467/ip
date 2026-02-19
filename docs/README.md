@@ -1,5 +1,9 @@
 # Jerry User Guide
 Jerry is a desktop app for managing tasks.
+## Quick Start
+- Ensure that you are on JDK 17.
+- Get the **latest** jerry.jar release from [here](https://github.com/e1384467/ip/releases).
+- Double click to run or use `java -jar jerry.jar`
 ## Features
 ### Adding a todo type task
 Adds a todo type task to your list of tasks.\
@@ -88,7 +92,7 @@ Got it! I've removed [T][] eat an orange. You now have 2 task(s) left
 Finds based on task description.\
 Jerry returns a list of the results.\
 \
-Format: `find <search query>`
+Format: `find <search query>`\
 \
 Example input: `find submit`\
 Example output: 
@@ -101,7 +105,7 @@ Exits the application\
 \
 Format: `bye`\
 \
-Example input: `bye`
+Example input: `bye`\
 Example output:
 ```
 Bye. Hope to see you again soon!
